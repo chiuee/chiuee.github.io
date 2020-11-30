@@ -39,7 +39,7 @@
 </div>
 
 <div class="index-about">
-    <i>  </i>
+    <i> 趁现在，安心地去烦恼吧 </i>
 </div>
 
 <div class="index-container">
@@ -106,7 +106,7 @@
 </div>
 
         <div class="index-about-mobile">
-            <i>  </i>
+            <i> 趁现在，安心地去烦恼吧 </i>
         </div>
     </div>
     
@@ -175,10 +175,7 @@
 </blockquote>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Create(&amp;ST, n); <span class="comment">// 构造一个含有n个数据元素的静态查找表ST</span></span><br><span class="line">Destroy(&amp;ST); <span class="comment">// 销毁ST</span></span><br><span class="line">Search(ST, key); <span class="comment">// 查找ST中关键字为key的数据元素的值，否则返回空</span></span><br><span class="line">Traverse(ST, Visit()); </span><br><span class="line"><span class="comment">// 对每个ST中的元素调用一起visit，一旦visit失败则操作失败</span></span><br></pre></td></tr></table></figure>
 
-<h3 id="9-1-1-顺序表的查找"><a href="#9-1-1-顺序表的查找" class="headerlink" title="9.1.1 顺序表的查找"></a>9.1.1 <a title="p216">顺序表的查找</a></h3><blockquote>
-<p>p216</p>
-</blockquote>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">    ElemType * elem; </span><br><span class="line">    <span class="comment">// 数据元素储存空间基址，建表时按照实际长度分配，0号单元留空</span></span><br><span class="line">    <span class="keyword">int</span> length; <span class="comment">// 表长度</span></span><br><span class="line">&#125;SSTable;</span><br></pre></td></tr></table></figure>
+<h3 id="9-1-1-顺序表的查找"><a href="#9-1-1-顺序表的查找" class="headerlink" title="9.1.1 顺序表的查找"></a>9.1.1 <a title="p216" style="color: #000">顺序表的查找</a></h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">    ElemType * elem; </span><br><span class="line">    <span class="comment">// 数据元素储存空间基址，建表时按照实际长度分配，0号单元留空</span></span><br><span class="line">    <span class="keyword">int</span> length; <span class="comment">// 表长度</span></span><br><span class="line">&#125;SSTable;</span><br></pre></td></tr></table></figure>
 
 <p><strong>顺序查找</strong>就是，先把要查的值放在o号单元，然后从后往前一个一个比较，然后返回比较结果，如果返回的结果是0，则说明没有找到，如果非0则说明查找成功。</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 在顺序表ST中查找其关键字等于key的数据元素，返回元素在表中的位置</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Search_Seq</span><span class="params">(SSTable ST, KeyType key)</span> </span>&#123;</span><br><span class="line">    ST.elem[<span class="number">0</span>].key = key;</span><br><span class="line">    <span class="comment">// 先把表的0号位置填上待查值key</span></span><br><span class="line">    <span class="keyword">for</span>(i=ST.length; !EQ(ST,elem[i].key, key); --i);</span><br><span class="line">    <span class="comment">// 然后一个一个比较</span></span><br><span class="line">    <span class="keyword">return</span> i; <span class="comment">// 如果返回0就说明没找到</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
