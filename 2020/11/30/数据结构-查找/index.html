@@ -204,8 +204,19 @@
 <li>如果key大于mid就将low指向mid的后一位，然后再重新让mid指向中间元素。</li>
 <li>如果，到最后low反而比high大，那说明没找到这个值。</li>
 </ol>
-<h4 id="索引顺序表"><a href="#索引顺序表" class="headerlink" title="索引顺序表"></a>索引顺序表</h4><p>这里插一嘴，关于索引查找表，索引查找表思路上，也和折半查找差不多吧。也是一个缩小区间的查找过程。</p>
+<h4 id="索引顺序表"><a href="#索引顺序表" class="headerlink" title="索引顺序表"></a>索引顺序表</h4><p>关于索引查找表，索引查找表思路上，也和折半查找差不多吧。也是一个缩小区间的查找过程。</p>
 <p>索引表根据查找表的特点来构造。比如说，把固定的几个人放一组，选一个年龄最大的当组长，他的名字是组名。最后我们通过比较组长的年龄，来寻找我们要找的人的年龄。当然啊，这个比较不是很准确，但就那个意思。</p>
+<p>索引查找的平均查找长度=查找索引的平均查找长度+查找顺序表的平均查找长度</p>
+<p>若用顺序表确定所在块，则平均查找长度为</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ASL &#x3D; 1&#x2F;2 * (n&#x2F;s + s) + 1 &#x2F;&#x2F; s个块</span><br></pre></td></tr></table></figure>
+
+<p>若用折半查找确定所在块</p>
+<div style = "border: 2px solid #000; text-align: center">
+    ASL = log<sub>2</sub>(n/s + 1) + s/2
+</div>
+
+
+
 
         
         <br />
