@@ -177,11 +177,15 @@
 <p>设置哨兵可以避免像之前一样，每次比较都需要检测整个表知否查找完毕。这样一个小操作居然可以使查找时间缩小近一半。</p>
 <h4 id="性能分析"><a href="#性能分析" class="headerlink" title="性能分析"></a>性能分析</h4><p>通常以“关键字和给定值进行过比较的记录个数的平均值”来衡量查找算法。</p>
 <p>为确定记录在查找表中的位置，需和给定值进行比较的关键字个数的期望值称为查找算法在查找成功时的<strong>平均查找长度</strong>(Average Search Length)。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ASL &#x3D; (n+1)&#x2F;2</span><br></pre></td></tr></table></figure>
+<div style = "border: 2px solid #000; text-align: center">
+    ASL = (n+1)/2
+</div>
 
 <p>这是查找成功的ASL，还有查找失败的情况吧。大部分实际情况下，找到的可能性都比找不到的可能性大很多，查找失败的情况可以忽略，尤其是记录数很大很大的时候。但有时候确实不能忽略，那就得计算了。</p>
 <p>当查找失败的情况不能忽略的时候，查找算法的平均长度应该是<u>查找成功时的平均查找长度</u>与<u>查找失败时的平均查找长度</u>之<strong>和</strong>。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ASL &#x3D; 3&#x2F;4 × (n+1)</span><br></pre></td></tr></table></figure>
+<div style = "border: 2px solid #000; text-align: center">
+    ASL = 3/4 × (n+1)
+</div>
 
 <p>有时候，表中的元素被查询频率不同，如果我们把频率高的排到后边，那么查的时候效率就会变高。当然，我们一开始没办法直到查询频率，所以可以在每个记录里设置一个<u>访问频率域</u>，并使顺序表按频率<u>非递减有序排列</u>，让概率大的都往后边。或者也可以搞简单点，每次查完就放表尾。</p>
 <h4 id="优与缺"><a href="#优与缺" class="headerlink" title="优与缺"></a>优与缺</h4><p>优点：</p>
@@ -207,8 +211,10 @@
 <h4 id="索引顺序表"><a href="#索引顺序表" class="headerlink" title="索引顺序表"></a>索引顺序表</h4><p>关于索引查找表，索引查找表思路上，也和折半查找差不多吧。也是一个缩小区间的查找过程。</p>
 <p>索引表根据查找表的特点来构造。比如说，把固定的几个人放一组，选一个年龄最大的当组长，他的名字是组名。最后我们通过比较组长的年龄，来寻找我们要找的人的年龄。当然啊，这个比较不是很准确，但就那个意思。</p>
 <p>索引查找的平均查找长度=查找索引的平均查找长度+查找顺序表的平均查找长度</p>
-<p>若用顺序表确定所在块，则平均查找长度为</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ASL &#x3D; 1&#x2F;2 * (n&#x2F;s + s) + 1 &#x2F;&#x2F; s个块</span><br></pre></td></tr></table></figure>
+<p>若用顺序表确定所在块，则平均查找长度为(s为块数)</p>
+<div style = "border: 2px solid #000; text-align: center">
+    ASL = 1/2 * (n/s + s) + 1
+</div>
 
 <p>若用折半查找确定所在块</p>
 <div style = "border: 2px solid #000; text-align: center">
