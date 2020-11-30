@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="第七章 图  7.1 图的定义与术语图是一种“多对多”的关系。用点代表事物，用两点的连线代表事物之间的关系。 图是由顶点与边组成的(可以没有边，但至少有一个点)： 通常使用V表示顶点的用穷非空集合  用VR表示顶点之间的关系的集合   若&lt;v, w&gt;∈VR，则&lt;v, w&gt;表示从v到w的一条弧，用箭头表示为v—&gt;w。v为弧尾（起始点），w为弧头（终端点）。 图可以分为有">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据结构-图">
+<meta property="og:url" content="http://example.com/2020/11/30/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E5%9B%BE/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="第七章 图  7.1 图的定义与术语图是一种“多对多”的关系。用点代表事物，用两点的连线代表事物之间的关系。 图是由顶点与边组成的(可以没有边，但至少有一个点)： 通常使用V表示顶点的用穷非空集合  用VR表示顶点之间的关系的集合   若&lt;v, w&gt;∈VR，则&lt;v, w&gt;表示从v到w的一条弧，用箭头表示为v—&gt;w。v为弧尾（起始点），w为弧头（终端点）。 图可以分为有">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="d:/personal/study/notes/data%20structure%20C/数据结构-图img/图.png">
+<meta property="og:image" content="d:/personal/study/notes/data%20structure%20C/数据结构-图img/邻接矩阵1.png">
+<meta property="og:image" content="d:/personal/study/notes/data%20structure%20C/数据结构-图img/邻接矩阵2.png">
+<meta property="og:image" content="d:/personal/study/notes/data%20structure%20C/数据结构-图img/邻接矩阵节省空间.png">
+<meta property="article:published_time" content="2020-11-30T00:40:25.000Z">
+<meta property="article:modified_time" content="2020-11-30T00:41:47.179Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="数据结构">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="d:/personal/study/notes/data%20structure%20C/数据结构-图img/图.png">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>数据结构-图</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- rss -->
+    
+    
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+<body>
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/posts/">Writing</a></li>
+         
+          <li><a target="_blank" rel="noopener" href="http://github.com/sergodeeva">Projects</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" href="/2020/11/29/%E6%B5%8B%E8%AF%95/"><i class="fa fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fa fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2020/11/30/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E5%9B%BE/"><i class="fa fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2020/11/30/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E5%9B%BE/&text=数据结构-图"><i class="fa fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2020/11/30/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E5%9B%BE/&title=数据结构-图"><i class="fa fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2020/11/30/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E5%9B%BE/&is_video=false&description=数据结构-图"><i class="fa fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=数据结构-图&body=Check out this article: http://example.com/2020/11/30/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E5%9B%BE/"><i class="fa fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2020/11/30/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E5%9B%BE/&title=数据结构-图"><i class="fa fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2020/11/30/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E5%9B%BE/&title=数据结构-图"><i class="fa fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2020/11/30/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E5%9B%BE/&title=数据结构-图"><i class="fa fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2020/11/30/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E5%9B%BE/&title=数据结构-图"><i class="fa fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2020/11/30/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E5%9B%BE/&name=数据结构-图&description="><i class="fa fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AC%AC%E4%B8%83%E7%AB%A0-%E5%9B%BE"><span class="toc-number">1.</span> <span class="toc-text">第七章 图</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#7-1-%E5%9B%BE%E7%9A%84%E5%AE%9A%E4%B9%89%E4%B8%8E%E6%9C%AF%E8%AF%AD"><span class="toc-number">1.1.</span> <span class="toc-text">7.1 图的定义与术语</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%BE%E6%98%AF%E7%94%B1%E9%A1%B6%E7%82%B9%E4%B8%8E%E8%BE%B9%E7%BB%84%E6%88%90%E7%9A%84-%E5%8F%AF%E4%BB%A5%E6%B2%A1%E6%9C%89%E8%BE%B9%EF%BC%8C%E4%BD%86%E8%87%B3%E5%B0%91%E6%9C%89%E4%B8%80%E4%B8%AA%E7%82%B9-%EF%BC%9A"><span class="toc-number">1.1.1.</span> <span class="toc-text">图是由顶点与边组成的(可以没有边，但至少有一个点)：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%BE%E5%8F%AF%E4%BB%A5%E5%88%86%E4%B8%BA%E6%9C%89%E5%90%91%E5%9B%BE%E4%B8%8E%E6%97%A0%E5%90%91%E5%9B%BE"><span class="toc-number">1.1.2.</span> <span class="toc-text">图可以分为有向图与无向图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%BE%E5%8F%AF%E4%BB%A5%E5%88%86%E4%B8%BA%E6%9C%89%E6%9D%83%E5%9B%BE%E5%92%8C%E6%97%A0%E6%9D%83%E5%9B%BE"><span class="toc-number">1.1.3.</span> <span class="toc-text">图可以分为有权图和无权图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%89%E4%B8%80%E7%A7%8D%E5%9B%BE%E5%8F%AB%E5%81%9A%E5%AE%8C%E5%85%A8%E5%9B%BE"><span class="toc-number">1.1.4.</span> <span class="toc-text">有一种图叫做完全图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%BE%E5%8F%AF%E4%BB%A5%E5%88%86%E4%B8%BA%E7%A8%80%E7%96%8F%E5%9B%BE%E4%B8%8E%E7%A8%A0%E5%AF%86%E5%9B%BE"><span class="toc-number">1.1.5.</span> <span class="toc-text">图可以分为稀疏图与稠密图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%BE%E4%B8%AD%E6%9C%89%E5%AD%90%E5%9B%BE%E7%9A%84%E6%A6%82%E5%BF%B5"><span class="toc-number">1.1.6.</span> <span class="toc-text">图中有子图的概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%BE%E7%9A%84%E9%A1%B6%E7%82%B9%E6%9C%89%E5%BA%A6%E7%9A%84%E6%A6%82%E5%BF%B5"><span class="toc-number">1.1.7.</span> <span class="toc-text">图的顶点有度的概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%BE%E5%8F%AF%E4%BB%A5%E5%88%86%E4%B8%BA%E8%BF%9E%E9%80%9A%E5%9B%BE%E4%B8%8E%E9%9D%9E%E8%BF%9E%E9%80%9A%E5%9B%BE"><span class="toc-number">1.1.8.</span> <span class="toc-text">图可以分为连通图与非连通图</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-2-%E5%9B%BE%E7%9A%84%E5%82%A8%E5%AD%98%E7%BB%93%E6%9E%84"><span class="toc-number">1.2.</span> <span class="toc-text">7.2 图的储存结构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#7-2-1-%E6%95%B0%E7%BB%84%E8%A1%A8%E7%A4%BA%E6%B3%95%EF%BC%88%E9%82%BB%E6%8E%A5%E7%9F%A9%E9%98%B5%EF%BC%89"><span class="toc-number">1.2.1.</span> <span class="toc-text">7.2.1 数组表示法（邻接矩阵）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9B%BE%E7%9A%84%E6%95%B0%E7%BB%84%EF%BC%88%E9%82%BB%E6%8E%A5%E7%9F%A9%E9%98%B5%EF%BC%89%E5%AD%98%E5%82%A8%E8%A1%A8%E7%A4%BA"><span class="toc-number">1.2.1.1.</span> <span class="toc-text">图的数组（邻接矩阵）存储表示</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%82%BB%E6%8E%A5%E7%9F%A9%E9%98%B5%E4%BC%98%E7%82%B9"><span class="toc-number">1.2.1.2.</span> <span class="toc-text">邻接矩阵优点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%82%BB%E6%8E%A5%E7%9F%A9%E9%98%B5%E7%9A%84%E7%BC%BA%E7%82%B9"><span class="toc-number">1.2.1.3.</span> <span class="toc-text">邻接矩阵的缺点</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-2-2-%E9%82%BB%E6%8E%A5%E8%A1%A8"><span class="toc-number">1.2.2.</span> <span class="toc-text">7.2.2 邻接表</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-3-%E5%9B%BE%E7%9A%84%E9%81%8D%E5%8E%86"><span class="toc-number">1.3.</span> <span class="toc-text">7.3 图的遍历</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#7-3-1-%E6%B7%B1%E5%BA%A6%E4%BC%98%E5%85%88%E6%90%9C%E7%B4%A2"><span class="toc-number">1.3.1.</span> <span class="toc-text">7.3.1 深度优先搜索</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-3-2-%E5%B9%BF%E5%BA%A6%E4%BC%98%E5%85%88%E6%90%9C%E7%B4%A2"><span class="toc-number">1.3.2.</span> <span class="toc-text">7.3.2 广度优先搜索</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-4-%E5%9B%BE%E7%9A%84%E8%BF%9E%E9%80%9A%E6%80%A7%E9%97%AE%E9%A2%98"><span class="toc-number">1.4.</span> <span class="toc-text">7.4 图的连通性问题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#7-4-1-%E6%97%A0%E5%90%91%E5%9B%BE%E7%9A%84%E8%BF%9E%E9%80%9A%E5%88%86%E9%87%8F%E5%92%8C%E7%94%9F%E6%88%90%E6%A0%91"><span class="toc-number">1.4.1.</span> <span class="toc-text">7.4.1 无向图的连通分量和生成树</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-4-2-%E6%9C%89%E5%90%91%E5%9B%BE%E7%9A%84%E5%BC%BA%E8%BF%9E%E9%80%9A%E5%88%86%E9%87%8F%EF%BC%88%E6%9C%89%E5%BE%85%E8%A1%A5%E5%85%85%EF%BC%89"><span class="toc-number">1.4.2.</span> <span class="toc-text">7.4.2 有向图的强连通分量（有待补充）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-4-3-%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91"><span class="toc-number">1.4.3.</span> <span class="toc-text">7.4.3 最小生成树</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%99%AE%E9%87%8C%E5%A7%86%E7%AE%97%E6%B3%95%EF%BC%88%E9%80%82%E7%94%A8%E4%BA%8E%E7%A8%A0%E5%AF%86%E5%9B%BE%EF%BC%89"><span class="toc-number">1.4.3.1.</span> <span class="toc-text">普里姆算法（适用于稠密图）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%8B%E9%B2%81%E6%96%AF%E5%8D%A1%E5%B0%94%E7%AE%97%E6%B3%95%EF%BC%88%E9%80%82%E7%94%A8%E4%BA%8E%E7%A8%80%E7%96%8F%E5%9B%BE%EF%BC%89"><span class="toc-number">1.4.3.2.</span> <span class="toc-text">克鲁斯卡尔算法（适用于稀疏图）</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-4-4-%E5%85%B3%E8%8A%82%E7%82%B9%E5%92%8C%E9%87%8D%E8%BF%9E%E9%80%9A%E5%88%86%E9%87%8F"><span class="toc-number">1.4.4.</span> <span class="toc-text">7.4.4 关节点和重连通分量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-5-1-%E6%8B%93%E6%89%91%E6%8E%92%E5%BA%8F"><span class="toc-number">1.4.5.</span> <span class="toc-text">7.5.1 拓扑排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-5-2-%E5%85%B3%E9%94%AE%E8%B7%AF%E5%BE%84"><span class="toc-number">1.4.6.</span> <span class="toc-text">7.5.2 关键路径</span></a></li></ol></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index width mx-auto px2 my4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        数据结构-图
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Hexo</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2020-11-30T00:40:25.000Z" itemprop="datePublished">2020-11-30</time>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h1 id="第七章-图"><a href="#第七章-图" class="headerlink" title="第七章 图"></a>第七章 图</h1><img src="D:\personal\study\notes\data structure C\数据结构-图img\图.png" style="zoom:50%;" />
+
+<h2 id="7-1-图的定义与术语"><a href="#7-1-图的定义与术语" class="headerlink" title="7.1 图的定义与术语"></a>7.1 图的定义与术语</h2><p>图是一种“多对多”的关系。用点代表事物，用两点的连线代表事物之间的关系。</p>
+<h3 id="图是由顶点与边组成的-可以没有边，但至少有一个点-："><a href="#图是由顶点与边组成的-可以没有边，但至少有一个点-：" class="headerlink" title="图是由顶点与边组成的(可以没有边，但至少有一个点)："></a>图是由顶点与边组成的(可以没有边，但至少有一个点)：</h3><ul>
+<li><p>通常使用<code>V</code>表示顶点的用穷非空集合</p>
+</li>
+<li><p>用<code>VR</code>表示顶点之间的关系的集合</p>
+</li>
+</ul>
+<p>若&lt;v, w&gt;∈VR，则&lt;v, w&gt;表示从v到w的一条<strong>弧</strong>，用箭头表示为v—&gt;w。v为<strong>弧尾</strong>（起始点），w为<strong>弧头</strong>（终端点）。</p>
+<h3 id="图可以分为有向图与无向图"><a href="#图可以分为有向图与无向图" class="headerlink" title="图可以分为有向图与无向图"></a>图可以分为有向图与无向图</h3><ul>
+<li>(v, w) 表示v与w之间有一条<strong>边</strong>，就是没箭头，v与w互通</li>
+<li>&lt;v, w&gt; 表示v到w之间有一条<strong>弧</strong>，就是右箭头，始于v终于w</li>
+</ul>
+<h3 id="图可以分为有权图和无权图"><a href="#图可以分为有权图和无权图" class="headerlink" title="图可以分为有权图和无权图"></a>图可以分为有权图和无权图</h3><p>有时弧或边有与其相关的数，这种与图的边或弧相关的数叫<strong>弧</strong>。这些权可以表示为一个顶点到另一个顶点的距离或者消耗。带权的图通常称为<strong>网</strong>。</p>
+<ul>
+<li>有权图：每条边具有一定的权重，通常是一个数</li>
+<li>无权图：每条边没有权重</li>
+</ul>
+<h3 id="有一种图叫做完全图"><a href="#有一种图叫做完全图" class="headerlink" title="有一种图叫做完全图"></a>有一种图叫做完全图</h3><p>我们用n代表图中的顶点数，用e表示边或弧的数目。</p>
+<ul>
+<li>满足 <code>e = n(n-1)/2</code> 的无向图称为<strong>完全图</strong></li>
+<li>满足<code>e = n(n-1)</code>的有向图称为<strong>有向完全图</strong></li>
+</ul>
+<h3 id="图可以分为稀疏图与稠密图"><a href="#图可以分为稀疏图与稠密图" class="headerlink" title="图可以分为稀疏图与稠密图"></a>图可以分为稀疏图与稠密图</h3><p>满足<code>e &lt; nlogn</code>的图称为稀疏图，反则称为稠密图。</p>
+<h3 id="图中有子图的概念"><a href="#图中有子图的概念" class="headerlink" title="图中有子图的概念"></a>图中有子图的概念</h3><p>互相没有联系的图组成一个图，在组成的图中称为<strong>子图</strong></p>
+<h3 id="图的顶点有度的概念"><a href="#图的顶点有度的概念" class="headerlink" title="图的顶点有度的概念"></a>图的顶点有度的概念</h3><ul>
+<li>无向图<ul>
+<li>度：与该顶点链接点的个数</li>
+</ul>
+</li>
+<li>有向图<ul>
+<li>入度：该顶点作为弧头的数目，也就是指向该顶点的弧的数量</li>
+<li>出度：该顶点作为弧尾的数目，也就是指向其他顶点的弧的数量</li>
+</ul>
+</li>
+</ul>
+<h3 id="图可以分为连通图与非连通图"><a href="#图可以分为连通图与非连通图" class="headerlink" title="图可以分为连通图与非连通图"></a>图可以分为连通图与非连通图</h3><p>如果从顶点A到顶点B有路径，则称A与B是<strong>连通</strong>的</p>
+<p>所有顶点可以直接或者间接产生联系的图，称为<strong>连通图</strong>。</p>
+<h2 id="7-2-图的储存结构"><a href="#7-2-图的储存结构" class="headerlink" title="7.2 图的储存结构"></a>7.2 图的储存结构</h2><p>图的结构杂乱，任意两个顶点都有可能产生联系，所以不能使用存储区中的物理位置来表示元素之间的关系。但是可以借助数组的数据类型来表示元素之间的关系。</p>
+<p>另外，使用多重链表表示图也是自然而然的事情。即，由一个数据域与多个指针域组成的节点来表示。但是每一个节点的度并不确定，所以如果统一定义度会浪费空间，而如果按照实际情况来分配，操作又很麻烦。</p>
+<h3 id="7-2-1-数组表示法（邻接矩阵）"><a href="#7-2-1-数组表示法（邻接矩阵）" class="headerlink" title="7.2.1 数组表示法（邻接矩阵）"></a>7.2.1 数组表示法（邻接矩阵）</h3><blockquote>
+<p>用数组分别存储数据元素（顶点）的信息和数据元素之间的关系（边或弧）的信息。</p>
+</blockquote>
+<h4 id="图的数组（邻接矩阵）存储表示"><a href="#图的数组（邻接矩阵）存储表示" class="headerlink" title="图的数组（邻接矩阵）存储表示"></a>图的数组（邻接矩阵）存储表示</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#difine INFINITY</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>n个顶点的图需要n×n大小的矩阵</li>
+<li>在无权图里，矩阵坐标中的每个位置为1表示两点有边，0表示无边。</li>
+<li>在有权图里，矩阵坐标中的每个位置代表权重，∞代表不相连</li>
+<li>在无向图中，邻接矩阵关于对角线相等</li>
+</ul>
+<img src="D:\personal\study\notes\data structure C\数据结构-图img\邻接矩阵1.png" alt="邻接矩阵1" style="zoom:50%;" />
+
+<img src="D:\personal\study\notes\data structure C\数据结构-图img\邻接矩阵2.png" alt="邻接矩阵2" style="zoom: 67%;" />
+
+<p>这里有一个问题，无向图的邻接矩阵是对称的，那么意味着有一半的数据是重复的，会占用资源，如何使资源不被浪费，这就成了一个需要考虑的问题。</p>
+<p>答案就是，真的只存一半的数据。砍掉一半，后就不能是二位数组了，那就只能是一维数组，砍掉右上角的三角形后，左下角的三角形中的元素按照从上到下，从左到右的排列方式。{G<del>00</del>, G<del>10</del>, G<del>11</del>, G<del>20</del>, … G<del>n-10</del>, … G<del>n-1n-1</del>}</p>
+<p>之前想要查看v<del>1</del>与v<del>2</del>的关系只要查看<code>arr[1][2]</code> 即可，而现在变成一维数组之后就比较难找。</p>
+<img src="D:\personal\study\notes\data structure C\数据结构-图img\邻接矩阵节省空间.png" style="zoom: 80%;" />
+
+<p>但是因为排列是有规律的，所以，我们只要找到一个公式即可。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 二维G[i][j]在一维中对应的下标</span><br><span class="line">( i*(i+1)&#x2F;2 + j )</span><br></pre></td></tr></table></figure>
+
+<h4 id="邻接矩阵优点"><a href="#邻接矩阵优点" class="headerlink" title="邻接矩阵优点"></a>邻接矩阵优点</h4><ol>
+<li>直观</li>
+<li>方便检查一对顶点的关系</li>
+<li>方便找到任一顶点的所有“链接点”</li>
+<li>方便计算任一顶点的“度”<ol>
+<li>对于无向图，看元素所在行（列）的非零元素的个数</li>
+<li>对于有向图，对应行为“出度”，对应列为“入度”（有向图的邻接矩阵是行指向列，所以行是“出度”列是“入度”）</li>
+</ol>
+</li>
+</ol>
+<h4 id="邻接矩阵的缺点"><a href="#邻接矩阵的缺点" class="headerlink" title="邻接矩阵的缺点"></a>邻接矩阵的缺点</h4><ol>
+<li>稠密图（或完全图）还好，但如果是稀疏图，比如只有一条边，很多很多顶点，那就太浪费空间了</li>
+<li>如上，还浪费时间</li>
+</ol>
+<h3 id="7-2-2-邻接表"><a href="#7-2-2-邻接表" class="headerlink" title="7.2.2 邻接表"></a>7.2.2 邻接表</h3><p>![](D:\personal\study\notes\data structure C\数据结构-图img\邻接表演示图.png)</p>
+<h2 id="7-3-图的遍历"><a href="#7-3-图的遍历" class="headerlink" title="7.3 图的遍历"></a>7.3 图的遍历</h2><h3 id="7-3-1-深度优先搜索"><a href="#7-3-1-深度优先搜索" class="headerlink" title="7.3.1 深度优先搜索"></a>7.3.1 深度优先搜索</h3><p>假设初始状态是图中所有顶点未曾被访问，则深度优先搜索可从图中的某个顶点v出发，访问此顶点，然后依次从v的未被访问的邻接点除法深度优先遍历图，直至图中所有和v有路径的顶点都被访问到；若此时图中尚有未被访问的顶点，则重复上述操作，直到图中所有顶点均被访问。</p>
+<p>说人话，比方说你走进一个迷宫，每遇到一个路口就选一条路，直到走到死胡同，这时原路返回到上一个路口，选择另一条路继续走，如果足够倒霉，就会把所有的路和路口都走一遍。但是这也不够严谨，需要把这个迷宫魔改一下，让出口和入口是同一个地方，当你再回到入口时，这就相当于<u><strong>深度优先遍历</strong></u>。</p>
+<p>当然，你会问，走着走着忘记哪条路走过哪条路没走过怎么办？有办法，在走过的路口做<strong>标记</strong>。程序也是这样，你可以定义一个数组，专门用来存放标记，初始值为true，一旦被访问过就被标记为false。</p>
+<h3 id="7-3-2-广度优先搜索"><a href="#7-3-2-广度优先搜索" class="headerlink" title="7.3.2 广度优先搜索"></a>7.3.2 广度优先搜索</h3><p>广度优先搜索，就好像剥洋葱，一层一层剥开。</p>
+<p>从一个顶点开始，一次访问他的邻接点，然后按照次序，再依次访问邻接点的邻接点，直到全部访问完为止。注意是<strong>依次</strong>。</p>
+<h2 id="7-4-图的连通性问题"><a href="#7-4-图的连通性问题" class="headerlink" title="7.4 图的连通性问题"></a>7.4 图的连通性问题</h2><h3 id="7-4-1-无向图的连通分量和生成树"><a href="#7-4-1-无向图的连通分量和生成树" class="headerlink" title="7.4.1 无向图的连通分量和生成树"></a>7.4.1 无向图的连通分量和生成树</h3><ol>
+<li>连通分量：目前有点概念不清，先不写了</li>
+<li>生成树：<ol>
+<li>深度优先遍历的叫<strong>深度优先生成树</strong></li>
+<li>广度优先遍历的叫<strong>广度优先生成树</strong></li>
+</ol>
+</li>
+<li>生成森林：若干生成树构成的非连通子图</li>
+</ol>
+<h3 id="7-4-2-有向图的强连通分量（有待补充）"><a href="#7-4-2-有向图的强连通分量（有待补充）" class="headerlink" title="7.4.2 有向图的强连通分量（有待补充）"></a>7.4.2 有向图的强连通分量（有待补充）</h3><h3 id="7-4-3-最小生成树"><a href="#7-4-3-最小生成树" class="headerlink" title="7.4.3 最小生成树"></a>7.4.3 最小生成树</h3><blockquote>
+<p>技术都是用来解决实际问题的。</p>
+</blockquote>
+<p>假设要在n个城市之间建立通信联络网，则连通n个城市只需要n-1条线路。这是自然会考虑这样的问题，如何在最节省经费的情况下，将这几个城市连通？</p>
+<p>这个问题就是构造连通网的<strong>最小代价生成树</strong>（简称为<strong>最小生成树</strong>）的问题，一棵生成树的代价就是树上各边代价之和。</p>
+<h4 id="普里姆算法（适用于稠密图）"><a href="#普里姆算法（适用于稠密图）" class="headerlink" title="普里姆算法（适用于稠密图）"></a>普里姆算法（适用于稠密图）</h4><p>正儿八经：</p>
+<ol>
+<li>假设N={V, {E}}是连通图，TE是N上最小生成树的集合。算法从U={u<del>0</del>}(u<del>0</del>∈V)，TE={ }开始，重复执行以下操作：</li>
+<li>在所有u∈U，v∈V-U的边(u, v)∈E 中找到一条代价最小的边(u<del>0</del>, v<del>0</del>)并入集合TE，同时v<del>0</del>并入U，直至U=V为止。此时TE中必有n-1条边，则T={V, {TE}}为N的最小生成树。</li>
+</ol>
+<p>非官方语言：</p>
+<ol>
+<li>按顶点搜索，先找一个点v，然后查询比较依附于其的各边的权值，取最小权值的边相连的顶点v<del>新</del>。</li>
+<li>将这个新顶点v<del>新</del>与之前的旧顶点v囊括在一起，看作一个整体，然后以这个整体重复步骤1，直到所有顶点都被遍历过为止。</li>
+</ol>
+<p>算法实现：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">    VertexType adjvex; <span class="comment">// 集合U中的顶点</span></span><br><span class="line">    VRType lowcost; <span class="comment">// 边的权值</span></span><br><span class="line">&#125; closedge[MAX_VERTEX_NUM];</span><br><span class="line"></span><br><span class="line"><span class="comment">// 用普利姆算法从顶点u除法构造网G的最小生成树</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">MiniSpanTree_PRIM</span> <span class="params">(MGraph G, VertexType u)</span> </span>&#123;</span><br><span class="line">    k = LocateVex(G, u); </span><br><span class="line">    <span class="comment">// LocateVex(G, u):若G中存在顶点u，则返回该顶点再图中的位置</span></span><br><span class="line">	<span class="keyword">for</span>(j=<span class="number">0</span>; j&lt;G.vexnum; ++j) </span><br><span class="line">    <span class="comment">// 辅助数组初始化，G.vexnum:顶点数</span></span><br><span class="line">        <span class="keyword">if</span> (j!=k) closedge[j] = &#123;u, G.arcs[k][j].adj&#125; </span><br><span class="line">    	<span class="comment">// 录入顶点与其(众多)边信息&#123;adjvex, lowcost&#125;</span></span><br><span class="line">    closedge[k].lowcost = <span class="number">0</span>; </span><br><span class="line">    <span class="comment">// 初始，U=&#123;u&#125; 把边的权值变为0，就相当于把这几个顶点归为一类</span></span><br><span class="line">    <span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;G.vexnum; ++i) &#123;</span><br><span class="line">        k = minimum(closedge);</span><br><span class="line">        <span class="comment">// 求出加入生成树的下一个顶点k</span></span><br><span class="line">        <span class="built_in">printf</span>(closedge[k].adjvex, G.vex[k]);</span><br><span class="line">        <span class="comment">// 输入生成树上一条边</span></span><br><span class="line">        closedge[k].lowcost = <span class="number">0</span>;</span><br><span class="line">        <span class="comment">// 第k个顶点并入集合U</span></span><br><span class="line">        <span class="keyword">for</span> (j=<span class="number">0</span>; j&lt;G.vexnum; ++j)</span><br><span class="line">            <span class="comment">// 新顶点并入U后重新选择最小边</span></span><br><span class="line">            <span class="keyword">if</span>(G.arcs[k][j].adj&lt;closedge[j].lowcost)</span><br><span class="line">                closedge[j]=&#123;G.vexs[k], G.arcs[k][j].adj&#125;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="克鲁斯卡尔算法（适用于稀疏图）"><a href="#克鲁斯卡尔算法（适用于稀疏图）" class="headerlink" title="克鲁斯卡尔算法（适用于稀疏图）"></a>克鲁斯卡尔算法（适用于稀疏图）</h4><ol>
+<li>按边进行搜索，把权值最小的边标记出来</li>
+<li>一直执行步骤1，但是不能出现回路的情况</li>
+</ol>
+<h3 id="7-4-4-关节点和重连通分量"><a href="#7-4-4-关节点和重连通分量" class="headerlink" title="7.4.4 关节点和重连通分量"></a>7.4.4 关节点和重连通分量</h3><p>若在删去顶点v以及和v相关联的各边之后，将图的一个连通分量分割成两个或两个以上的连通分量，则称顶点v为该图的<strong>关节点</strong>。</p>
+<p>一个没有关节点的连通图称为<strong>重连通图</strong>。</p>
+<p>若连通图上至少删除k个顶点才能破坏图的连通性，则称此图的<strong>连通度</strong>为k。</p>
+<p>利用深度优先搜索可求得图的关键点。</p>
+<ol>
+<li>若生成树的根有两颗或两颗以上的子树，则此根必为关节点。</li>
+<li>若生成树中某个非叶子顶点v，其某棵子树的根和子树中的其他节点均没有指向v的祖先的回边。</li>
+</ol>
+<h3 id="7-5-1-拓扑排序"><a href="#7-5-1-拓扑排序" class="headerlink" title="7.5.1 拓扑排序"></a>7.5.1 拓扑排序</h3><blockquote>
+<p>结合《数据结构》严蔚敏版180页学习</p>
+</blockquote>
+<p>什么是<strong>拓扑排序</strong>？由某个集合上的一个偏序得到该集合上的一个全序，这个操作称为拓扑排序。</p>
+<p>那书本上的例子来说：</p>
+<p>软件工程专业有很多课程需要学习，比如在学数据结构前，要求必须学习离散数学和程序设计基础，那么离散和程序设计就是数据结构的先决条件。当然，不可能只学这几门课，课程环环相扣，很多课程都需要基础才能学。然后我们要求，一次只能学一门，那么这时候就需要先排个序了。</p>
+<p>我们用顶点表示活动（在上边所举例子中表示课程），弧表示活动间的优先关系这样的有向图，简称<strong>AOV-网</strong>。</p>
+<p>在AOV-网中<strong>不能出现环</strong>，因为如果出现环，就意味着有以自己作为先决条件，这合理吗，这不合理。</p>
+<p>拓扑排序的过程：</p>
+<ol>
+<li>在有向图中选一个没有前驱的顶点且输出</li>
+<li>从图中删去该顶点和所有以它为尾的弧</li>
+</ol>
+<p>重复上述步骤，直到图中不存在有前驱的顶点。</p>
+<h3 id="7-5-2-关键路径"><a href="#7-5-2-关键路径" class="headerlink" title="7.5.2 关键路径"></a>7.5.2 关键路径</h3><p>与AOV-网对应的是AOE-网，AOE-网是一个带权的有向无环图。</p>
+<p>一道小学题：</p>
+<p>小红想：“我感冒了，吃完药后要赶快休息。”请你帮小红想一想如何合理安排以上事情？</p>
+<table>
+<thead>
+<tr>
+<th align="center">事情</th>
+<th align="center">时间</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">倒开水</td>
+<td align="center">1分钟</td>
+</tr>
+<tr>
+<td align="center">等开水变温</td>
+<td align="center">6分钟</td>
+</tr>
+<tr>
+<td align="center">找感冒药</td>
+<td align="center">1分钟</td>
+</tr>
+<tr>
+<td align="center">量体温</td>
+<td align="center">5分钟</td>
+</tr>
+</tbody></table>
+<p>我觉得这道题很能说明AOE-网。</p>
+<p>路径长度最长叫做<strong>关键路径</strong>，也好理解，只有它执行完了，整张图才能结束。</p>
+
+  </div>
+</article>
+
+
+
+    </div>
+    
+      <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/posts/">Writing</a></li>
+         
+          <li><a target="_blank" rel="noopener" href="http://github.com/sergodeeva">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AC%AC%E4%B8%83%E7%AB%A0-%E5%9B%BE"><span class="toc-number">1.</span> <span class="toc-text">第七章 图</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#7-1-%E5%9B%BE%E7%9A%84%E5%AE%9A%E4%B9%89%E4%B8%8E%E6%9C%AF%E8%AF%AD"><span class="toc-number">1.1.</span> <span class="toc-text">7.1 图的定义与术语</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%BE%E6%98%AF%E7%94%B1%E9%A1%B6%E7%82%B9%E4%B8%8E%E8%BE%B9%E7%BB%84%E6%88%90%E7%9A%84-%E5%8F%AF%E4%BB%A5%E6%B2%A1%E6%9C%89%E8%BE%B9%EF%BC%8C%E4%BD%86%E8%87%B3%E5%B0%91%E6%9C%89%E4%B8%80%E4%B8%AA%E7%82%B9-%EF%BC%9A"><span class="toc-number">1.1.1.</span> <span class="toc-text">图是由顶点与边组成的(可以没有边，但至少有一个点)：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%BE%E5%8F%AF%E4%BB%A5%E5%88%86%E4%B8%BA%E6%9C%89%E5%90%91%E5%9B%BE%E4%B8%8E%E6%97%A0%E5%90%91%E5%9B%BE"><span class="toc-number">1.1.2.</span> <span class="toc-text">图可以分为有向图与无向图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%BE%E5%8F%AF%E4%BB%A5%E5%88%86%E4%B8%BA%E6%9C%89%E6%9D%83%E5%9B%BE%E5%92%8C%E6%97%A0%E6%9D%83%E5%9B%BE"><span class="toc-number">1.1.3.</span> <span class="toc-text">图可以分为有权图和无权图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%89%E4%B8%80%E7%A7%8D%E5%9B%BE%E5%8F%AB%E5%81%9A%E5%AE%8C%E5%85%A8%E5%9B%BE"><span class="toc-number">1.1.4.</span> <span class="toc-text">有一种图叫做完全图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%BE%E5%8F%AF%E4%BB%A5%E5%88%86%E4%B8%BA%E7%A8%80%E7%96%8F%E5%9B%BE%E4%B8%8E%E7%A8%A0%E5%AF%86%E5%9B%BE"><span class="toc-number">1.1.5.</span> <span class="toc-text">图可以分为稀疏图与稠密图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%BE%E4%B8%AD%E6%9C%89%E5%AD%90%E5%9B%BE%E7%9A%84%E6%A6%82%E5%BF%B5"><span class="toc-number">1.1.6.</span> <span class="toc-text">图中有子图的概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%BE%E7%9A%84%E9%A1%B6%E7%82%B9%E6%9C%89%E5%BA%A6%E7%9A%84%E6%A6%82%E5%BF%B5"><span class="toc-number">1.1.7.</span> <span class="toc-text">图的顶点有度的概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%BE%E5%8F%AF%E4%BB%A5%E5%88%86%E4%B8%BA%E8%BF%9E%E9%80%9A%E5%9B%BE%E4%B8%8E%E9%9D%9E%E8%BF%9E%E9%80%9A%E5%9B%BE"><span class="toc-number">1.1.8.</span> <span class="toc-text">图可以分为连通图与非连通图</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-2-%E5%9B%BE%E7%9A%84%E5%82%A8%E5%AD%98%E7%BB%93%E6%9E%84"><span class="toc-number">1.2.</span> <span class="toc-text">7.2 图的储存结构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#7-2-1-%E6%95%B0%E7%BB%84%E8%A1%A8%E7%A4%BA%E6%B3%95%EF%BC%88%E9%82%BB%E6%8E%A5%E7%9F%A9%E9%98%B5%EF%BC%89"><span class="toc-number">1.2.1.</span> <span class="toc-text">7.2.1 数组表示法（邻接矩阵）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9B%BE%E7%9A%84%E6%95%B0%E7%BB%84%EF%BC%88%E9%82%BB%E6%8E%A5%E7%9F%A9%E9%98%B5%EF%BC%89%E5%AD%98%E5%82%A8%E8%A1%A8%E7%A4%BA"><span class="toc-number">1.2.1.1.</span> <span class="toc-text">图的数组（邻接矩阵）存储表示</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%82%BB%E6%8E%A5%E7%9F%A9%E9%98%B5%E4%BC%98%E7%82%B9"><span class="toc-number">1.2.1.2.</span> <span class="toc-text">邻接矩阵优点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%82%BB%E6%8E%A5%E7%9F%A9%E9%98%B5%E7%9A%84%E7%BC%BA%E7%82%B9"><span class="toc-number">1.2.1.3.</span> <span class="toc-text">邻接矩阵的缺点</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-2-2-%E9%82%BB%E6%8E%A5%E8%A1%A8"><span class="toc-number">1.2.2.</span> <span class="toc-text">7.2.2 邻接表</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-3-%E5%9B%BE%E7%9A%84%E9%81%8D%E5%8E%86"><span class="toc-number">1.3.</span> <span class="toc-text">7.3 图的遍历</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#7-3-1-%E6%B7%B1%E5%BA%A6%E4%BC%98%E5%85%88%E6%90%9C%E7%B4%A2"><span class="toc-number">1.3.1.</span> <span class="toc-text">7.3.1 深度优先搜索</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-3-2-%E5%B9%BF%E5%BA%A6%E4%BC%98%E5%85%88%E6%90%9C%E7%B4%A2"><span class="toc-number">1.3.2.</span> <span class="toc-text">7.3.2 广度优先搜索</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-4-%E5%9B%BE%E7%9A%84%E8%BF%9E%E9%80%9A%E6%80%A7%E9%97%AE%E9%A2%98"><span class="toc-number">1.4.</span> <span class="toc-text">7.4 图的连通性问题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#7-4-1-%E6%97%A0%E5%90%91%E5%9B%BE%E7%9A%84%E8%BF%9E%E9%80%9A%E5%88%86%E9%87%8F%E5%92%8C%E7%94%9F%E6%88%90%E6%A0%91"><span class="toc-number">1.4.1.</span> <span class="toc-text">7.4.1 无向图的连通分量和生成树</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-4-2-%E6%9C%89%E5%90%91%E5%9B%BE%E7%9A%84%E5%BC%BA%E8%BF%9E%E9%80%9A%E5%88%86%E9%87%8F%EF%BC%88%E6%9C%89%E5%BE%85%E8%A1%A5%E5%85%85%EF%BC%89"><span class="toc-number">1.4.2.</span> <span class="toc-text">7.4.2 有向图的强连通分量（有待补充）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-4-3-%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91"><span class="toc-number">1.4.3.</span> <span class="toc-text">7.4.3 最小生成树</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%99%AE%E9%87%8C%E5%A7%86%E7%AE%97%E6%B3%95%EF%BC%88%E9%80%82%E7%94%A8%E4%BA%8E%E7%A8%A0%E5%AF%86%E5%9B%BE%EF%BC%89"><span class="toc-number">1.4.3.1.</span> <span class="toc-text">普里姆算法（适用于稠密图）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%8B%E9%B2%81%E6%96%AF%E5%8D%A1%E5%B0%94%E7%AE%97%E6%B3%95%EF%BC%88%E9%80%82%E7%94%A8%E4%BA%8E%E7%A8%80%E7%96%8F%E5%9B%BE%EF%BC%89"><span class="toc-number">1.4.3.2.</span> <span class="toc-text">克鲁斯卡尔算法（适用于稀疏图）</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-4-4-%E5%85%B3%E8%8A%82%E7%82%B9%E5%92%8C%E9%87%8D%E8%BF%9E%E9%80%9A%E5%88%86%E9%87%8F"><span class="toc-number">1.4.4.</span> <span class="toc-text">7.4.4 关节点和重连通分量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-5-1-%E6%8B%93%E6%89%91%E6%8E%92%E5%BA%8F"><span class="toc-number">1.4.5.</span> <span class="toc-text">7.5.1 拓扑排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-5-2-%E5%85%B3%E9%94%AE%E8%B7%AF%E5%BE%84"><span class="toc-number">1.4.6.</span> <span class="toc-text">7.5.2 关键路径</span></a></li></ol></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2020/11/30/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E5%9B%BE/"><i class="fa fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2020/11/30/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E5%9B%BE/&text=数据结构-图"><i class="fa fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2020/11/30/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E5%9B%BE/&title=数据结构-图"><i class="fa fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2020/11/30/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E5%9B%BE/&is_video=false&description=数据结构-图"><i class="fa fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=数据结构-图&body=Check out this article: http://example.com/2020/11/30/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E5%9B%BE/"><i class="fa fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2020/11/30/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E5%9B%BE/&title=数据结构-图"><i class="fa fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2020/11/30/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E5%9B%BE/&title=数据结构-图"><i class="fa fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2020/11/30/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E5%9B%BE/&title=数据结构-图"><i class="fa fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2020/11/30/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E5%9B%BE/&title=数据结构-图"><i class="fa fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2020/11/30/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E5%9B%BE/&name=数据结构-图&description="><i class="fa fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+      <ul>
+        <li id="toc"><a class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa fa-list fa-lg" aria-hidden="true"></i> TOC</a></li>
+        <li id="share"><a class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa fa-share-alt fa-lg" aria-hidden="true"></i> Share</a></li>
+        <li id="top" style="display:none"><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a></li>
+        <li id="menu"><a class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa fa-bars fa-lg" aria-hidden="true"></i> Menu</a></li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+    
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2020 John Doe
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/posts/">Writing</a></li>
+         
+          <li><a target="_blank" rel="noopener" href="http://github.com/sergodeeva">Projects</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>
+<!-- styles -->
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<link rel="stylesheet" href="/lib/meslo-LG/styles.css">
+
+
+<link rel="stylesheet" href="/lib/justified-gallery/justifiedGallery.min.css">
+
+
+<!-- jquery -->
+
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/lib/justified-gallery/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+
+
+    <!-- Google Analytics -->
+    <script type="text/javascript">
+        (function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-37473492-6', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+
+
