@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        数据结构-查找 - undefined
+        
+    </title>
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/aircloud.css">
+
+    
+<link rel="stylesheet" href="/css/gitment.css">
+
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i>  </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/img/avatar.png" />
+        </div>
+        <div class="name">
+            <i>赵一凡</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AC%AC%E4%B9%9D%E7%AB%A0-%E6%9F%A5%E6%89%BE"><span class="toc-text">第九章 查找</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#9-1-%E9%9D%99%E6%80%81%E6%9F%A5%E6%89%BE%E8%A1%A8"><span class="toc-text">9.1 静态查找表</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#9-1-1-%E9%A1%BA%E5%BA%8F%E8%A1%A8%E7%9A%84%E6%9F%A5%E6%89%BE"><span class="toc-text">9.1.1 顺序表的查找</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-1-2-%E6%9C%89%E5%BA%8F%E8%A1%A8%E7%9A%84%E6%9F%A5%E6%89%BE"><span class="toc-text">9.1.2 有序表的查找</span></a></li></ol></li></ol></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i>  </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        数据结构-查找
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2020-11-30 10:48:52</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#数据结构" title="数据结构">数据结构</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content ">
+        <h1 id="第九章-查找"><a href="#第九章-查找" class="headerlink" title="第九章 查找"></a>第九章 查找</h1><blockquote>
+<p>《数据结构》严蔚敏——p214</p>
+</blockquote>
+<blockquote>
+<p>查找表是由<strong>同一类型</strong>数据元素（或记录）构成的集合</p>
+<p>由于“集合”中的数据元素之间存在着松散的关系，因此查找表是一种应用灵便的结构。</p>
+</blockquote>
+<p>对查找表进行的操作</p>
+<ol>
+<li><u><strong>查询</strong></u>某个“特定的”数据元素是否在查找表中</li>
+<li><u><strong>检索</strong></u>某个“特定的”数据元素的各种属性</li>
+<li>在查找表中<u><strong>插入</strong></u>一个数据元素</li>
+<li>从查找表中<u><strong>删去</strong></u>某个数据元素</li>
+</ol>
+<p>一些概念：</p>
+<ol>
+<li><u><strong>关键字</strong></u>是数据元素(或记录)中某个<strong>数据项</strong>的值，用以<strong>标识</strong>(识别)一个数据元素(或记录)。</li>
+<li>若此关键字可以识别<u>唯一</u>的一个数据元素(或记录)，则称之为<u><strong>主关键字</strong></u></li>
+<li>若此关键字能识别<u>若干</u>记录，则称之为<u><strong>次关键字</strong></u></li>
+</ol>
+<p>典型的关键字类型说明可以是</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">float</span> KeyType; <span class="comment">// 实型</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">int</span> KeyType; <span class="comment">// 整型</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">char</span> *KeyType; <span class="comment">// 字符串型</span></span><br></pre></td></tr></table></figure>
+
+<p>数据元素类型定义为</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">    KeyType key; <span class="comment">// 关键字域</span></span><br><span class="line">    ... <span class="comment">// 其他域</span></span><br><span class="line">&#125;SElemType;</span><br></pre></td></tr></table></figure>
+
+<p>对两个关键字的比较约定如下的宏定义</p>
+<blockquote>
+<p><code>#define</code>可以当作简单的函数使用。</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 对数值类型关键字</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> EQ(a, b) ( (a) == (b) )</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LT(a, b) ( (a) &lt; (b) )</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LQ(a, b) ( (a) &lt;= (b) )</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 对字符串类型关键字</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> EQ(a, b) ( !strcmp( (a), (b) ) )</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LT(a, b) ( strcmp( (a), (b) ) &lt; 0 )</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LQ(a, b) ( strcmp( (a), (b) ) &lt;= 0 )</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="9-1-静态查找表"><a href="#9-1-静态查找表" class="headerlink" title="9.1 静态查找表"></a>9.1 静态查找表</h2><blockquote>
+<p>p216</p>
+</blockquote>
+<blockquote>
+<p>仅作<strong>查询</strong>和<strong>检索</strong>操作的查找表</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Create(&amp;ST, n); <span class="comment">// 构造一个含有n个数据元素的静态查找表ST</span></span><br><span class="line">Destroy(&amp;ST); <span class="comment">// 销毁ST</span></span><br><span class="line">Search(ST, key); <span class="comment">// 查找ST中关键字为key的数据元素的值，否则返回空</span></span><br><span class="line">Traverse(ST, Visit()); </span><br><span class="line"><span class="comment">// 对每个ST中的元素调用一起visit，一旦visit失败则操作失败</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="9-1-1-顺序表的查找"><a href="#9-1-1-顺序表的查找" class="headerlink" title="9.1.1 顺序表的查找"></a>9.1.1 <a title="p216">顺序表的查找</a></h3><blockquote>
+<p>p216</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">    ElemType * elem; </span><br><span class="line">    <span class="comment">// 数据元素储存空间基址，建表时按照实际长度分配，0号单元留空</span></span><br><span class="line">    <span class="keyword">int</span> length; <span class="comment">// 表长度</span></span><br><span class="line">&#125;SSTable;</span><br></pre></td></tr></table></figure>
+
+<p><strong>顺序查找</strong>就是，先把要查的值放在o号单元，然后从后往前一个一个比较，然后返回比较结果，如果返回的结果是0，则说明没有找到，如果非0则说明查找成功。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 在顺序表ST中查找其关键字等于key的数据元素，返回元素在表中的位置</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Search_Seq</span><span class="params">(SSTable ST, KeyType key)</span> </span>&#123;</span><br><span class="line">    ST.elem[<span class="number">0</span>].key = key;</span><br><span class="line">    <span class="comment">// 先把表的0号位置填上待查值key</span></span><br><span class="line">    <span class="keyword">for</span>(i=ST.length; !EQ(ST,elem[i].key, key); --i);</span><br><span class="line">    <span class="comment">// 然后一个一个比较</span></span><br><span class="line">    <span class="keyword">return</span> i; <span class="comment">// 如果返回0就说明没找到</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="9-1-2-有序表的查找"><a href="#9-1-2-有序表的查找" class="headerlink" title="9.1.2 有序表的查找"></a>9.1.2 有序表的查找</h3><blockquote>
+<p>p218</p>
+</blockquote>
+<p><strong>折半查找</strong>就是数学上的二分法，所以也叫二分查找。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Search_Bin</span><span class="params">( SSTable ST, KeyType key )</span></span>&#123;</span><br><span class="line">    low = <span class="number">1</span>;</span><br><span class="line">    high = ST.length;</span><br><span class="line">    <span class="keyword">while</span>( low&lt;=high )&#123;</span><br><span class="line">        mid = (low+high)/<span class="number">2</span>;</span><br><span class="line">        <span class="keyword">if</span>(EQ(key, ST.elem[mid].key)) <span class="keyword">return</span> mid;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(LT(key, ST.elem[mid].key)) high = mid<span class="number">-1</span>;</span><br><span class="line">        <span class="keyword">else</span> low = mid+<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>二分查找就和数学里的二分法一个道理。</p>
+<ol>
+<li>首先让low指向第一个元素，high指向最后一个元素，mid只想中间的元素（向下取整），让待查询的key与mid指向的元素作比较。</li>
+<li>如果key小于mid就将high指向mid的前一位，然后重新让mid指向中间元素。</li>
+<li>如果key大于mid就将low指向mid的后一位，然后再重新让mid指向中间元素。</li>
+<li>如果，到最后low反而比high大，那说明没找到这个值。</li>
+</ol>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+
+        <div id="lv-container">
+        </div>
+
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <!-- <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span> -->
+        Created By <a href="">Hexo</a>  Theme <a href="">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = ""
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="/js/index.js"></script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+</html>
