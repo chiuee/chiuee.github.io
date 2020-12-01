@@ -86,7 +86,7 @@
     </div>
     
         <div id="toc" class="toc-article">
-    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AC%AC%E4%B9%9D%E7%AB%A0-%E6%9F%A5%E6%89%BE"><span class="toc-text">第九章 查找</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#9-1-%E9%9D%99%E6%80%81%E6%9F%A5%E6%89%BE%E8%A1%A8"><span class="toc-text">9.1 静态查找表</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#9-1-1-%E9%A1%BA%E5%BA%8F%E8%A1%A8%E7%9A%84%E6%9F%A5%E6%89%BE"><span class="toc-text">9.1.1 顺序表的查找</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90"><span class="toc-text">性能分析</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BC%98%E4%B8%8E%E7%BC%BA"><span class="toc-text">优与缺</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-1-2-%E6%9C%89%E5%BA%8F%E8%A1%A8%E7%9A%84%E6%9F%A5%E6%89%BE"><span class="toc-text">9.1.2 有序表的查找</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%B4%A2%E5%BC%95%E9%A1%BA%E5%BA%8F%E8%A1%A8"><span class="toc-text">索引顺序表</span></a></li></ol></li></ol></li></ol></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AC%AC%E4%B9%9D%E7%AB%A0-%E6%9F%A5%E6%89%BE"><span class="toc-text">第九章 查找</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#9-1-%E9%9D%99%E6%80%81%E6%9F%A5%E6%89%BE%E8%A1%A8"><span class="toc-text">9.1 静态查找表</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#9-1-1-%E9%A1%BA%E5%BA%8F%E8%A1%A8%E7%9A%84%E6%9F%A5%E6%89%BE"><span class="toc-text">9.1.1 顺序表的查找</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90"><span class="toc-text">性能分析</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BC%98%E4%B8%8E%E7%BC%BA"><span class="toc-text">优与缺</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-1-2-%E6%9C%89%E5%BA%8F%E8%A1%A8%E7%9A%84%E6%9F%A5%E6%89%BE"><span class="toc-text">9.1.2 有序表的查找</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90-1"><span class="toc-text">性能分析</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%B4%A2%E5%BC%95%E9%A1%BA%E5%BA%8F%E8%A1%A8"><span class="toc-text">索引顺序表</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-2-%E5%8A%A8%E6%80%81%E6%9F%A5%E6%89%BE%E8%A1%A8"><span class="toc-text">9.2 动态查找表</span></a></li></ol></li></ol>
 </div>
     
 </div>
@@ -208,6 +208,11 @@
 <li>如果key大于mid就将low指向mid的后一位，然后再重新让mid指向中间元素。</li>
 <li>如果，到最后low反而比high大，那说明没找到这个值。</li>
 </ol>
+<h4 id="性能分析-1"><a href="#性能分析-1" class="headerlink" title="性能分析"></a>性能分析</h4><p>这个查找过程可以用二叉树来描述，折半查找最多不过树的深度</p>
+<div style = "border: 2px solid #000; text-align: center">
+    ASL = log<sub>2</sub>(n + 1) - 1
+</div>
+
 <h4 id="索引顺序表"><a href="#索引顺序表" class="headerlink" title="索引顺序表"></a>索引顺序表</h4><p>关于索引查找表，索引查找表思路上，也和折半查找差不多吧。也是一个缩小区间的查找过程。</p>
 <p>索引表根据查找表的特点来构造。比如说，把固定的几个人放一组，选一个年龄最大的当组长，他的名字是组名。最后我们通过比较组长的年龄，来寻找我们要找的人的年龄。当然啊，这个比较不是很准确，但就那个意思。</p>
 <p>索引查找的平均查找长度=查找索引的平均查找长度+查找顺序表的平均查找长度</p>
@@ -223,6 +228,7 @@
 
 
 
+<h2 id="9-2-动态查找表"><a href="#9-2-动态查找表" class="headerlink" title="9.2 动态查找表"></a>9.2 动态查找表</h2><p>表结构本身是在查找的过程中建立的，对于给定的key，如果有记录的关键字等于key，就返回成功，否则就插入关键字等于key的记录。</p>
 
         
         <br />
