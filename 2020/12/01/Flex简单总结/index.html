@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        Flex简单总结 - Chiuee | Zhaoyifan&#39;s Blog
+        
+    </title>
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/aircloud.css">
+
+    
+<link rel="stylesheet" href="/css/gitment.css">
+
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> 趁现在，安心地去烦恼吧 </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/img/avatar.png" />
+        </div>
+        <div class="name">
+            <i>赵一凡</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BC%B9%E6%80%A7%E7%9B%92%E6%A8%A1%E5%9E%8B"><span class="toc-text">弹性盒模型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A3%B0%E6%98%8E%E5%BC%B9%E6%80%A7%E7%9B%92%E6%A8%A1%E5%9E%8B"><span class="toc-text">声明弹性盒模型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#align-self"><span class="toc-text">align-self</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#flex-grow"><span class="toc-text">flex-grow</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Flex%E5%BC%B9%E6%80%A7%E7%9B%92%E6%A8%A1%E5%9E%8B%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="toc-text">Flex弹性盒模型基本概念</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#flexbox-%E7%9A%84%E4%B8%A4%E6%A0%B9%E8%BD%B4%E7%BA%BF"><span class="toc-text">flexbox 的两根轴线</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BB%E8%BD%B4"><span class="toc-text">主轴</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%A4%E5%8F%89%E8%BD%B4"><span class="toc-text">交叉轴</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Flex-%E5%AE%B9%E5%99%A8"><span class="toc-text">Flex 容器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9B%B4%E6%94%B9flex%E6%96%B9%E5%90%91flex-direction"><span class="toc-text">更改flex方向flex-direction</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%A8flex-wrap%E5%AE%9E%E7%8E%B0%E5%A4%9A%E8%A1%8CFlex%E5%AE%B9%E5%99%A8"><span class="toc-text">用flex-wrap实现多行Flex容器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%80%E5%86%99%E5%B1%9E%E6%80%A7flex-flow"><span class="toc-text">简写属性flex-flow</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#flex-%E5%85%83%E7%B4%A0%E4%B8%8A%E7%9A%84%E5%B1%9E%E6%80%A7"><span class="toc-text">flex 元素上的属性</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Flex-%E5%85%83%E7%B4%A0%E5%B1%9E%E6%80%A7%EF%BC%9Aflex-basis"><span class="toc-text">Flex 元素属性：flex-basis</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Flex-%E5%85%83%E7%B4%A0%E5%B1%9E%E6%80%A7%EF%BC%9Aflex-grow"><span class="toc-text">Flex 元素属性：flex-grow</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Flex-%E5%85%83%E7%B4%A0%E5%B1%9E%E6%80%A7%EF%BC%9Aflex-shrink"><span class="toc-text">Flex 元素属性：flex-shrink</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Flex-%E5%B1%9E%E6%80%A7%E7%9A%84%E7%AE%80%E5%86%99"><span class="toc-text">Flex 属性的简写</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%83%E7%B4%A0%E9%97%B4%E7%9A%84%E5%AF%B9%E9%BD%90%E5%92%8C%E7%A9%BA%E9%97%B4%E5%88%86%E9%85%8D"><span class="toc-text">元素间的对齐和空间分配</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#align-items"><span class="toc-text">align-items</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#justify-content"><span class="toc-text">justify-content</span></a></li></ol></li></ol></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> 趁现在，安心地去烦恼吧 </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        Flex简单总结
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2020-12-01 20:30:40</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#CSS笔记" title="CSS笔记">CSS笔记</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content ">
+        <h1 id="弹性盒模型"><a href="#弹性盒模型" class="headerlink" title="弹性盒模型"></a>弹性盒模型</h1><h2 id="声明弹性盒模型"><a href="#声明弹性盒模型" class="headerlink" title="声明弹性盒模型"></a>声明弹性盒模型</h2><p>定义一个盒子，然后在盒子上属性声明</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">footer</span> &#123;</span><br><span class="line">    <span class="attribute">display</span>: flex; <span class="comment">/* 变成弹性盒子，横向排列 */</span></span><br><span class="line">    <span class="attribute">display</span>: inline-flex; <span class="comment">/* 行级的弹性盒子 */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>改变弹性元素方向</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">main</span> &#123;</span><br><span class="line">    <span class="attribute">display</span>: flex;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">main</span> <span class="selector-tag">div</span> &#123;</span><br><span class="line">    <span class="attribute">flex-direction</span>: row; <span class="comment">/* 默认，行排列 */</span></span><br><span class="line">    <span class="attribute">flex-direction</span>: row-reverse; <span class="comment">/* 倒序显示 */</span></span><br><span class="line">    </span><br><span class="line">    <span class="attribute">flex-direction</span>: column; <span class="comment">/* 上下方向排列 */</span></span><br><span class="line">    <span class="attribute">flex-direction</span>: column-reverse; <span class="comment">/* 同上，反转 */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>元素溢出</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">main</span> &#123;</span><br><span class="line">    <span class="attribute">display</span>: flex;</span><br><span class="line">    width; 200px; /* 一个会导致元素溢出的宽度 */</span><br><span class="line">    </span><br><span class="line">    <span class="selector-tag">flex-wrap</span>: <span class="selector-tag">wrap</span>;</span><br><span class="line">    <span class="comment">/* 表示溢出换行，如果不加这一条属性，那么元素会挤在一起，尺寸会变 */</span></span><br><span class="line">    <span class="selector-tag">flex-wrap</span>: <span class="selector-tag">wrap-reverse</span>; <span class="comment">/* 同上，逆向，折行折到上边或者左边 */</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">/* 折行是根据之前flex-dirtection来确定的 */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>简写</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">main</span> &#123;</span><br><span class="line">    <span class="attribute">display</span>: flex;</span><br><span class="line">    <span class="attribute">flex-flow</span>: column wrap;</span><br><span class="line">    <span class="comment">/* 如上，简写 */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>轴</p>
+<blockquote>
+<p>主轴是flex-direction规定的方向</p>
+<p>副轴是被强行换行之后垂直方向的</p>
+</blockquote>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">main</span> &#123;</span><br><span class="line">    <span class="attribute">display</span>: flex;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/* 主轴是默认的从左向右，所以start就意味着从左向右 */</span></span><br><span class="line">    <span class="comment">/* justify-content只管主轴 */</span></span><br><span class="line">    <span class="attribute">flex-direction</span>: row;</span><br><span class="line">    <span class="attribute">justify-content</span>: flex-start; <span class="comment">/* 从主轴方向开始排列，姑且理解成左对齐 */</span></span><br><span class="line">    <span class="attribute">justify-content</span>: flex-end; <span class="comment">/* 从主轴的反方向开始排列，姑且理解成右对齐 */</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="selector-tag">main</span> &#123;</span><br><span class="line">    <span class="attribute">display</span>: flex;</span><br><span class="line">    <span class="attribute">flex-direction</span>: column; <span class="comment">/* 从上到下排列 */</span></span><br><span class="line">    <span class="attribute">justify-content</span>: flex-start; <span class="comment">/* 上对齐 */</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 剩下的不演示了，一样 */</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">div</span> &#123;</span><br><span class="line">    <span class="attribute">display</span>: flex;</span><br><span class="line">    <span class="attribute">flex-direction</span>: row;</span><br><span class="line">    </span><br><span class="line">    <span class="attribute">justify-content</span>: center; <span class="comment">/* 贴在上边的居中 */</span></span><br><span class="line">    </span><br><span class="line">    <span class="attribute">justify-content</span>: space-between; <span class="comment">/* 左右元素贴边，进行平均排列 */</span></span><br><span class="line">    </span><br><span class="line">    <span class="attribute">justify-content</span>: space-around;</span><br><span class="line">    <span class="comment">/* 每个元素左右都有间距，和之前的padding margin不一样，不会重叠间距，而是会加在一起 */</span></span><br><span class="line">    </span><br><span class="line">    <span class="attribute">justify-content</span>: space-evenly; <span class="comment">/* 完全平均分配，没有space-around的累加特性 */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>副轴</p>
+</blockquote>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">main</span> &#123;</span><br><span class="line">    <span class="attribute">display</span>: flex;</span><br><span class="line">    <span class="comment">/* 控制副轴 */</span></span><br><span class="line">    <span class="attribute">align-items</span>: flex-start;</span><br><span class="line">    <span class="comment">/* 因为主轴默认是从左往右，那么对于副轴的start来说就是上下方向了 */</span></span><br><span class="line">    <span class="comment">/* 这里意思是上对齐 */</span></span><br><span class="line">    <span class="attribute">align-items</span>: flex-end; <span class="comment">/* 向下对齐 */</span></span><br><span class="line">    <span class="attribute">align-items</span>: center; <span class="comment">/* 上下居中 */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 副轴与主轴属性基本对应 */</span></span><br><span class="line"></span><br><span class="line"><span class="selector-tag">main</span> &#123;</span><br><span class="line">    <span class="attribute">display</span>: flex;</span><br><span class="line">    </span><br><span class="line">    <span class="attribute">align-content</span>: flex-start;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="align-self"><a href="#align-self" class="headerlink" title="align-self"></a><code>align-self</code></h3><blockquote>
+<p>对单个元素进行控制</p>
+</blockquote>
+<ol>
+<li><code>center</code></li>
+<li><code>flex-start</code></li>
+</ol>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span></span><br><span class="line">    main &#123;</span><br><span class="line">        display: flex;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="css">    <span class="selector-tag">main</span> <span class="selector-pseudo">:nth-child(2)</span> &#123;</span></span><br><span class="line"><span class="css">        <span class="selector-tag">align-self</span>: <span class="selector-tag">center</span>; <span class="comment">/* 单独让第二个元素居中 */</span></span></span><br><span class="line">    &#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">main</span>&gt;</span></span><br><span class="line">    	<span class="tag">&lt;<span class="name">div</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">main</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="flex-grow"><a href="#flex-grow" class="headerlink" title="flex-grow"></a><code>flex-grow</code></h3><blockquote>
+<p>为元素分配可用空间</p>
+</blockquote>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">main</span> <span class="selector-pseudo">:nth-child(1)</span> &#123;</span><br><span class="line">    <span class="attribute">flex-grow</span>: <span class="number">0</span>; <span class="comment">/* 意思是原来设置的 */</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">main</span> <span class="selector-pseudo">:nth-child(2)</span> &#123;</span><br><span class="line">    <span class="attribute">flex-grow</span>: <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">main</span> <span class="selector-pseudo">:nth-child(3)</span> &#123;</span><br><span class="line">    <span class="attribute">flex-grow</span>: <span class="number">2</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/* </span></span><br><span class="line"><span class="comment">以上代码，child_1按原来的大小分配</span></span><br><span class="line"><span class="comment">child_2和child_3，拿到剩余空间的1/3与2/3</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+<h1 id="Flex弹性盒模型基本概念"><a href="#Flex弹性盒模型基本概念" class="headerlink" title="Flex弹性盒模型基本概念"></a>Flex弹性盒模型基本概念</h1><blockquote>
+<p> flexbox 是一种一维布局，因为 flexbox 一次性只能处理一个维度上的元素布局</p>
+</blockquote>
+<p>本文为简单介绍。</p>
+<hr>
+<h2 id="flexbox-的两根轴线"><a href="#flexbox-的两根轴线" class="headerlink" title="flexbox 的两根轴线"></a>flexbox 的两根轴线</h2><blockquote>
+<p>主轴与交叉轴（副轴）。</p>
+</blockquote>
+<h3 id="主轴"><a href="#主轴" class="headerlink" title="主轴"></a>主轴</h3><p>主轴由<code>flex-direction</code>定义，有四个值：</p>
+<ul>
+<li><code>row</code>：从左至右</li>
+<li><code>row-reverse</code>：从右至左</li>
+<li><code>column</code>：从上到下</li>
+<li><code>column-reverse</code>：从下到上</li>
+</ul>
+<p>默认情况下是<code>row</code>。</p>
+<h3 id="交叉轴"><a href="#交叉轴" class="headerlink" title="交叉轴"></a>交叉轴</h3><p>也就是副轴，垂直于<code>flex-direction</code>设置的主轴方向。</p>
+<p>主轴与交叉轴的概念很重要，因为 flexbox 一次性只能调控一个维度的元素。</p>
+<hr>
+<h2 id="Flex-容器"><a href="#Flex-容器" class="headerlink" title="Flex 容器"></a>Flex 容器</h2><p>采用 flexbox 的区域就叫做 flex 容器。</p>
+<p>将一个容器的<code>display</code>属性值改为<code>flex</code>或者<code>inline-flex</code>后，该容器就会变成 flex 容器，而容器中的元素则会变成 <strong>flex 元素</strong> 。</p>
+<p>flex 元素的初始值：</p>
+<ul>
+<li>元素按行排列（<code>flex--direction</code>属性的初始值是<code>row</code>）</li>
+<li>元素从主轴的起始线（start）开始。</li>
+<li>元素不会拉伸，但是可以缩小。</li>
+<li>元素被拉伸来填充交叉轴大小。（？）</li>
+<li><code>flex-basis</code>属性为<code>auto</code></li>
+<li><code>flex-wrap</code>属性为<code>nowrap</code></li>
+</ul>
+<p>注意，以上为默认属性值。</p>
+<h3 id="更改flex方向flex-direction"><a href="#更改flex方向flex-direction" class="headerlink" title="更改flex方向flex-direction"></a>更改flex方向flex-direction</h3><p>flex容器中更改<code>flex-direction</code>属性可以改变flex容器中元素的排列方向。</p>
+<p>设置<code>flex-direction: row-reverse</code>让元素从右向左排列，但是在flex容器中，不说左和右，而是<strong>起始线</strong>与<strong>终止线</strong>。</p>
+<hr>
+<h2 id="用flex-wrap实现多行Flex容器"><a href="#用flex-wrap实现多行Flex容器" class="headerlink" title="用flex-wrap实现多行Flex容器"></a>用flex-wrap实现多行Flex容器</h2><p><code>flex-wrap</code>默认值为<code>nowrap</code>，意思是不换行，元素挤不下就先变小然后挤进去。改成<code>wrap</code>后挤不进去就会换行。如果有些元素无法缩小，那么默认的<code>nowrap</code>会导致元素溢出。</p>
+<hr>
+<h2 id="简写属性flex-flow"><a href="#简写属性flex-flow" class="headerlink" title="简写属性flex-flow"></a>简写属性flex-flow</h2><p><code>flex-flow</code>是<code>flex-direction</code>与<code>flex-wrap</code>的简写形式，第一个写<code>flex-direction</code>的值，第二个写<code>flex-wrap</code>的值。</p>
+<hr>
+<h2 id="flex-元素上的属性"><a href="#flex-元素上的属性" class="headerlink" title="flex 元素上的属性"></a>flex 元素上的属性</h2><p>为了更好的控制flex元素，有三个属性可以作用于他们：</p>
+<ul>
+<li><code>flex-grow</code></li>
+<li><code>flex-shrink</code></li>
+<li><code>flex-basis</code></li>
+</ul>
+<p>在使用这几个属性之前，先明白一个概念——<strong>可用空间</strong>。这几个属性的作用其实就是在改变flex容器中的可用空间。</p>
+<p>假设一个容器宽 100px ，其中的元素有三个，宽均为 20px 。那么剩下的40px就是可用空间。默认情况下，这40px的可用空间放在最后一个元素后边。</p>
+<p>控制元素去使用可用空间，就是这些属性要做的事。</p>
+<h3 id="Flex-元素属性：flex-basis"><a href="#Flex-元素属性：flex-basis" class="headerlink" title="Flex 元素属性：flex-basis"></a>Flex 元素属性：<code>flex-basis</code></h3><p><code>flex-basis</code>定义了该元素的<strong>空间大小</strong>，flex容器里除了元素所占的空间以外的其余空间就是<strong>可用空间</strong>。属性的默认值为<code>auto</code>。如果元素已经设置了宽度（width），那么<code>flex-basis</code>就是宽度的值。</p>
+<p>如果元素没有设置宽度，那么<code>flex-basis</code>的值就只是刚好放下元素里的内容。</p>
+<p>如果宽度于其一同设置，那以<code>flex-basis</code>为准。</p>
+<h3 id="Flex-元素属性：flex-grow"><a href="#Flex-元素属性：flex-grow" class="headerlink" title="Flex 元素属性：flex-grow"></a>Flex 元素属性：<code>flex-grow</code></h3><p>如果单独一个元素的<code>flex-grow</code>被赋予一个整数值，那么该元素会被拉伸然后占据全部可用空间。</p>
+<p>当多个元素的<code>flex-grow</code>均被赋值时，可用空间会按比例被元素瓜分。<br>$$<br>元素瓜分的可用空间 = (容器总宽度 - 各元素宽度) × (该元素flex-grow值/各元素flex-grow值之和)<br>$$<br>比如</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 一个&lt;main&gt;里有三个&lt;div&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="selector-tag">main</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">400px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">270px</span>;</span><br><span class="line">    <span class="attribute">display</span>: flex;</span><br><span class="line"></span><br><span class="line">    <span class="selector-pseudo">:nth-child(1)</span> &#123;</span><br><span class="line">        <span class="attribute">flex-grow</span>: <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="selector-pseudo">:nth-child(2)</span> &#123;</span><br><span class="line">        <span class="attribute">flex-grow</span>: <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="selector-pseudo">:nth-child(3)</span> &#123;</span><br><span class="line">        <span class="attribute">flex-grow</span>: <span class="number">2</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="selector-tag">div</span> &#123;</span><br><span class="line">        <span class="attribute">width</span>: <span class="number">50px</span>;</span><br><span class="line">        <span class="attribute">height</span>: <span class="number">50px</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>第一个div在原来宽度的基础上，再增加已瓜分的可用空间，得到<code>width: 112.5px</code></p>
+<p>第二个div得到<code>width: 112.5px</code></p>
+<p>第三个div得到<code>width: 175px</code></p>
+<h3 id="Flex-元素属性：flex-shrink"><a href="#Flex-元素属性：flex-shrink" class="headerlink" title="Flex 元素属性：flex-shrink"></a>Flex 元素属性：<code>flex-shrink</code></h3><p>这个是用来缩小元素的。<br>$$<br>现在的宽度=原宽度-(各元素宽度之和-容器总宽度)×(该元素flex-shrink值/各元素flex-shrink值之和)<br>$$</p>
+<p>例如</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">main</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">500px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">270px</span>;</span><br><span class="line">    <span class="attribute">display</span>: flex;</span><br><span class="line"></span><br><span class="line">    <span class="selector-pseudo">:nth-child(1)</span> &#123;</span><br><span class="line">        <span class="attribute">flex-shrink</span>: <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="selector-pseudo">:nth-child(2)</span> &#123;</span><br><span class="line">        <span class="attribute">flex-shrink</span>: <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="selector-pseudo">:nth-child(3)</span> &#123;</span><br><span class="line">        <span class="attribute">flex-shrink</span>: <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="selector-pseudo">:nth-child(4)</span> &#123;</span><br><span class="line">        <span class="attribute">flex-shrink</span>: <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="selector-tag">div</span> &#123;</span><br><span class="line">        <span class="attribute">width</span>: <span class="number">200px</span>;</span><br><span class="line">        <span class="attribute">height</span>: <span class="number">50px</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>容器总宽度是500px，元素宽度之和为4x200px，溢出来的空间有300px，第一个元素flex-shrink为0，那他就是原长200px。剩下的都是1，于是平分300px，每一个分到100px，最后的长度为200-100。</p>
+<h3 id="Flex-属性的简写"><a href="#Flex-属性的简写" class="headerlink" title="Flex 属性的简写"></a>Flex 属性的简写</h3><blockquote>
+<p>（我还没想清楚为什么将这三个明明比较冲突的属性写在一起，所以先不详细地写了）</p>
+</blockquote>
+<p>进行开发时，一般不会就属性单独使用，因为实际开发中，某一元素的属性有很多。所以会有一种简写形式供大家选择。</p>
+<p><code>flex</code>允许你把上边的三个值按顺序依次书写——<code>flex-gorw</code>，<code>flex-shrink</code>，<code>flex-basis</code>。</p>
+<p>当然，也有一些预制效果：</p>
+<ul>
+<li>flex: initial -&gt; flex: 0 1 auto</li>
+<li>flex: auto -&gt; 1 1 auto</li>
+<li>flex: none -&gt; flex: 0 0 auto</li>
+<li>flex: <positive-number> -&gt; </li>
+</ul>
+<hr>
+<h2 id="元素间的对齐和空间分配"><a href="#元素间的对齐和空间分配" class="headerlink" title="元素间的对齐和空间分配"></a>元素间的对齐和空间分配</h2><h3 id="align-items"><a href="#align-items" class="headerlink" title="align-items"></a>align-items</h3><p>该属性可以使元素在交叉轴方向对齐。</p>
+<p>属性：</p>
+<ul>
+<li>stretch</li>
+<li>flex-start：怼向起始线</li>
+<li>flex-end：怼向终止线</li>
+<li>center：在交叉轴居中</li>
+</ul>
+<h3 id="justify-content"><a href="#justify-content" class="headerlink" title="justify-content"></a>justify-content</h3><p>该属性决定元素在主轴方向的对齐方式。</p>
+<p>属性：</p>
+<ul>
+<li>stretch</li>
+<li>flex-start：对齐到起始线</li>
+<li>flex-end：对齐到终止线</li>
+<li>center：在主轴方向居中</li>
+<li>space-around：元素周围均匀地围一圈空白，但是和padding或者margin不一样的是，他不对重叠在一起，所以这个属性值用得比较少。</li>
+<li>space-between：两边属性往边靠，元素间的空隙均匀分配</li>
+</ul>
+<hr>
+<p>大概就是这样了。</p>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+
+        <div id="lv-container">
+        </div>
+
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <!-- <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span> -->
+        Created By <a href="">Hexo</a>  Theme <a href="">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = ""
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="/js/index.js"></script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+</html>
