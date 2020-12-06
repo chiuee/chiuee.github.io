@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        python基础部分 - Chiuee | Zhaoyifan&#39;s Blog
+        
+    </title>
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/aircloud.css">
+
+    
+<link rel="stylesheet" href="/css/gitment.css">
+
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> 趁现在，安心地去烦恼吧 </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/img/avatar.png" />
+        </div>
+        <div class="name">
+            <i>赵一凡</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%86"><span class="toc-text">基础部分</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-text">数据类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B4%E5%9E%8B"><span class="toc-text">整型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B5%AE%E7%82%B9%E5%9E%8B"><span class="toc-text">浮点型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="toc-text">字符串</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%83%E5%B0%94%E5%80%BC"><span class="toc-text">布尔值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A9%BA%E5%80%BCNone"><span class="toc-text">空值None</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E9%87%8F"><span class="toc-text">常量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B0%E4%B8%9C%E8%A5%BF%E2%80%94%E2%80%94%E5%88%97%E8%A1%A8"><span class="toc-text">新东西——列表</span></a></li></ol></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> 趁现在，安心地去烦恼吧 </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        python基础部分
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2020-12-05 20:55:52</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#python学习笔记" title="python学习笔记">python学习笔记</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content ">
+        <h1 id="基础部分"><a href="#基础部分" class="headerlink" title="基础部分"></a>基础部分</h1><blockquote>
+<p>由于已有编程基础，便不再事无巨细地记录了</p>
+</blockquote>
+<p>在python里，当一行代码太长，看着头皮发麻时，由于没有<code>;</code>的限制，显然不能像C语言一样直接换行。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(this_sentence_is_too_long == <span class="literal">True</span>) <span class="keyword">and</span> \</span><br><span class="line">(then_write_it_like_this == <span class="literal">True</span>):</span><br><span class="line">    show() <span class="comment"># 如果一行代码太长，那就用 \ 来分割</span></span><br></pre></td></tr></table></figure>
+
+<p>不过老分号在python里还是存在的</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">x = <span class="string">&quot;123&quot;</span>; its_OK() </span><br><span class="line"><span class="comment"># 用 ; 分隔，当然这样就不能拥有代码块了</span></span><br></pre></td></tr></table></figure>
+
+<p>再看看变量赋值，真就是变量名+值，连类似JavaScript里的<code>let</code>或者<code>var</code>都没有。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">anInt = <span class="number">12</span></span><br><span class="line">aString = <span class="string">&#x27;string&#x27;</span></span><br><span class="line">aFloat = <span class="number">0.23123</span></span><br><span class="line">anotherString = <span class="string">&#x27;str&#x27;</span> + <span class="string">&#x27;ing&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>熟悉的<code>*=</code>、<code>-=</code>等在python里依然存在，不过自增自减就人没了<code>--</code>、<code>++</code>。</p>
+<p>python可以说是很懂人类了，看看这种赋值吧，我觉得以C或Java等，为母语的朋友们，对这样的赋值，肯定会比较新奇。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">x, y, z = <span class="number">1</span>, <span class="number">2</span>, <span class="string">&#x27;aString&#x27;</span></span><br><span class="line">(x, y, z) = (<span class="number">1</span>, <span class="number">2</span>, <span class="string">&#x27;aString&#x27;</span>) <span class="comment"># 加上括号多少保险一点</span></span><br></pre></td></tr></table></figure>
+
+<p>及不记得在C等语言里，我x要和你y交换值，得有个中间商，而python就无需中间商。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">x = <span class="number">1</span></span><br><span class="line">y = <span class="number">2</span></span><br><span class="line"><span class="comment"># 交换</span></span><br><span class="line">x, y = <span class="number">2</span>, <span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h2><h3 id="整型"><a href="#整型" class="headerlink" title="整型"></a>整型</h3><p>有一点不同，就是<code>100000000000</code>可以写成<code>100_000_000_000</code>。用下划线<code>_</code>可以分隔数字，方便阅读。</p>
+<p>加减乘除还是原来的<code>+ - * /</code>，且多了一个乘方<code>**</code>。整型用<code>/</code>除出来是浮点型，而用<code>//</code>则是整型，称之为<u>地板除</u>。浮点型不管用<code>/</code>还是<code>//</code>都是浮点型。（python 2中两个整型用<code>/</code>计算出来结果还是整型，必须有一个是浮点型结果才能使浮点型。）</p>
+<h3 id="浮点型"><a href="#浮点型" class="headerlink" title="浮点型"></a>浮点型</h3><p>依然存在这种通病。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="number">0.2</span> + <span class="number">0.1</span></span><br><span class="line"><span class="number">0.30000000000000004</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h3><p><code>+</code>可以算数学，而且可以链接字符串，<s>让我想起了JavaScript。</s></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>aString = <span class="string">&#x27;连接&#x27;</span> + <span class="string">&#x27;字符串&#x27;</span></span><br><span class="line"><span class="string">&#x27;连接字符串&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>感觉python很自由对吧，但是他不能这样</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>num = <span class="number">2</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>aString = <span class="string">&#x27;连接&#x27;</span> + num + <span class="string">&#x27;个字符串&#x27;</span></span><br><span class="line">error</span><br></pre></td></tr></table></figure>
+
+<p>毕竟类型不同。这样就行了</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>num = <span class="number">2</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>aString = <span class="string">&#x27;连接&#x27;</span> + <span class="built_in">str</span>(num) + <span class="string">&#x27;个字符串&#x27;</span></span><br><span class="line"><span class="string">&#x27;连接2个字符串&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>单引号和双引号均可。还有类似模板字面量的东西，只不过这个是用三个单引号括起来。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">&#x27;&#x27;&#x27;line1</span></span><br><span class="line"><span class="string">line2</span></span><br><span class="line"><span class="string">line3&#x27;&#x27;&#x27;</span>)</span><br><span class="line"><span class="comment"># 输出</span></span><br><span class="line">line1</span><br><span class="line">line2</span><br><span class="line">line3</span><br><span class="line"></span><br><span class="line">print(<span class="string">&#x27;&#x27;&#x27;line1</span></span><br><span class="line"><span class="string">	line2</span></span><br><span class="line"><span class="string">	line3&#x27;&#x27;&#x27;</span>)</span><br><span class="line"><span class="comment"># 输出</span></span><br><span class="line">line1</span><br><span class="line">	line2</span><br><span class="line">    line3</span><br></pre></td></tr></table></figure>
+
+<h3 id="布尔值"><a href="#布尔值" class="headerlink" title="布尔值"></a>布尔值</h3><p>布尔值是大写的<code>True</code>和<code>False</code>。布尔值可以用<code>and</code>、<code>or</code>和<code>not</code>。<s>好家伙，难怪外行想玩玩编程就会选择python。</s></p>
+<h3 id="空值None"><a href="#空值None" class="headerlink" title="空值None"></a>空值<code>None</code></h3><h2 id="常量"><a href="#常量" class="headerlink" title="常量"></a>常量</h2><p>其实没有常量，就只是把字母大写的变量。</p>
+<h2 id="新东西——列表"><a href="#新东西——列表" class="headerlink" title="新东西——列表"></a>新东西——列表</h2>
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+
+        <div id="lv-container">
+        </div>
+
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <!-- <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span> -->
+        Created By <a href="">Hexo</a>  Theme <a href="">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = ""
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="/js/index.js"></script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+</html>
