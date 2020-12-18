@@ -151,7 +151,7 @@
 <p>性质4：具有n个结点的完全二叉树的深度为└log<sub>2</sub>n┘+1</p>
 <h3 id="二叉树的二叉链表存储表示"><a href="#二叉树的二叉链表存储表示" class="headerlink" title="二叉树的二叉链表存储表示"></a>二叉树的二叉链表存储表示</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">BiTNode</span> &#123;</span></span><br><span class="line">    TElemType data;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">BiTNode</span> *<span class="title">lchild</span>, *<span class="title">rchild</span>;</span></span><br><span class="line">&#125;BiTNode, *BiTree;</span><br></pre></td></tr></table></figure>
 
-<p><strong>先（根）序的遍历算法</strong></p>
+<p><strong>先（根）序的遍历算法</strong>（待补充）</p>
 <ol>
 <li><p>访问根结点；</p>
 </li>
@@ -160,7 +160,7 @@
 <li><p>先序遍历右子树。</p>
 </li>
 </ol>
-<p><strong>中（根）序的遍历算法</strong></p>
+<p><strong>中（根）序的遍历算法</strong>（待补充）</p>
 <ol>
 <li><p>中序遍历左子树；</p>
 </li>
@@ -169,7 +169,7 @@
 <li><p>中序遍历右子树。</p>
 </li>
 </ol>
-<p><strong>后（根）序的遍历算法</strong></p>
+<p><strong>后（根）序的遍历算法</strong>（待补充）</p>
 <ol>
 <li>后序遍历左子树；</li>
 <li>后序遍历右子树；</li>
@@ -183,7 +183,27 @@
     <div style="border: 2px solid #000;flex-grow:1;">rchild</div>
 </div>
 
-<p>若结点有左子树，则其lchild域指示其左孩子，否则令lchild域指示其前驱；若结点有右子树，则其rchild域指示其右孩子，否则令rchild域指示其后继。</p>
+<p>若结点有左子树，则其lchild域指示其左孩子（标志域LTag=0），否则令lchild域指示其前驱（标志域LTag=1）；若结点有右子树，则其rchild域指示其右孩子（标志域RTag=0），否则令rchild域指示其后继（标志域RTag=1）。指向结点前驱和后驱的指针叫做<strong>线索</strong>。加上线索的二叉树叫做<strong>线索二叉树</strong>。对二叉树进行遍历的时候将其变为线索二叉树的过程叫做<strong>线索化</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">enum</span> &#123;</span> Link, Thread &#125; PointerThr;  </span><br><span class="line"><span class="comment">// Link==0:指针，Thread==1:线索</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">BiThrNode</span> &#123;</span></span><br><span class="line">   TElemType data;</span><br><span class="line">   <span class="class"><span class="keyword">struct</span> <span class="title">BiThrNode</span> *<span class="title">lchild</span>, *<span class="title">rchild</span>;</span> <span class="comment">// 左右指针</span></span><br><span class="line">   PointerThr LTag, RTag; <span class="comment">// 左右标志</span></span><br><span class="line">&#125; BiThrNode, *BiThrTree;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         
         <br />
