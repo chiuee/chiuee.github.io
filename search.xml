@@ -621,6 +621,7 @@
 ]]></content>
       <tags>
         <tag>数据结构笔记</tag>
+        <tag>栈和队列</tag>
       </tags>
   </entry>
   <entry>
@@ -711,16 +712,16 @@
 <li>除第一个以外，所有数据元素只存在一个前驱</li>
 <li>除最后一个外，所有数据元素只存在一个后继</li>
 </ol>
-<h2 id="2-1-线性表的类型定义"><a href="#2-1-线性表的类型定义" class="headerlink" title="2.1 线性表的类型定义"></a>2.1 线性表的类型定义</h2><p><strong>线性表</strong>是最常用且最简单的一种数据结构。线性表是由n个数据元素的<strong>有限序列</strong>。</p>
+<h2 id="线性表的类型定义"><a href="#线性表的类型定义" class="headerlink" title="线性表的类型定义"></a>线性表的类型定义</h2><p><strong>线性表</strong>是最常用且最简单的一种数据结构。线性表是由n个数据元素的<strong>有限序列</strong>。</p>
 <p>数据元素可能有很多个<strong>数据项</strong>组成，这样的数据元素称为<strong>记录</strong>，有很多个记录的线性表称为<strong>文件</strong>。</p>
 <p>a<del>i</del>是第i个数据元素，称i为数据元素a在线性表中的<strong>位序</strong>。</p>
-<h2 id="2-2-线性表的顺序表示和实现"><a href="#2-2-线性表的顺序表示和实现" class="headerlink" title="2.2 线性表的顺序表示和实现"></a>2.2 线性表的顺序表示和实现</h2><p>线性表的顺序表示指的是用一组地址连续的存储单位一次存储线性表的数据元素。</p>
+<h2 id="线性表的顺序表示和实现"><a href="#线性表的顺序表示和实现" class="headerlink" title="线性表的顺序表示和实现"></a>线性表的顺序表示和实现</h2><p>线性表的顺序表示指的是用一组地址连续的存储单位一次存储线性表的数据元素。</p>
 <p>线性表这种机内表示称作线性表的<strong>顺序存储结构</strong>或者<strong>顺序映像</strong>。就是说表中相邻的元素，实际上也是物理意义上的相邻。</p>
 <figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LIST_INIT_SIZE 100 <span class="comment">// 线性表存储空间的初是分量</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LISTINCREMENT 10 <span class="comment">// 线性表存储空间的分配增量</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ERROR 0</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> OK 1</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> OVERFLOW -2</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">int</span> ElemType; <span class="comment">// 暂定为int类型</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">    ElemType *elem; <span class="comment">// 存储空间的基址</span></span><br><span class="line">    <span class="keyword">int</span> length; <span class="comment">// 当前长度</span></span><br><span class="line">    <span class="keyword">int</span> listsize; <span class="comment">// 当前分配的存储容量</span></span><br><span class="line">    			  <span class="comment">// 以sizeof(ElemType)为单位</span></span><br><span class="line">&#125;SqList; <span class="comment">// 俗称：顺序表</span></span><br></pre></td></tr></table></figure>
 
 <figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">// Status不是给关键字，这是伪代码</span></span><br><span class="line"><span class="function">Status <span class="title">InitList_Sq</span><span class="params">(SqList &amp;L)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 构造一个空的线性表</span></span><br><span class="line">    L.elem=(ElemtYPE*)<span class="built_in">malloc</span>(LIST_INIT_SIZE*<span class="keyword">sizeof</span>(ElemType));</span><br><span class="line">    <span class="keyword">if</span>(!L.elem) <span class="built_in">exit</span>(OVERFLOW);</span><br><span class="line">    L.length = <span class="number">0</span>; <span class="comment">// 初始化</span></span><br><span class="line">    L.listsize = LIST_INIT_SIZE;</span><br><span class="line">    <span class="keyword">return</span> OK;</span><br><span class="line">&#125; <span class="comment">// 时间复杂度O(1)</span></span><br></pre></td></tr></table></figure>
 
-<h3 id="2-2-1-增加数据元素"><a href="#2-2-1-增加数据元素" class="headerlink" title="2.2.1 增加数据元素"></a>2.2.1 增加数据元素</h3><p>在顺序表L的第i个元素之前插入新的元素e</p>
+<h3 id="增加数据元素"><a href="#增加数据元素" class="headerlink" title="增加数据元素"></a>增加数据元素</h3><p>在顺序表L的第i个元素之前插入新的元素e</p>
 <figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">/* 为什么是&amp;L呢 破案了，C语言里&amp;是取地址的意思，不能表示引用，可以改成SqList *L，相应的，在使用L的地方改成(*L)*/</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">insert</span><span class="params">(SqList &amp;L, <span class="keyword">int</span> i, ElemType e)</span> </span>&#123;</span><br><span class="line">	<span class="comment">// 首先判断位置是否存在，然后判断线性表够不够长，然后插入</span></span><br><span class="line">	<span class="keyword">if</span>(L.length&lt;i || i&lt;<span class="number">0</span>) <span class="keyword">return</span> ERROR; <span class="comment">//不要忘记i&lt;0</span></span><br><span class="line">	</span><br><span class="line">	<span class="comment">// 判断线性表长度</span></span><br><span class="line">	<span class="keyword">if</span>(L.length &gt;= L.listsize) &#123;</span><br><span class="line">		ElemType *newbase; <span class="comment">//定义新基址</span></span><br><span class="line">		newbase=(ElemType *)<span class="built_in">malloc</span>(L.elem,</span><br><span class="line">				(L.listsize+LISTINCREMENT)*<span class="keyword">sizeof</span>(ElemType));</span><br><span class="line">		<span class="keyword">if</span>(!newbase) <span class="built_in">exit</span>(OVERFLOW); <span class="comment">// 分配失败</span></span><br><span class="line">		L.elem = newbase;</span><br><span class="line">		L.listsize += LISTINCREMENT;</span><br><span class="line">	&#125;</span><br><span class="line">	ElemType *p = &amp;L.elem[L.length<span class="number">-1</span>]; <span class="comment">// 线性表最后一个元素地址</span></span><br><span class="line">	<span class="comment">/* 可以用数组下表表示，毕竟elem就是指针类型，这个结论其实是显而易见的，但是我确实想了好久，虽然比较蠢，但是还是记下来吧 */</span></span><br><span class="line">	ElemType *q = &amp;(L.elem[i<span class="number">-1</span>]); <span class="comment">// 待插入地址</span></span><br><span class="line">	<span class="keyword">for</span>(; p&gt;=q; p--)</span><br><span class="line">	<span class="comment">// 这里建议画图理解，为什么是&gt;=，而不是&gt;</span></span><br><span class="line">		*(p+<span class="number">1</span>) = *p; <span class="comment">// 将值赋予后继</span></span><br><span class="line">	*q = e; <span class="comment">// 插入e</span></span><br><span class="line">	++L.length;</span><br><span class="line">	<span class="keyword">return</span> OK;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>补充关于<code>realloc</code>的相关知识：</p>
@@ -730,7 +731,7 @@
 <li>如果申请失败，将返回NULL，此时，原来的指针仍然有效。</li>
 </ol>
 <p>若<strong>假定</strong>在线性表中的任何一个位置上进行插入的概率都是相等的，则<strong>移动元素的期望值</strong>为：E<sub>is</sub>=n/2</p>
-<h3 id="2-2-2-删除数据元素"><a href="#2-2-2-删除数据元素" class="headerlink" title="2.2.2 删除数据元素"></a>2.2.2 删除数据元素</h3><p>我写的</p>
+<h3 id="删除数据元素"><a href="#删除数据元素" class="headerlink" title="删除数据元素"></a>删除数据元素</h3><p>我写的</p>
 <figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">/* 为什么是&amp;e */</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">delete</span><span class="params">(SqList &amp;L, <span class="keyword">int</span> i, ElemType &amp;e)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(i&lt;<span class="number">1</span> || i&gt;L.length) <span class="keyword">return</span> ERROR;</span><br><span class="line">	ElemType *q = &amp;(L.elem[i<span class="number">-1</span>]);</span><br><span class="line">	e = *q;</span><br><span class="line">	<span class="keyword">for</span>(; q&lt;=&amp;(L.elem[L.length<span class="number">-1</span>]); q--)</span><br><span class="line">		*q = *(q+<span class="number">1</span>);</span><br><span class="line">	--L.length;</span><br><span class="line">	<span class="keyword">return</span> OK;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>书本上的</p>
@@ -755,10 +756,10 @@
     O( ListLength(La) ＋ ListLength(Lb) )
 </div>
 
-<h2 id="2-3-线性表的链式表示和实现"><a href="#2-3-线性表的链式表示和实现" class="headerlink" title="2.3 线性表的链式表示和实现"></a>2.3 线性表的链式表示和实现</h2><blockquote>
+<h2 id="线性表的链式表示和实现"><a href="#线性表的链式表示和实现" class="headerlink" title="线性表的链式表示和实现"></a>线性表的链式表示和实现</h2><blockquote>
 <p>线性表的顺序存储结构储存的数据元素，在逻辑与物理上都是相邻的，这样有一个好处，就是存储位置可以用一个简单的直观的公式来表达。但是也早就了一个缺陷，在删除或插入数据的时候，变得极其复杂。</p>
 </blockquote>
-<h3 id="2-3-1-线性链表"><a href="#2-3-1-线性链表" class="headerlink" title="2.3.1 线性链表"></a>2.3.1 线性链表</h3><p>用一组<u><strong>地址任意</strong></u>的存储单元存放线性表中的数据元素。之前顺序表中的单元，现在称之为<strong>结点</strong>。一个结点包含两个域，一个存放数据的<strong>数据域</strong>，一个存放<u>直接后继</u>的<strong>指针域</strong>。</p>
+<h3 id="线性链表"><a href="#线性链表" class="headerlink" title="线性链表"></a>线性链表</h3><p>用一组<u><strong>地址任意</strong></u>的存储单元存放线性表中的数据元素。之前顺序表中的单元，现在称之为<strong>结点</strong>。一个结点包含两个域，一个存放数据的<strong>数据域</strong>，一个存放<u>直接后继</u>的<strong>指针域</strong>。</p>
 <p>以线性表中第一个数据元素的存储地址为线性表的地址，称作线性表的<strong>头指针</strong>。有时为了操作方便，在第一个结点之前虚假一个“头结点”，以指向头节点的指针为链表的头指针。</p>
 <p>头结点、首元结点（第一个结点）、头指针的概念区分：</p>
 <ol>
@@ -813,7 +814,7 @@
 
 <h4 id="合并两链表为一个表"><a href="#合并两链表为一个表" class="headerlink" title="合并两链表为一个表"></a>合并两链表为一个表</h4><p>和上边顺序表合并条件相同，但是这回要将Lb并入La中。</p>
 <figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">MergeList_L</span><span class="params">(LinkList &amp;La, LinkList &amp;La, LinkList &amp;Lc)</span> </span>&#123;</span><br><span class="line">	pa = La-&gt;next;</span><br><span class="line">	pb = Lb-&gt;next;</span><br><span class="line">	Lc = pc = La;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">while</span>(pa &amp;&amp; pb) &#123;</span><br><span class="line">		<span class="keyword">if</span>(pa-&gt;data &lt;= pb-&gt;data) &#123;</span><br><span class="line">			pc-&gt;next = pa;</span><br><span class="line">			pc = pa;</span><br><span class="line">			pa = pa-&gt;next;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span>&#123;</span><br><span class="line">			pc-&gt;next = pb;</span><br><span class="line">			pc = pb;</span><br><span class="line">			pb = pb-&gt;next;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	pc-&gt;next = pa ? pa : pb;</span><br><span class="line">	<span class="built_in">free</span>(Lb);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="2-3-2-循环链表"><a href="#2-3-2-循环链表" class="headerlink" title="2.3.2 循环链表"></a>2.3.2 循环链表</h2><h3 id="循环链表"><a href="#循环链表" class="headerlink" title="循环链表"></a>循环链表</h3><p>最后一个结点指回第一个结点，就变成循环链表，这样的话，循环判断时，从判断p-&gt;next是否为空，变成判断p-&gt;next是否为<u>头指针</u>（指向的并不是头结点的地址，而是首元结点的地址）。</p>
+<h2 id="循环链表"><a href="#循环链表" class="headerlink" title="循环链表"></a>循环链表</h2><h3 id="循环链表-1"><a href="#循环链表-1" class="headerlink" title="循环链表"></a>循环链表</h3><p>最后一个结点指回第一个结点，就变成循环链表，这样的话，循环判断时，从判断p-&gt;next是否为空，变成判断p-&gt;next是否为<u>头指针</u>（指向的并不是头结点的地址，而是首元结点的地址）。</p>
 <p><i>p35“但有时候，若在循环链表中设立尾指针而不设头指针，可是某些操作简化。例如两个线性表合并成一个表时，仅需将一个表的表尾和另一个表的表头相接。”</i>不太懂，意思是不设头结点的表？</p>
 <h3 id="双向链表"><a href="#双向链表" class="headerlink" title="双向链表"></a>双向链表</h3><p>前面讲到的链表，都是单向的，双向链表有两个指针域，一个指向前驱，一个指向后继。</p>
 <figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">DuLNode</span> &#123;</span></span><br><span class="line">    ElemType data;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">DuLNode</span> *<span class="title">prior</span>;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">DuLNode</span> *<span class="title">next</span>;</span></span><br><span class="line">&#125;DuLNode, *DuLinkList;</span><br></pre></td></tr></table></figure>
@@ -838,7 +839,7 @@
 <li>存储空间可共享使用</li>
 </ol>
 </blockquote>
-<h2 id="2-4-一元多项式的表示及相加"><a href="#2-4-一元多项式的表示及相加" class="headerlink" title="2.4 一元多项式的表示及相加"></a>2.4 一元多项式的表示及相加</h2><p>p<sub>n</sub>(x) = p<sub>0</sub> + p<sub>1</sub>x + p<sub>2</sub>x<sup>2</sup> + … + p<sub>n</sub>x<sup>n</sup> 在计算机中可以用一个线性表来表示：P=(p<sub>0</sub>, p<sub>1</sub>, …, p<sub>n</sub>)（p的下标就是x的幂）。但是对于形如S(x) = 1 + 3x<sup>10000</sup> - 2x<sup>20000</sup> 就…</p>
+<h2 id="一元多项式的表示及相加"><a href="#一元多项式的表示及相加" class="headerlink" title="一元多项式的表示及相加"></a>一元多项式的表示及相加</h2><p>p<sub>n</sub>(x) = p<sub>0</sub> + p<sub>1</sub>x + p<sub>2</sub>x<sup>2</sup> + … + p<sub>n</sub>x<sup>n</sup> 在计算机中可以用一个线性表来表示：P=(p<sub>0</sub>, p<sub>1</sub>, …, p<sub>n</sub>)（p的下标就是x的幂）。但是对于形如S(x) = 1 + 3x<sup>10000</sup> - 2x<sup>20000</sup> 就…</p>
 <p>一般情况下的<strong>一元稀疏多项式</strong>可以写成P<sub>n</sub>(x) = p<sub>1</sub>x<sup>e1</sup> + p<sub>2</sub>x<sup>e2</sup> + … + p<sub>m</sub>x<sup>em</sup> 其中：p<sub>i</sub>是指数为e<sub>i</sub>的项的非零系数0&lt;=e<sub>1</sub>&lt;e<sub>2</sub>&lt; … &lt;e<sub>m</sub> = n可以用下列线性表示：((p<sub>1</sub>, e<sub>1</sub>), (p<sub>2</sub>, e<sub>2</sub>), … ,  (p<sub>m</sub>, e<sub>m</sub>))</p>
 <p>例如P<sub>999</sub>(x) = 7x<sup>3</sup> - 2x<sup>12</sup> - 8x<sup>999</sup> 可用线性表((7, 3), (-2, 12), (-8, 999))表示</p>
 ]]></content>
@@ -903,13 +904,8 @@
 <p>如上两表，组合起来可称为<strong>数据</strong>；其中每一张表为<strong>数据对象</strong>，因为具有相同的属性；每一行叫<strong>数据元素</strong>；每一行中的单个信息，比如性别，姓名等称为<strong>数据项</strong>。</p>
 <figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 结构体定义的是个数据项</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">    <span class="keyword">char</span> name[<span class="number">10</span>]; <span class="comment">// 数据项</span></span><br><span class="line">    <span class="keyword">char</span> gender[<span class="number">5</span>]; <span class="comment">// 数据项</span></span><br><span class="line">    <span class="keyword">int</span> height; <span class="comment">// 数据项</span></span><br><span class="line">    <span class="keyword">char</span> curriculum; <span class="comment">// 数据项</span></span><br><span class="line">&#125; Students;</span><br><span class="line"></span><br><span class="line">Students xiaohong; <span class="comment">// 单个定义了小红，就是个数据项</span></span><br><span class="line">Students students[<span class="number">10</span>]; <span class="comment">// 这是一个学生信息的集合，所以数据对象</span></span><br></pre></td></tr></table></figure>
 
-
-
-
-
-
-
-]]></content>
+<hr>
+<h3 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h3>]]></content>
       <tags>
         <tag>数据结构笔记</tag>
       </tags>
