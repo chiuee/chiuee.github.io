@@ -1,6 +1,298 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Flex简单总结</title>
+    <url>/2020/12/01/Flex%E7%AE%80%E5%8D%95%E6%80%BB%E7%BB%93/</url>
+    <content><![CDATA[<p>flexbox 是一种一维布局，因为 flexbox 一次性只能处理一个维度上的元素布局。<br>本文为简单介绍。</p>
+<a id="more"></a>
+
+<h1 id="Flex弹性盒模型基本概念"><a href="#Flex弹性盒模型基本概念" class="headerlink" title="Flex弹性盒模型基本概念"></a>Flex弹性盒模型基本概念</h1><p><br><br></p>
+<hr>
+<p><br><br></p>
+<h2 id="flexbox-的两根轴线"><a href="#flexbox-的两根轴线" class="headerlink" title="flexbox 的两根轴线"></a>flexbox 的两根轴线</h2><blockquote>
+<p>主轴与交叉轴（副轴）。</p>
+</blockquote>
+<h3 id="主轴"><a href="#主轴" class="headerlink" title="主轴"></a>主轴</h3><p>主轴由<code>flex-direction</code>定义，有四个值：</p>
+<ul>
+<li><code>row</code>：从左至右</li>
+<li><code>row-reverse</code>：从右至左</li>
+<li><code>column</code>：从上到下</li>
+<li><code>column-reverse</code>：从下到上</li>
+</ul>
+<p>默认情况下是<code>row</code>。</p>
+<h3 id="交叉轴"><a href="#交叉轴" class="headerlink" title="交叉轴"></a>交叉轴</h3><p>也就是副轴，垂直于<code>flex-direction</code>设置的主轴方向。</p>
+<p>主轴与交叉轴的概念很重要，因为 flexbox 一次性只能调控一个维度的元素。</p>
+<p><br><br></p>
+<hr>
+<p><br><br></p>
+<h2 id="Flex-容器"><a href="#Flex-容器" class="headerlink" title="Flex 容器"></a>Flex 容器</h2><p>采用 flexbox 的区域就叫做 flex 容器。</p>
+<p>将一个容器的<code>display</code>属性值改为<code>flex</code>或者<code>inline-flex</code>后，该容器就会变成 flex 容器，而容器中的元素则会变成 <strong>flex 元素</strong> 。</p>
+<p>flex 元素的初始值：</p>
+<ul>
+<li>元素按行排列（<code>flex--direction</code>属性的初始值是<code>row</code>）</li>
+<li>元素从主轴的起始线（start）开始。</li>
+<li>元素不会拉伸，但是可以缩小。</li>
+<li>元素被拉伸来填充交叉轴大小。（？）</li>
+<li><code>flex-basis</code>属性为<code>auto</code></li>
+<li><code>flex-wrap</code>属性为<code>nowrap</code></li>
+</ul>
+<p>注意，以上为默认属性值。</p>
+<h3 id="更改flex方向flex-direction"><a href="#更改flex方向flex-direction" class="headerlink" title="更改flex方向flex-direction"></a>更改flex方向flex-direction</h3><p>flex容器中更改<code>flex-direction</code>属性可以改变flex容器中元素的排列方向。</p>
+<p>设置<code>flex-direction: row-reverse</code>让元素从右向左排列，但是在flex容器中，不说左和右，而是<strong>起始线</strong>与<strong>终止线</strong>。</p>
+<p><br><br></p>
+<hr>
+<p><br><br></p>
+<h2 id="用flex-wrap实现多行Flex容器"><a href="#用flex-wrap实现多行Flex容器" class="headerlink" title="用flex-wrap实现多行Flex容器"></a>用flex-wrap实现多行Flex容器</h2><p><code>flex-wrap</code>默认值为<code>nowrap</code>，意思是不换行，元素挤不下就先变小然后挤进去。改成<code>wrap</code>后挤不进去就会换行。如果有些元素无法缩小，那么默认的<code>nowrap</code>会导致元素溢出。</p>
+<p><br><br></p>
+<hr>
+<p><br><br></p>
+<h2 id="简写属性flex-flow"><a href="#简写属性flex-flow" class="headerlink" title="简写属性flex-flow"></a>简写属性flex-flow</h2><p><code>flex-flow</code>是<code>flex-direction</code>与<code>flex-wrap</code>的简写形式，第一个写<code>flex-direction</code>的值，第二个写<code>flex-wrap</code>的值。</p>
+<p><br><br></p>
+<hr>
+<p><br><br></p>
+<h2 id="flex-元素上的属性"><a href="#flex-元素上的属性" class="headerlink" title="flex 元素上的属性"></a>flex 元素上的属性</h2><p>为了更好的控制flex元素，有三个属性可以作用于他们：</p>
+<ul>
+<li><code>flex-grow</code></li>
+<li><code>flex-shrink</code></li>
+<li><code>flex-basis</code></li>
+</ul>
+<p>在使用这几个属性之前，先明白一个概念——<strong>可用空间</strong>。这几个属性的作用其实就是在改变flex容器中的可用空间。</p>
+<p>假设一个容器宽 100px ，其中的元素有三个，宽均为 20px 。那么剩下的40px就是可用空间。默认情况下，这40px的可用空间放在最后一个元素后边。</p>
+<p>控制元素去使用可用空间，就是这些属性要做的事。</p>
+<h3 id="Flex-元素属性：flex-basis"><a href="#Flex-元素属性：flex-basis" class="headerlink" title="Flex 元素属性：flex-basis"></a>Flex 元素属性：<code>flex-basis</code></h3><p><code>flex-basis</code>定义了该元素的<strong>空间大小</strong>，flex容器里除了元素所占的空间以外的其余空间就是<strong>可用空间</strong>。属性的默认值为<code>auto</code>。如果元素已经设置了宽度（width），那么<code>flex-basis</code>就是宽度的值。</p>
+<p>如果元素没有设置宽度，那么<code>flex-basis</code>的值就只是刚好放下元素里的内容。</p>
+<p>如果宽度于其一同设置，那以<code>flex-basis</code>为准。</p>
+<h3 id="Flex-元素属性：flex-grow"><a href="#Flex-元素属性：flex-grow" class="headerlink" title="Flex 元素属性：flex-grow"></a>Flex 元素属性：<code>flex-grow</code></h3><p>如果单独一个元素的<code>flex-grow</code>被赋予一个整数值，那么该元素会被拉伸然后占据全部可用空间。</p>
+<p>当多个元素的<code>flex-grow</code>均被赋值时，可用空间会按比例被元素瓜分。<br>$$<br>元素瓜分的可用空间 = (容器总宽度 - 各元素宽度) × (该元素flex-grow值/各元素flex-grow值之和)<br>$$<br>比如</p>
+<figure class="highlight less"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 一个&lt;main&gt;里有三个&lt;div&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="selector-tag">main</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">400px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">270px</span>;</span><br><span class="line">    <span class="attribute">display</span>: flex;</span><br><span class="line"></span><br><span class="line">    <span class="selector-pseudo">:nth-child(1)</span> &#123;</span><br><span class="line">        <span class="attribute">flex-grow</span>: <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="selector-pseudo">:nth-child(2)</span> &#123;</span><br><span class="line">        <span class="attribute">flex-grow</span>: <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="selector-pseudo">:nth-child(3)</span> &#123;</span><br><span class="line">        <span class="attribute">flex-grow</span>: <span class="number">2</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="selector-tag">div</span> &#123;</span><br><span class="line">        <span class="attribute">width</span>: <span class="number">50px</span>;</span><br><span class="line">        <span class="attribute">height</span>: <span class="number">50px</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>第一个div在原来宽度的基础上，再增加已瓜分的可用空间，得到<code>width: 112.5px</code></p>
+<p>第二个div得到<code>width: 112.5px</code></p>
+<p>第三个div得到<code>width: 175px</code></p>
+<h3 id="Flex-元素属性：flex-shrink"><a href="#Flex-元素属性：flex-shrink" class="headerlink" title="Flex 元素属性：flex-shrink"></a>Flex 元素属性：<code>flex-shrink</code></h3><p>这个是用来缩小元素的。<br>$$<br>现在的宽度=原宽度-(各元素宽度之和-容器总宽度)×(该元素flex-shrink值/各元素flex-shrink值之和)<br>$$</p>
+<p>例如</p>
+<figure class="highlight less"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">main</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">500px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">270px</span>;</span><br><span class="line">    <span class="attribute">display</span>: flex;</span><br><span class="line"></span><br><span class="line">    <span class="selector-pseudo">:nth-child(1)</span> &#123;</span><br><span class="line">        <span class="attribute">flex-shrink</span>: <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="selector-pseudo">:nth-child(2)</span> &#123;</span><br><span class="line">        <span class="attribute">flex-shrink</span>: <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="selector-pseudo">:nth-child(3)</span> &#123;</span><br><span class="line">        <span class="attribute">flex-shrink</span>: <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="selector-pseudo">:nth-child(4)</span> &#123;</span><br><span class="line">        <span class="attribute">flex-shrink</span>: <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="selector-tag">div</span> &#123;</span><br><span class="line">        <span class="attribute">width</span>: <span class="number">200px</span>;</span><br><span class="line">        <span class="attribute">height</span>: <span class="number">50px</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>容器总宽度是500px，元素宽度之和为4x200px，溢出来的空间有300px，第一个元素flex-shrink为0，那他就是原长200px。剩下的都是1，于是平分300px，每一个分到100px，最后的长度为200-100。</p>
+<h3 id="Flex-属性的简写"><a href="#Flex-属性的简写" class="headerlink" title="Flex 属性的简写"></a>Flex 属性的简写</h3><blockquote>
+<p>（我还没想清楚为什么将这三个明明比较冲突的属性写在一起，所以先不详细地写了）</p>
+</blockquote>
+<p>进行开发时，一般不会就属性单独使用，因为实际开发中，某一元素的属性有很多。所以会有一种简写形式供大家选择。</p>
+<p><code>flex</code>允许你把上边的三个值按顺序依次书写——<code>flex-gorw</code>，<code>flex-shrink</code>，<code>flex-basis</code>。</p>
+<p>当然，也有一些预制效果：</p>
+<ul>
+<li>flex: initial -&gt; flex: 0 1 auto</li>
+<li>flex: auto -&gt; 1 1 auto</li>
+<li>flex: none -&gt; flex: 0 0 auto</li>
+<li>flex: <positive-number> -&gt; </li>
+</ul>
+<p><br><br></p>
+<hr>
+<p><br><br></p>
+<h2 id="元素间的对齐和空间分配"><a href="#元素间的对齐和空间分配" class="headerlink" title="元素间的对齐和空间分配"></a>元素间的对齐和空间分配</h2><h3 id="align-items"><a href="#align-items" class="headerlink" title="align-items"></a>align-items</h3><p>该属性可以使元素在交叉轴方向对齐。</p>
+<p>属性：</p>
+<ul>
+<li>stretch</li>
+<li>flex-start：怼向起始线</li>
+<li>flex-end：怼向终止线</li>
+<li>center：在交叉轴居中</li>
+</ul>
+<h3 id="justify-content"><a href="#justify-content" class="headerlink" title="justify-content"></a>justify-content</h3><p>该属性决定元素在主轴方向的对齐方式。</p>
+<p>属性：</p>
+<ul>
+<li>stretch</li>
+<li>flex-start：对齐到起始线</li>
+<li>flex-end：对齐到终止线</li>
+<li>center：在主轴方向居中</li>
+<li>space-around：元素周围均匀地围一圈空白，但是和padding或者margin不一样的是，他不对重叠在一起，所以这个属性值用得比较少。</li>
+<li>space-between：两边属性往边靠，元素间的空隙均匀分配</li>
+</ul>
+<p><br><br></p>
+<hr>
+<p><br><br></p>
+<p>大概就是这样了。</p>
+]]></content>
+      <tags>
+        <tag>CSS笔记</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>JavaScript笔记</title>
+    <url>/2020/12/24/JavaScript%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<h1 id="笔记"><a href="#笔记" class="headerlink" title="笔记"></a>笔记</h1><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> </span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+]]></content>
+      <tags>
+        <tag>JavaScript笔记</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>LeetCode | 两数之和</title>
+    <url>/2020/12/02/LeetCode-%E4%B8%A4%E6%95%B0%E4%B9%8B%E5%92%8C/</url>
+    <content><![CDATA[<h1 id="两数之和"><a href="#两数之和" class="headerlink" title="两数之和"></a>两数之和</h1><h2 id="C语言实现"><a href="#C语言实现" class="headerlink" title="C语言实现"></a>C语言实现</h2><p>一开始傻了逼了，一直想着让每一个与自己</p>
+]]></content>
+      <tags>
+        <tag>LeetCode简单题</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>关于博客内容</title>
+    <url>/2020/12/06/%E5%85%B3%E4%BA%8E%E5%8D%9A%E5%AE%A2%E5%86%85%E5%AE%B9/</url>
+    <content><![CDATA[<h1 id="关于这个博客"><a href="#关于这个博客" class="headerlink" title="关于这个博客"></a>关于这个博客</h1><blockquote>
+<p>最近要考python了，所以边学边做笔记，途中我发现自己的笔记废话连篇。写这些废话很浪费时间与精力。于是从思考“如何写笔记”，衍生到“笔记记什么”。</p>
+</blockquote>
+<p>这个博客是用来记录的，不仅仅是技术笔记，将来我有能力开发自己的主题时，就会加入更多东西。</p>
+<p>我把我的博客分为这几类</p>
+<ol>
+<li>研究笔记</li>
+<li>学习笔记</li>
+<li>实记笔记</li>
+<li>随笔</li>
+</ol>
+<h2 id="研究笔记"><a href="#研究笔记" class="headerlink" title="研究笔记"></a>研究笔记</h2><p>主要是自己的东西，通过学习、实践与理解，而研究出来东西。这种笔记正文可以有废话，可以有啰嗦的解释。</p>
+<h2 id="学习笔记"><a href="#学习笔记" class="headerlink" title="学习笔记"></a>学习笔记</h2><p>边学边做的笔记，这类笔记避免废话，避免啰嗦（可以稍微罗嗦一点，但是不要废话）。这不是写教程，自己明白就好。将知识点写明白即可。现在只是想有个大概了解，将来还有可能拿来复习，太罗嗦不好。</p>
+<h2 id="实记笔记"><a href="#实记笔记" class="headerlink" title="实记笔记"></a>实记笔记</h2><p>记录实践中遇到的问题，以及解决方案。</p>
+<h2 id="随笔"><a href="#随笔" class="headerlink" title="随笔"></a>随笔</h2><p>随笔</p>
+]]></content>
+      <tags>
+        <tag>日志</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>充电</title>
+    <url>/2020/12/11/%E5%85%85%E7%94%B5/</url>
+    <content><![CDATA[<h1 id="读书充电"><a href="#读书充电" class="headerlink" title="读书充电"></a>读书充电</h1><blockquote>
+<p>记录一个比较喜欢的知乎回答，没有注明出处，反正是自己的私人博客，不管那么多了。</p>
+</blockquote>
+<p>如何吸收书中的知识点：</p>
+<p>当你看到一个很有意思的知识点的时候，试着把它教给别人。<br>不一定真要对别人说，在脑子里想象两个人的对话也可以。<br>不明白的地方，讲不清楚的地方，再查书。<br>反复尝试，直到能不看原文，完整地用自己的话把它叙述出来为止。</p>
+<p>OK，这是第一步。</p>
+<p>然后，试着为它写一篇短文。<br>内容可以是这个知识点在任何地方的应用，关于它的一切，想到什么写什么。<br>不要与第一步重复。<br>几百字就可以。<br>如果碰到任何障碍，记下来，去弄明白，然后继续写。</p>
+<p>这是第二步。</p>
+<p>最后一步，以这个点为中心，发散思维，将你能联想到的东西全部记下来。<br>在连接处写上两点之间的联系。<br>这个图谱就是你理解和记忆这个知识点的方式。请多多翻阅。</p>
+<p><strong>第一步，是理解它的内涵。</strong><br><strong>第二步，是理解它的外延。</strong><br><strong>第三步，是将它在记忆中，以图谱的形式储存起来。</strong></p>
+<p>完成以上三步，这个知识点，就是你的了。</p>
+<p>先明确一下读书笔记的原则：</p>
+<ol>
+<li>不要为了做笔记而做笔记。<strong>笔记是帮助构建知识体系的工具。</strong>笔记代替不了思考，只能作为思考的补充。</li>
+<li>做了笔记，要多看，否则，毫无作用。</li>
+<li>不要依赖笔记。<strong>笔记的作用就是让你不再需要笔记。</strong></li>
+</ol>
+<p>再说一下读书笔记的几个误区：</p>
+<ol>
+<li>笔记就是摘抄<br>摘抄是最没效率的方法。如果需要记录大段的原文以供引用，请拍照。这就是数码时代的便利。</li>
+<li>笔记就是给一本书画大纲<br>这同样是效率极低的方法。一本书的内容，不可能全部都使你感兴趣，能纳入你的知识体系。而且，仅仅因为“这本书里有这样的内容”，就记下自己不喜欢也不需要的东西，会影响做笔记的积极性。</li>
+<li>笔记要保存起来，时时翻看<br>前期确实如此，但如果一本笔记做了几年，当你需要时，还得翻开笔记去查——那这笔记做了有什么用？你的知识是储存在大脑里的，不是储存在笔记里的。<br>笔记只有两种：一种是原文，以备查询（拍照或者用电脑录入即可）；一种是思维架构，帮助完善知识体系，用完就可以丢弃。</li>
+</ol>
+<p>说说我的笔记方法。</p>
+<p>当你看一本书，读罢一章，觉得信息量巨大，醍醐灌顶，拍案叫绝，恨不得马上把这一章画大纲、抄下来——这时，先别忙着这样做。<br>先问自己：这一章里面，感兴趣的是哪些？<strong>有哪些能纳入自己的知识体系之中</strong>？</p>
+<p>比如，读古希腊史，你也许不会对克里特宫殿里有什么器皿、迈锡尼人驯养了什么家畜、伊奥尼亚人种植了什么作物感兴趣，你比较感兴趣的是：希波战争的整个过程。它是如何发生的？双方的实力对比如何？有哪些经典的小战役？</p>
+<p>那么，带着这个问题，再读一遍，其他无关的信息，不要理会。<br>读的时候，看到任何一个不懂的词、不清楚的概念，立刻上网查，务必弄明白。<br>当你把这个过程梳理清楚了，好，眼睛离开书。现在，请你在心中想象一个听众，用你的话把这个知识点解释给他听。<br>说的过程中，遇到任何不清楚的地方，停下来，上网查，马上弄明白。</p>
+<p>等你可以流畅地把“希波战争发生的全过程”解释清楚了，打开笔记本，在本子上记下要点。这些要点，就是你在叙述时，那些比较重要的节点，那些“牵一发而动全身”的点。</p>
+<p>下一步，请你思考，这个东西，可以跟知识体系中的什么联系起来？<br>你通过这个知识点，可以联想到什么你已经知道了的东西？<br>以这个点为圆心，把它们记在它的周围。<br>这就是你关于这个知识点的图式。</p>
+<p>好了，这个知识点已经告一段落，请在笔记下面标明日期、书名、页码，然后就可以翻开下一章了。<br>接下来，只需要每周一次，或者几天一次，翻开这几天做的笔记，根据自己记下的图式，将这个知识点完完整整地回忆出来。<br>然后，根据周围的联系元素，将它在你整个知识图式中过一遍。<br>直到你对这个点已经烂熟于心，这则笔记也就完成它的使命了。</p>
+]]></content>
+      <tags>
+        <tag>随笔</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>python基础部分</title>
+    <url>/2020/12/05/python%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%86/</url>
+    <content><![CDATA[<h1 id="基础部分"><a href="#基础部分" class="headerlink" title="基础部分"></a>基础部分</h1><blockquote>
+<p>由于已有编程基础，便不再事无巨细地记录了</p>
+</blockquote>
+<p>在python里，当一行代码太长，看着头皮发麻时，由于没有<code>;</code>的限制，显然不能像C语言一样直接换行。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span>(this_sentence_is_too_long == <span class="literal">True</span>) <span class="keyword">and</span> \</span><br><span class="line">(then_write_it_like_this == <span class="literal">True</span>):</span><br><span class="line">    show() <span class="comment"># 如果一行代码太长，那就用 \ 来分割</span></span><br></pre></td></tr></table></figure>
+
+<p>不过老分号在python里还是存在的</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">x = <span class="string">&quot;123&quot;</span>; its_OK() </span><br><span class="line"><span class="comment"># 用 ; 分隔，当然这样就不能拥有代码块了</span></span><br></pre></td></tr></table></figure>
+
+<p>再看看变量赋值，真就是变量名+值，连类似JavaScript里的<code>let</code>或者<code>var</code>都没有。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">anInt = <span class="number">12</span></span><br><span class="line">aString = <span class="string">&#x27;string&#x27;</span></span><br><span class="line">aFloat = <span class="number">0.23123</span></span><br><span class="line">anotherString = <span class="string">&#x27;str&#x27;</span> + <span class="string">&#x27;ing&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>熟悉的<code>*=</code>、<code>-=</code>等在python里依然存在，不过自增自减就人没了<code>--</code>、<code>++</code>。</p>
+<p>python可以说是很懂人类了，看看这种赋值吧，我觉得以C或Java等，为母语的朋友们，对这样的赋值，肯定会比较新奇。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">x, y, z = <span class="number">1</span>, <span class="number">2</span>, <span class="string">&#x27;aString&#x27;</span></span><br><span class="line">(x, y, z) = (<span class="number">1</span>, <span class="number">2</span>, <span class="string">&#x27;aString&#x27;</span>) <span class="comment"># 加上括号多少保险一点</span></span><br></pre></td></tr></table></figure>
+
+<p>及不记得在C等语言里，我x要和你y交换值，得有个中间商，而python就无需中间商。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">x = <span class="number">1</span></span><br><span class="line">y = <span class="number">2</span></span><br><span class="line"><span class="comment"># 交换</span></span><br><span class="line">x, y = <span class="number">2</span>, <span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h2><h3 id="整型"><a href="#整型" class="headerlink" title="整型"></a>整型</h3><p>有一点不同，就是<code>100000000000</code>可以写成<code>100_000_000_000</code>。用下划线<code>_</code>可以分隔数字，方便阅读。</p>
+<p>加减乘除还是原来的<code>+ - * /</code>，且多了一个乘方<code>**</code>。整型用<code>/</code>除出来是浮点型，而用<code>//</code>则是整型，称之为<u>地板除</u>。浮点型不管用<code>/</code>还是<code>//</code>都是浮点型。（python 2中两个整型用<code>/</code>计算出来结果还是整型，必须有一个是浮点型结果才能使浮点型。）</p>
+<h3 id="浮点型"><a href="#浮点型" class="headerlink" title="浮点型"></a>浮点型</h3><p>依然存在这种通病。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="number">0.2</span> + <span class="number">0.1</span></span><br><span class="line"><span class="number">0.30000000000000004</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h3><p><code>+</code>可以算数学，而且可以链接字符串，<s>让我想起了JavaScript。</s></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>aString = <span class="string">&#x27;连接&#x27;</span> + <span class="string">&#x27;字符串&#x27;</span></span><br><span class="line"><span class="string">&#x27;连接字符串&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>感觉python很自由对吧，但是类型不同就不能连在一起，需要用<code>str()</code>转化一下才可以。<s>道不同不相为谋。</s></p>
+<p>单引号和双引号均可。还有类似模板字面量的东西，只不过这个是用三个单引号括起来。<code>&#39;&#39;&#39;  &#39;&#39;&#39;</code>可以保留你在引号里边的操作。</p>
+<h3 id="布尔值"><a href="#布尔值" class="headerlink" title="布尔值"></a>布尔值</h3><p>布尔值是大写的<code>True</code>和<code>False</code>。布尔值可以用<code>and</code>、<code>or</code>和<code>not</code>。<s>好家伙，难怪外行想玩玩编程就会选择python。</s></p>
+<h3 id="空值None"><a href="#空值None" class="headerlink" title="空值None"></a>空值<code>None</code></h3><h2 id="常量"><a href="#常量" class="headerlink" title="常量"></a>常量</h2><p>其实没有常量，就只是把字母大写的变量。但你要认为他就是常量。</p>
+<h2 id="新东西——列表"><a href="#新东西——列表" class="headerlink" title="新东西——列表"></a>新东西——列表</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>hotwords = [<span class="string">&#x27;好家伙&#x27;</span>, <span class="string">&#x27;打工人&#x27;</span>, <span class="string">&#x27;后浪&#x27;</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(hotwords)</span><br><span class="line">[<span class="string">&#x27;好家伙&#x27;</span>, <span class="string">&#x27;打工人&#x27;</span>, <span class="string">&#x27;后浪&#x27;</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(hotwords[<span class="number">0</span>])</span><br><span class="line">好家伙</span><br></pre></td></tr></table></figure>
+
+<p><s>想起了什么？数组？一样吗，可不一样了。</s></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(hotwords[-<span class="number">1</span>])</span><br><span class="line">后浪</span><br></pre></td></tr></table></figure>
+
+<h3 id="修改、添加、删除"><a href="#修改、添加、删除" class="headerlink" title="修改、添加、删除"></a>修改、添加、删除</h3><p>修改直接覆盖即可。</p>
+<p>添加有给定的方法</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>hotwords.append(<span class="string">&#x27;阴阳怪气&#x27;</span>) <span class="comment"># 添加到末尾</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(hotwords)</span><br><span class="line">[<span class="string">&#x27;好家伙&#x27;</span>, <span class="string">&#x27;打工人&#x27;</span>, <span class="string">&#x27;后浪&#x27;</span>, <span class="string">&#x27;阴阳怪气&#x27;</span>]</span><br></pre></td></tr></table></figure>
+
+<p>向后<code>append()</code>也可以通过建立空列表，然后向后追加来创建新列表。</p>
+<h3 id="map"><a href="#map" class="headerlink" title="map()"></a>map()</h3><p>map(function, iterbale)</p>
+<p>两个参数</p>
+<ol>
+<li>function —— 函数</li>
+<li>iterable —— 一个或多个列表</li>
+</ol>
+<h3 id="sorted"><a href="#sorted" class="headerlink" title="sorted()"></a>sorted()</h3><p>sorted(iterable, key=None, reverse=False)</p>
+]]></content>
+      <tags>
+        <tag>python学习笔记</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>数据结构-内部排序</title>
+    <url>/2020/12/01/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E5%86%85%E9%83%A8%E6%8E%92%E5%BA%8F/</url>
+    <content><![CDATA[<h1 id="第十章-内部排序"><a href="#第十章-内部排序" class="headerlink" title="第十章 内部排序"></a>第十章 内部排序</h1><h2 id="10-1-概述"><a href="#10-1-概述" class="headerlink" title="10.1 概述"></a>10.1 概述</h2><p>排序使用的关键字可以是主关键字也可以是次关键字，如果是主关键字，那排序肯定是唯一的，但是如果是次关键字，那排序就不止一种情况了。</p>
+<p>如果使用次关键字排序，这时K<sub>i</sub>=K<sub>j</sub>，在排序前K<sub>i</sub>的记录在K<sub>j</sub>前，排序后也是K<sub>i</sub>为关键字的记录在K<sub>j</sub>前，那就说顺序没变，那么称所用的**<u>排序方法是稳定的</u>**。否则就说不稳定。</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXSIZE 20</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">int</span> KeyType; <span class="comment">// 关键字类型为整型</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">    KeyType key; <span class="comment">// 关键字</span></span><br><span class="line">    InforType otherinfor; <span class="comment">// 其他数据项</span></span><br><span class="line">&#125;RedType; <span class="comment">// 记录数据</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">    RedType r[MAXSIZE+<span class="number">1</span>]; <span class="comment">// r[0]闲置或者做哨兵</span></span><br><span class="line">    <span class="keyword">int</span> length; <span class="comment">// 顺序表长度</span></span><br><span class="line">&#125;SqList;</span><br></pre></td></tr></table></figure>
+
+<h2 id="10-2-插入排序"><a href="#10-2-插入排序" class="headerlink" title="10.2 插入排序"></a>10.2 插入排序</h2><h3 id="10-2-1-直接插入排序"><a href="#10-2-1-直接插入排序" class="headerlink" title="10.2.1 直接插入排序"></a>10.2.1 直接插入排序</h3><p>把一个表分为有序表和无序表，零号单元作为中转站不放任何东西。1号单元单独组成有序表（能理解吧，一个元素还不是有序？），后边自然就是无序表，2号单元内的元素自然是无序表的第一个元素。从无序表的第一个元素开始，从有序表的最后依次与其元素作比较，找准机会就插入。</p>
+<p>啰里啰唆一大堆废话可以不看，直接上代码。</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">InsertSort</span><span class="params">(SqList &amp;L)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(i=<span class="number">2</span>; i&lt;=L.length; ++i) &#123;</span><br><span class="line">        <span class="keyword">if</span>(L.r[i].key&lt;L.r[i<span class="number">-1</span>].key) &#123;</span><br><span class="line">            L.r[<span class="number">0</span>]=L.r[i]; <span class="comment">// 先存起来</span></span><br><span class="line">            <span class="keyword">for</span>(j=i<span class="number">-1</span>; L.r[<span class="number">0</span>].key&lt;L.r[j].key; --j)</span><br><span class="line">            <span class="comment">//开始搬运，为待插入记录腾出空间</span></span><br><span class="line">                L.r[j+<span class="number">1</span>]=L.r[j];</span><br><span class="line">            L.r[j+<span class="number">1</span>]=L.r[<span class="number">0</span>]; <span class="comment">// 插入</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="性能分析"><a href="#性能分析" class="headerlink" title="性能分析"></a>性能分析</h4><p>内部排序的两个操作：</p>
+<ol>
+<li>比较关键字大小</li>
+<li>移动记录</li>
+</ol>
+<p>最好的结果，人家本来就是正序排列的，这样比较次数为<code>n-1</code>，元素也不移动；最坏的结果，本来是逆序排列，这样比较次数就是<code>(n-1)(n+2)/2</code>，移动次数为<code>(n+4)(n-1)/2</code>。</p>
+<ol>
+<li><p>**时间复杂度为O(n<sup>2</sup>)**。</p>
+</li>
+<li><p><strong>空间复杂度</strong>是O(1)，因为就借助了零号单元（原因是这个吧？）。</p>
+</li>
+<li><p>直接插入排序是稳定的排序方法</p>
+</li>
+<li><p>适用于元素初始排序基本有序和元素个数较少的情况</p>
+</li>
+</ol>
+<h3 id="10-2-2-折半插入排序"><a href="#10-2-2-折半插入排序" class="headerlink" title="10.2.2 折半插入排序"></a>10.2.2 折半插入排序</h3><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">BInsertSort</span><span class="params">(SqList &amp;L)</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+]]></content>
+      <tags>
+        <tag>数据结构笔记</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>数据结构-图</title>
     <url>/2020/11/30/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E5%9B%BE/</url>
     <content><![CDATA[<h1 id="第七章-图"><a href="#第七章-图" class="headerlink" title="第七章 图"></a>第七章 图</h1><img src="D:\personal\study\notes\data structure C\数据结构-图img\图.png" style="zoom:50%;" />
@@ -277,6 +569,138 @@
       </tags>
   </entry>
   <entry>
+    <title>数据结构-栈和队列</title>
+    <url>/2020/12/07/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E6%A0%88%E5%92%8C%E9%98%9F%E5%88%97/</url>
+    <content><![CDATA[<h1 id="栈和队列"><a href="#栈和队列" class="headerlink" title="栈和队列"></a>栈和队列</h1><blockquote>
+<p>栈和队列也是线性表，只不过他们的操作受限。通常称，栈和队列是限定<u><strong>插入</strong></u>和<u><strong>删除</strong></u>只能在表的“<u><strong>端点</strong></u>”进行的线性表。</p>
+</blockquote>
+<h2 id="3-1-栈"><a href="#3-1-栈" class="headerlink" title="3.1 栈"></a>3.1 栈</h2><p>羽毛球筒，先进后出。</p>
+<h3 id="3-1-1-栈的定义"><a href="#3-1-1-栈的定义" class="headerlink" title="3.1.1 栈的定义"></a>3.1.1 栈的定义</h3><p>栈是限定仅在表尾进行插入或删除操作的线性表，表尾——栈顶，表头——栈底，不含元素的空表称<strong>空栈</strong>。特点：先进后出或后进先出。</p>
+<h3 id="3-1-2-栈的表示和实现"><a href="#3-1-2-栈的表示和实现" class="headerlink" title="3.1.2 栈的表示和实现"></a>3.1.2 栈的表示和实现</h3><p>和线性表一样，也有是有顺序存储结构与链式存储结构的。</p>
+<p>顺序栈，利用一组地址连续的存储单元依次存放字栈底到栈顶的数据元素。同时附一个top指示栈顶的位置。一般来说不设置顺序栈的最大容量，而是不够的时候添加。</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> strict &#123;</span><br><span class="line">	SElemType *base; <span class="comment">// 指向栈底的位置，为NULL则说明不存在</span></span><br><span class="line">	SElemType *top; <span class="comment">// 指向栈顶位置</span></span><br><span class="line">	<span class="keyword">int</span> stacksize; <span class="comment">// 当前可使用的最大容量</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>当top=base的时候自然是顺序栈为空的时候。每当插入一个新栈顶元素，top加一，每当删除一个栈顶元素时，top减一。</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="function">Status <span class="title">InitStack</span><span class="params">(SqStack &amp;S)</span></span>&#123;</span><br><span class="line">	<span class="comment">// 建一个新栈</span></span><br><span class="line">	S.base = (SElemType *)<span class="built_in">malloc</span>(INIT_SIZE*(<span class="keyword">sizeof</span> SElemType*));</span><br><span class="line">	<span class="comment">// 写笔记的时候，这里卡了一下，一时间没有理解为什么是S.base，</span></span><br><span class="line">    <span class="comment">// .后来翻看了一下线性表那一章的笔记，</span></span><br><span class="line">    <span class="comment">// 这个S.base应该是栈的基址</span></span><br><span class="line">	<span class="keyword">if</span>(!S.base) <span class="built_in">exit</span>(OVERFLOW);</span><br><span class="line">	S.top = S.base;</span><br><span class="line">	S.stacksize = INIT_SIZE;</span><br><span class="line">	<span class="keyword">return</span> OK;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>取栈顶元素</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="function">Status <span class="title">GetTop</span><span class="params">(SqStack S, SElemType &amp;e)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(S.top = S.base) <span class="keyword">return</span> ERROR;</span><br><span class="line">	e = *(S.top<span class="number">-1</span>);</span><br><span class="line">	<span class="keyword">return</span> OK</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>添加新的栈顶元素</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="function">Status <span class="title">Push</span><span class="params">(SqStack S, SElemType &amp;e)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(S.top-S.base&gt;=S.stacksize) &#123;</span><br><span class="line">	<span class="comment">//栈满了</span></span><br><span class="line">	S.base=</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="3-2-栈的应用举例"><a href="#3-2-栈的应用举例" class="headerlink" title="3.2 栈的应用举例"></a>3.2 栈的应用举例</h2><h3 id="3-2-1-数制转换"><a href="#3-2-1-数制转换" class="headerlink" title="3.2.1 数制转换"></a>3.2.1 数制转换</h3><p>十进制数N和其他d进制转换：<code>N=(N div d)xd+N mod d</code>（div为取整运算，mod为求余）</p>
+<p>上述计算过程，从低位到高位顺序产生d进制数，但是输出时，应该是从高位到地位输出的，正好相反。</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">conversion</span><span class="params">(d)</span> </span>&#123;</span><br><span class="line">	InitStack(S);</span><br><span class="line">	<span class="built_in">scanf</span>(“%d”, N);</span><br><span class="line">	<span class="keyword">while</span>(N) &#123;</span><br><span class="line">	<span class="comment">// 这个循环一下子没看懂的话，可以画一画图</span></span><br><span class="line">		push(S, N%d);</span><br><span class="line">		N=N/d;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">while</span>(S.top!=S.base) &#123;</span><br><span class="line">		Pop(S, e); <span class="comment">// 删除;</span></span><br><span class="line">		<span class="built_in">printf</span>(“%d”, e); <span class="comment">// 按高位到低位顺序输出</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="3-2-2-括号匹配的检验"><a href="#3-2-2-括号匹配的检验" class="headerlink" title="3.2.2 括号匹配的检验"></a>3.2.2 括号匹配的检验</h3><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function">Status <span class="title">Match</span><span class="params">()</span></span>&#123;</span><br><span class="line">	InitStack(S);</span><br><span class="line">	<span class="keyword">do</span>&#123;</span><br><span class="line">		<span class="built_in">scanf</span>(“%s”, <span class="keyword">new</span>);</span><br><span class="line">		<span class="keyword">switch</span>(<span class="keyword">new</span>) &#123;</span><br><span class="line">			<span class="keyword">case</span> ‘[‘:</span><br><span class="line">			<span class="keyword">case</span> ‘(’: Push(S, <span class="keyword">new</span>); <span class="keyword">break</span>;</span><br><span class="line">			<span class="keyword">case</span> ‘]’:</span><br><span class="line">			<span class="keyword">case</span> ‘)’:</span><br><span class="line">				<span class="keyword">if</span>(<span class="keyword">new</span> == *S.top) Pop(S, e);</span><br><span class="line">				<span class="keyword">else</span> <span class="keyword">return</span> ERROR;</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			<span class="keyword">default</span>: <span class="keyword">return</span> ERROR;</span><br><span class="line">		&#125; <span class="comment">//switch</span></span><br><span class="line">	&#125;<span class="keyword">while</span>(S.top!=S.base);</span><br><span class="line">	DestroyStack(S);</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>上边的伪代码，功能貌似是实现了，但是总感觉差点意思。 </p>
+</blockquote>
+<h3 id="3-2-2-行编辑程序"><a href="#3-2-2-行编辑程序" class="headerlink" title="3.2.2 行编辑程序"></a>3.2.2 行编辑程序</h3><p>用户要输入东西，但是你不能他输入什么你就存什么，万一他输错了呢，所以要放在缓存区内，方便用户修改。缓存区设置成一个栈，将用户输入的字符存进去，存的时候先进行判断，如果是退格符<code>#</code>，或者是退行符<code>@</code>，那就压入栈中，如果是，那要不删除栈顶元素，要不清空栈。</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">LineEdit</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	InitStack(S); <span class="comment">// 这个栈存的是一行元素</span></span><br><span class="line">	ch = getchar();</span><br><span class="line">	<span class="keyword">while</span>(ch!=EOF)&#123;</span><br><span class="line">		<span class="keyword">while</span>(ch!=EOF &amp;&amp; ch!=‘\n’) &#123;</span><br><span class="line">			<span class="keyword">switch</span>(ch)&#123;</span><br><span class="line">				<span class="keyword">case</span> ‘#’: Pop(S, e); <span class="keyword">break</span>; </span><br><span class="line">                    <span class="comment">// 如果是#就删除栈顶元素</span></span><br><span class="line">				<span class="keyword">case</span> ‘@‘: ClearStack(S); <span class="keyword">break</span>; </span><br><span class="line">                    <span class="comment">//@就把这个栈清空</span></span><br><span class="line">				<span class="keyword">default</span>: Push(S, ch); <span class="keyword">break</span>; </span><br><span class="line">                    <span class="comment">// 输入其他的就放入栈中</span></span><br><span class="line">			&#125;</span><br><span class="line">			ch = getchar();</span><br><span class="line">		&#125;</span><br><span class="line">		ClearStack(S);</span><br><span class="line">		<span class="keyword">if</span>(ch==‘\n’) ch = getchar(); </span><br><span class="line">        <span class="comment">// 如果仅仅是换行的话，就继续存</span></span><br><span class="line">	&#125;</span><br><span class="line">	DestroyStack(S); <span class="comment">// 销毁栈</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="3-2-4-迷宫求解"><a href="#3-2-4-迷宫求解" class="headerlink" title="3.2.4 迷宫求解"></a>3.2.4 迷宫求解</h3><h2 id="3-4-队列"><a href="#3-4-队列" class="headerlink" title="3.4 队列"></a>3.4 队列</h2><h3 id="3-4-1-定义"><a href="#3-4-1-定义" class="headerlink" title="3.4.1 定义"></a>3.4.1 定义</h3><p>队列和栈不同，队列一种先进先出的线性表，就和日常生活中的排队一样。在队列中，云需插入的一端叫<strong>队尾</strong>，允许删除的一端叫做<strong>队头</strong>。</p>
+<p>双端队列</p>
+<h3 id="3-4-2-链队列"><a href="#3-4-2-链队列" class="headerlink" title="3.4.2 链队列"></a>3.4.2 链队列</h3><p>需要头指针与尾指针，指向队头与队尾。</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">QNode</span> &#123;</span></span><br><span class="line">	QElemType data;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">QNode</span> *<span class="title">next</span>;</span></span><br><span class="line">&#125;QNode, *QueuePtr;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">	QueuePtr front; <span class="comment">// 队头指针</span></span><br><span class="line">	QueuePtr rear; <span class="comment">// 队尾指针</span></span><br><span class="line">&#125;LinkQueue;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>删除队头</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function">Status <span class="title">DeQueue</span><span class="params">(LinkQueue &amp;Q, QElemType &amp;e)</span> </span>&#123;</span><br><span class="line">	p = Q.front-&gt;next;</span><br><span class="line">	e = p-&gt;data;</span><br><span class="line">	Q.front-&gt;next = p.front-&gt;next;</span><br><span class="line">	<span class="keyword">if</span>(Q.rear == p) Q.rear = Q.front; </span><br><span class="line">	<span class="comment">// 如果删除的刚好就是队尾，那就需要重新赋值，不然队尾就丢了</span></span><br><span class="line">	<span class="built_in">free</span>(p);</span><br><span class="line">	<span class="keyword">return</span> OK;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="3-4-3-循环队列"><a href="#3-4-3-循环队列" class="headerlink" title="3.4.3 循环队列"></a>3.4.3 循环队列</h3><p>队列的循序表示与实现。插入新的队列尾元素时，尾指针加一；删除队列头元素时，头指针加一。非空队列中，头指针始终指向队头元素，尾指针始终指向队尾元素的后一位。</p>
+<p>可以发现，不管是添加还是删除，都会往后移一位，那么两个一直往后退，退到最后一位，前面却全空了。</p>
+<p>有一个方法(结合教材p63理解)，臆想一个环形的队列，这样就解决了空表不能存放数据的问题，但是<code>Q.front=Q.rear</code>却不能判断队列是否为空。</p>
+<p>解决上述问题：</p>
+<ol>
+<li>另外设置一个标志来区分队列是否为空</li>
+<li>少用一个元素空间，约定以“队列头指针在队列尾指针的下一位置（指环状的下一位置）上”作为队列呈“满”状态的标志。（没懂）</li>
+</ol>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXQSIZE 100 <span class="comment">//最大队列长度</span></span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">	QElemType *base; <span class="comment">//初始化动态分配存储空间</span></span><br><span class="line">	<span class="keyword">int</span> front;</span><br><span class="line">	<span class="keyword">int</span> rear;</span><br><span class="line">&#125;SqQueue;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <tags>
+        <tag>数据结构笔记</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>树和二叉树</title>
+    <url>/2020/12/10/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E6%A0%91%E5%92%8C%E4%BA%8C%E5%8F%89%E6%A0%91/</url>
+    <content><![CDATA[<h1 id="第六章-树和二叉树"><a href="#第六章-树和二叉树" class="headerlink" title="第六章 树和二叉树"></a>第六章 树和二叉树</h1><blockquote>
+<p>树的结构定义是一个递归定义，即在树的定义中又用到了树的概念。树是以层次化方式组织和存放数据的数据结构。</p>
+</blockquote>
+<p>以下定义为主观臆断，非标准定义：</p>
+<p>想象真正的树，枝条之间是不会相连接。数据结构中的树也同样是这种一对多的形式。树的枝条分叉点叫做<strong>结点</strong>，其中包含着数据元素及若干指向其子树的分支。结点拥有的分叉（子树）数量叫做<strong>结点的度</strong>。度为0的结点称为<strong>叶子</strong>（或终端结点），否则称为<strong>分支节点</strong>（非终端节点）。除根结点之外，分支节点也称<strong>内部节点</strong>。<strong>树的度</strong>是内部节点度的<u>最大值</u>。</p>
+<p>直接相连的两个结点，称为<strong>双亲</strong>与<strong>孩子</strong>，同一个子树下的结点们互称<strong>兄弟</strong>，两结点的双亲是兄弟，那么他俩就是<strong>堂兄弟</strong>。不直接相连，但是从A往下能到B，那么B就是A的<strong>子孙</strong>，A就是B的<strong>祖先</strong>。</p>
+<p><strong>层次</strong>：根为第一层，根的孩子为第二层，孩子的孩子为第三层… …树的最大层次就是树的<strong>深度</strong>。</p>
+<p><strong>森林</strong>：好多树的集合。</p>
+<h2 id="6-2-二叉树"><a href="#6-2-二叉树" class="headerlink" title="6.2 二叉树"></a>6.2 二叉树</h2><h3 id="6-2-1-二叉树的定义"><a href="#6-2-1-二叉树的定义" class="headerlink" title="6.2.1 二叉树的定义"></a>6.2.1 二叉树的定义</h3><p>顾名思义，每个结点最多只有左右两个结点。</p>
+<h3 id="6-2-2-二叉树的性质"><a href="#6-2-2-二叉树的性质" class="headerlink" title="6.2.2 二叉树的性质"></a>6.2.2 二叉树的性质</h3><p>性质1：在二叉树第i层上至多有2<sup>i-1</sup>个结点。</p>
+<p>性质2：深度为k的二叉树至多有2<sup>k</sup>-1个结点。</p>
+<p>性质3：对任何一棵二叉树t，如果其终端结点数为n<sub>0</sub>，度为2的节点数为n<sub>2</sub>，则n<sub>0</sub>=n<sub>2</sub>+1。</p>
+<p>满二叉树：每一层的结点都满满的。</p>
+<p>性质4：具有n个结点的完全二叉树的深度为└log<sub>2</sub>n┘+1</p>
+<h3 id="二叉树的二叉链表存储表示"><a href="#二叉树的二叉链表存储表示" class="headerlink" title="二叉树的二叉链表存储表示"></a>二叉树的二叉链表存储表示</h3><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">BiTNode</span> &#123;</span></span><br><span class="line">    TElemType data;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">BiTNode</span> *<span class="title">lchild</span>, *<span class="title">rchild</span>;</span></span><br><span class="line">&#125;BiTNode, *BiTree;</span><br></pre></td></tr></table></figure>
+
+<p><strong>先（根）序的遍历算法</strong>（待补充）</p>
+<ol>
+<li><p>访问根结点；</p>
+</li>
+<li><p>先序遍历左子树；</p>
+</li>
+<li><p>先序遍历右子树。</p>
+</li>
+</ol>
+<p><strong>中（根）序的遍历算法</strong>（待补充）</p>
+<ol>
+<li><p>中序遍历左子树；</p>
+</li>
+<li><p>访问根结点；</p>
+</li>
+<li><p>中序遍历右子树。</p>
+</li>
+</ol>
+<p><strong>后（根）序的遍历算法</strong>（待补充）</p>
+<ol>
+<li>后序遍历左子树；</li>
+<li>后序遍历右子树；</li>
+<li>访问根结点。</li>
+</ol>
+<h3 id="6-3-2-线索二叉树"><a href="#6-3-2-线索二叉树" class="headerlink" title="6.3.2 线索二叉树"></a>6.3.2 线索二叉树</h3><div style="display: flex;text-align:center;width:70%">
+    <div style="border: 2px solid #000;flex-grow:1;">lchild</div>
+    <div style="border: 2px solid #000;flex-grow:1;">LTag</div>
+    <div style="border: 2px solid #000;flex-grow:1;">data</div>
+    <div style="border: 2px solid #000;flex-grow:1;">RTag</div>
+    <div style="border: 2px solid #000;flex-grow:1;">rchild</div>
+</div>
+
+<p>若结点有左子树，则其lchild域指示其左孩子（标志域LTag=0），否则令lchild域指示其前驱（标志域LTag=1）；若结点有右子树，则其rchild域指示其右孩子（标志域RTag=0），否则令rchild域指示其后继（标志域RTag=1）。指向结点前驱和后驱的指针叫做<strong>线索</strong>。加上线索的二叉树叫做<strong>线索二叉树</strong>。对二叉树进行遍历的时候将其变为线索二叉树的过程叫做<strong>线索化</strong></p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">enum</span> &#123;</span> Link, Thread &#125; PointerThr;  </span><br><span class="line"><span class="comment">// Link==0:指针，Thread==1:线索</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">BiThrNode</span> &#123;</span></span><br><span class="line">   TElemType data;</span><br><span class="line">   <span class="class"><span class="keyword">struct</span> <span class="title">BiThrNode</span> *<span class="title">lchild</span>, *<span class="title">rchild</span>;</span> <span class="comment">// 左右指针</span></span><br><span class="line">   PointerThr LTag, RTag; <span class="comment">// 左右标志</span></span><br><span class="line">&#125; BiThrNode, *BiThrTree;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+]]></content>
+      <tags>
+        <tag>数据结构笔记</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>数据结构-线性表</title>
     <url>/2020/11/30/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E7%BA%BF%E6%80%A7%E8%A1%A8/</url>
     <content><![CDATA[<h1 id="第2章-线性表"><a href="#第2章-线性表" class="headerlink" title="第2章 线性表"></a>第2章 线性表</h1><p>线性结构的特点：</p>
@@ -424,491 +848,6 @@
       </tags>
   </entry>
   <entry>
-    <title>数据结构-内部排序</title>
-    <url>/2020/12/01/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E5%86%85%E9%83%A8%E6%8E%92%E5%BA%8F/</url>
-    <content><![CDATA[<h1 id="第十章-内部排序"><a href="#第十章-内部排序" class="headerlink" title="第十章 内部排序"></a>第十章 内部排序</h1><h2 id="10-1-概述"><a href="#10-1-概述" class="headerlink" title="10.1 概述"></a>10.1 概述</h2><p>排序使用的关键字可以是主关键字也可以是次关键字，如果是主关键字，那排序肯定是唯一的，但是如果是次关键字，那排序就不止一种情况了。</p>
-<p>如果使用次关键字排序，这时K<sub>i</sub>=K<sub>j</sub>，在排序前K<sub>i</sub>的记录在K<sub>j</sub>前，排序后也是K<sub>i</sub>为关键字的记录在K<sub>j</sub>前，那就说顺序没变，那么称所用的**<u>排序方法是稳定的</u>**。否则就说不稳定。</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXSIZE 20</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">int</span> KeyType; <span class="comment">// 关键字类型为整型</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">    KeyType key; <span class="comment">// 关键字</span></span><br><span class="line">    InforType otherinfor; <span class="comment">// 其他数据项</span></span><br><span class="line">&#125;RedType; <span class="comment">// 记录数据</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">    RedType r[MAXSIZE+<span class="number">1</span>]; <span class="comment">// r[0]闲置或者做哨兵</span></span><br><span class="line">    <span class="keyword">int</span> length; <span class="comment">// 顺序表长度</span></span><br><span class="line">&#125;SqList;</span><br></pre></td></tr></table></figure>
-
-<h2 id="10-2-插入排序"><a href="#10-2-插入排序" class="headerlink" title="10.2 插入排序"></a>10.2 插入排序</h2><h3 id="10-2-1-直接插入排序"><a href="#10-2-1-直接插入排序" class="headerlink" title="10.2.1 直接插入排序"></a>10.2.1 直接插入排序</h3><p>把一个表分为有序表和无序表，零号单元作为中转站不放任何东西。1号单元单独组成有序表（能理解吧，一个元素还不是有序？），后边自然就是无序表，2号单元内的元素自然是无序表的第一个元素。从无序表的第一个元素开始，从有序表的最后依次与其元素作比较，找准机会就插入。</p>
-<p>啰里啰唆一大堆废话可以不看，直接上代码。</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">InsertSort</span><span class="params">(SqList &amp;L)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(i=<span class="number">2</span>; i&lt;=L.length; ++i) &#123;</span><br><span class="line">        <span class="keyword">if</span>(L.r[i].key&lt;L.r[i<span class="number">-1</span>].key) &#123;</span><br><span class="line">            L.r[<span class="number">0</span>]=L.r[i]; <span class="comment">// 先存起来</span></span><br><span class="line">            <span class="keyword">for</span>(j=i<span class="number">-1</span>; L.r[<span class="number">0</span>].key&lt;L.r[j].key; --j)</span><br><span class="line">            <span class="comment">//开始搬运，为待插入记录腾出空间</span></span><br><span class="line">                L.r[j+<span class="number">1</span>]=L.r[j];</span><br><span class="line">            L.r[j+<span class="number">1</span>]=L.r[<span class="number">0</span>]; <span class="comment">// 插入</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="性能分析"><a href="#性能分析" class="headerlink" title="性能分析"></a>性能分析</h4><p>内部排序的两个操作：</p>
-<ol>
-<li>比较关键字大小</li>
-<li>移动记录</li>
-</ol>
-<p>最好的结果，人家本来就是正序排列的，这样比较次数为<code>n-1</code>，元素也不移动；最坏的结果，本来是逆序排列，这样比较次数就是<code>(n-1)(n+2)/2</code>，移动次数为<code>(n+4)(n-1)/2</code>。</p>
-<ol>
-<li><p>**时间复杂度为O(n<sup>2</sup>)**。</p>
-</li>
-<li><p><strong>空间复杂度</strong>是O(1)，因为就借助了零号单元（原因是这个吧？）。</p>
-</li>
-<li><p>直接插入排序是稳定的排序方法</p>
-</li>
-<li><p>适用于元素初始排序基本有序和元素个数较少的情况</p>
-</li>
-</ol>
-<h3 id="10-2-2-折半插入排序"><a href="#10-2-2-折半插入排序" class="headerlink" title="10.2.2 折半插入排序"></a>10.2.2 折半插入排序</h3><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">BInsertSort</span><span class="params">(SqList &amp;L)</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-]]></content>
-      <tags>
-        <tag>数据结构笔记</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Flex简单总结</title>
-    <url>/2020/12/01/Flex%E7%AE%80%E5%8D%95%E6%80%BB%E7%BB%93/</url>
-    <content><![CDATA[<p>flexbox 是一种一维布局，因为 flexbox 一次性只能处理一个维度上的元素布局。<br>本文为简单介绍。</p>
-<a id="more"></a>
-
-<h1 id="Flex弹性盒模型基本概念"><a href="#Flex弹性盒模型基本概念" class="headerlink" title="Flex弹性盒模型基本概念"></a>Flex弹性盒模型基本概念</h1><p><br><br></p>
-<hr>
-<p><br><br></p>
-<h2 id="flexbox-的两根轴线"><a href="#flexbox-的两根轴线" class="headerlink" title="flexbox 的两根轴线"></a>flexbox 的两根轴线</h2><blockquote>
-<p>主轴与交叉轴（副轴）。</p>
-</blockquote>
-<h3 id="主轴"><a href="#主轴" class="headerlink" title="主轴"></a>主轴</h3><p>主轴由<code>flex-direction</code>定义，有四个值：</p>
-<ul>
-<li><code>row</code>：从左至右</li>
-<li><code>row-reverse</code>：从右至左</li>
-<li><code>column</code>：从上到下</li>
-<li><code>column-reverse</code>：从下到上</li>
-</ul>
-<p>默认情况下是<code>row</code>。</p>
-<h3 id="交叉轴"><a href="#交叉轴" class="headerlink" title="交叉轴"></a>交叉轴</h3><p>也就是副轴，垂直于<code>flex-direction</code>设置的主轴方向。</p>
-<p>主轴与交叉轴的概念很重要，因为 flexbox 一次性只能调控一个维度的元素。</p>
-<p><br><br></p>
-<hr>
-<p><br><br></p>
-<h2 id="Flex-容器"><a href="#Flex-容器" class="headerlink" title="Flex 容器"></a>Flex 容器</h2><p>采用 flexbox 的区域就叫做 flex 容器。</p>
-<p>将一个容器的<code>display</code>属性值改为<code>flex</code>或者<code>inline-flex</code>后，该容器就会变成 flex 容器，而容器中的元素则会变成 <strong>flex 元素</strong> 。</p>
-<p>flex 元素的初始值：</p>
-<ul>
-<li>元素按行排列（<code>flex--direction</code>属性的初始值是<code>row</code>）</li>
-<li>元素从主轴的起始线（start）开始。</li>
-<li>元素不会拉伸，但是可以缩小。</li>
-<li>元素被拉伸来填充交叉轴大小。（？）</li>
-<li><code>flex-basis</code>属性为<code>auto</code></li>
-<li><code>flex-wrap</code>属性为<code>nowrap</code></li>
-</ul>
-<p>注意，以上为默认属性值。</p>
-<h3 id="更改flex方向flex-direction"><a href="#更改flex方向flex-direction" class="headerlink" title="更改flex方向flex-direction"></a>更改flex方向flex-direction</h3><p>flex容器中更改<code>flex-direction</code>属性可以改变flex容器中元素的排列方向。</p>
-<p>设置<code>flex-direction: row-reverse</code>让元素从右向左排列，但是在flex容器中，不说左和右，而是<strong>起始线</strong>与<strong>终止线</strong>。</p>
-<p><br><br></p>
-<hr>
-<p><br><br></p>
-<h2 id="用flex-wrap实现多行Flex容器"><a href="#用flex-wrap实现多行Flex容器" class="headerlink" title="用flex-wrap实现多行Flex容器"></a>用flex-wrap实现多行Flex容器</h2><p><code>flex-wrap</code>默认值为<code>nowrap</code>，意思是不换行，元素挤不下就先变小然后挤进去。改成<code>wrap</code>后挤不进去就会换行。如果有些元素无法缩小，那么默认的<code>nowrap</code>会导致元素溢出。</p>
-<p><br><br></p>
-<hr>
-<p><br><br></p>
-<h2 id="简写属性flex-flow"><a href="#简写属性flex-flow" class="headerlink" title="简写属性flex-flow"></a>简写属性flex-flow</h2><p><code>flex-flow</code>是<code>flex-direction</code>与<code>flex-wrap</code>的简写形式，第一个写<code>flex-direction</code>的值，第二个写<code>flex-wrap</code>的值。</p>
-<p><br><br></p>
-<hr>
-<p><br><br></p>
-<h2 id="flex-元素上的属性"><a href="#flex-元素上的属性" class="headerlink" title="flex 元素上的属性"></a>flex 元素上的属性</h2><p>为了更好的控制flex元素，有三个属性可以作用于他们：</p>
-<ul>
-<li><code>flex-grow</code></li>
-<li><code>flex-shrink</code></li>
-<li><code>flex-basis</code></li>
-</ul>
-<p>在使用这几个属性之前，先明白一个概念——<strong>可用空间</strong>。这几个属性的作用其实就是在改变flex容器中的可用空间。</p>
-<p>假设一个容器宽 100px ，其中的元素有三个，宽均为 20px 。那么剩下的40px就是可用空间。默认情况下，这40px的可用空间放在最后一个元素后边。</p>
-<p>控制元素去使用可用空间，就是这些属性要做的事。</p>
-<h3 id="Flex-元素属性：flex-basis"><a href="#Flex-元素属性：flex-basis" class="headerlink" title="Flex 元素属性：flex-basis"></a>Flex 元素属性：<code>flex-basis</code></h3><p><code>flex-basis</code>定义了该元素的<strong>空间大小</strong>，flex容器里除了元素所占的空间以外的其余空间就是<strong>可用空间</strong>。属性的默认值为<code>auto</code>。如果元素已经设置了宽度（width），那么<code>flex-basis</code>就是宽度的值。</p>
-<p>如果元素没有设置宽度，那么<code>flex-basis</code>的值就只是刚好放下元素里的内容。</p>
-<p>如果宽度于其一同设置，那以<code>flex-basis</code>为准。</p>
-<h3 id="Flex-元素属性：flex-grow"><a href="#Flex-元素属性：flex-grow" class="headerlink" title="Flex 元素属性：flex-grow"></a>Flex 元素属性：<code>flex-grow</code></h3><p>如果单独一个元素的<code>flex-grow</code>被赋予一个整数值，那么该元素会被拉伸然后占据全部可用空间。</p>
-<p>当多个元素的<code>flex-grow</code>均被赋值时，可用空间会按比例被元素瓜分。<br>$$<br>元素瓜分的可用空间 = (容器总宽度 - 各元素宽度) × (该元素flex-grow值/各元素flex-grow值之和)<br>$$<br>比如</p>
-<figure class="highlight less"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 一个&lt;main&gt;里有三个&lt;div&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="selector-tag">main</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">400px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">270px</span>;</span><br><span class="line">    <span class="attribute">display</span>: flex;</span><br><span class="line"></span><br><span class="line">    <span class="selector-pseudo">:nth-child(1)</span> &#123;</span><br><span class="line">        <span class="attribute">flex-grow</span>: <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="selector-pseudo">:nth-child(2)</span> &#123;</span><br><span class="line">        <span class="attribute">flex-grow</span>: <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="selector-pseudo">:nth-child(3)</span> &#123;</span><br><span class="line">        <span class="attribute">flex-grow</span>: <span class="number">2</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="selector-tag">div</span> &#123;</span><br><span class="line">        <span class="attribute">width</span>: <span class="number">50px</span>;</span><br><span class="line">        <span class="attribute">height</span>: <span class="number">50px</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>第一个div在原来宽度的基础上，再增加已瓜分的可用空间，得到<code>width: 112.5px</code></p>
-<p>第二个div得到<code>width: 112.5px</code></p>
-<p>第三个div得到<code>width: 175px</code></p>
-<h3 id="Flex-元素属性：flex-shrink"><a href="#Flex-元素属性：flex-shrink" class="headerlink" title="Flex 元素属性：flex-shrink"></a>Flex 元素属性：<code>flex-shrink</code></h3><p>这个是用来缩小元素的。<br>$$<br>现在的宽度=原宽度-(各元素宽度之和-容器总宽度)×(该元素flex-shrink值/各元素flex-shrink值之和)<br>$$</p>
-<p>例如</p>
-<figure class="highlight less"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">main</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">500px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">270px</span>;</span><br><span class="line">    <span class="attribute">display</span>: flex;</span><br><span class="line"></span><br><span class="line">    <span class="selector-pseudo">:nth-child(1)</span> &#123;</span><br><span class="line">        <span class="attribute">flex-shrink</span>: <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="selector-pseudo">:nth-child(2)</span> &#123;</span><br><span class="line">        <span class="attribute">flex-shrink</span>: <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="selector-pseudo">:nth-child(3)</span> &#123;</span><br><span class="line">        <span class="attribute">flex-shrink</span>: <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="selector-pseudo">:nth-child(4)</span> &#123;</span><br><span class="line">        <span class="attribute">flex-shrink</span>: <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="selector-tag">div</span> &#123;</span><br><span class="line">        <span class="attribute">width</span>: <span class="number">200px</span>;</span><br><span class="line">        <span class="attribute">height</span>: <span class="number">50px</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>容器总宽度是500px，元素宽度之和为4x200px，溢出来的空间有300px，第一个元素flex-shrink为0，那他就是原长200px。剩下的都是1，于是平分300px，每一个分到100px，最后的长度为200-100。</p>
-<h3 id="Flex-属性的简写"><a href="#Flex-属性的简写" class="headerlink" title="Flex 属性的简写"></a>Flex 属性的简写</h3><blockquote>
-<p>（我还没想清楚为什么将这三个明明比较冲突的属性写在一起，所以先不详细地写了）</p>
-</blockquote>
-<p>进行开发时，一般不会就属性单独使用，因为实际开发中，某一元素的属性有很多。所以会有一种简写形式供大家选择。</p>
-<p><code>flex</code>允许你把上边的三个值按顺序依次书写——<code>flex-gorw</code>，<code>flex-shrink</code>，<code>flex-basis</code>。</p>
-<p>当然，也有一些预制效果：</p>
-<ul>
-<li>flex: initial -&gt; flex: 0 1 auto</li>
-<li>flex: auto -&gt; 1 1 auto</li>
-<li>flex: none -&gt; flex: 0 0 auto</li>
-<li>flex: <positive-number> -&gt; </li>
-</ul>
-<p><br><br></p>
-<hr>
-<p><br><br></p>
-<h2 id="元素间的对齐和空间分配"><a href="#元素间的对齐和空间分配" class="headerlink" title="元素间的对齐和空间分配"></a>元素间的对齐和空间分配</h2><h3 id="align-items"><a href="#align-items" class="headerlink" title="align-items"></a>align-items</h3><p>该属性可以使元素在交叉轴方向对齐。</p>
-<p>属性：</p>
-<ul>
-<li>stretch</li>
-<li>flex-start：怼向起始线</li>
-<li>flex-end：怼向终止线</li>
-<li>center：在交叉轴居中</li>
-</ul>
-<h3 id="justify-content"><a href="#justify-content" class="headerlink" title="justify-content"></a>justify-content</h3><p>该属性决定元素在主轴方向的对齐方式。</p>
-<p>属性：</p>
-<ul>
-<li>stretch</li>
-<li>flex-start：对齐到起始线</li>
-<li>flex-end：对齐到终止线</li>
-<li>center：在主轴方向居中</li>
-<li>space-around：元素周围均匀地围一圈空白，但是和padding或者margin不一样的是，他不对重叠在一起，所以这个属性值用得比较少。</li>
-<li>space-between：两边属性往边靠，元素间的空隙均匀分配</li>
-</ul>
-<p><br><br></p>
-<hr>
-<p><br><br></p>
-<p>大概就是这样了。</p>
-]]></content>
-      <tags>
-        <tag>CSS笔记</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>LeetCode | 两数之和</title>
-    <url>/2020/12/02/LeetCode-%E4%B8%A4%E6%95%B0%E4%B9%8B%E5%92%8C/</url>
-    <content><![CDATA[<h1 id="两数之和"><a href="#两数之和" class="headerlink" title="两数之和"></a>两数之和</h1><h2 id="C语言实现"><a href="#C语言实现" class="headerlink" title="C语言实现"></a>C语言实现</h2><p>一开始傻了逼了，一直想着让每一个与自己</p>
-]]></content>
-      <tags>
-        <tag>LeetCode简单题</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>python基础部分</title>
-    <url>/2020/12/05/python%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%86/</url>
-    <content><![CDATA[<h1 id="基础部分"><a href="#基础部分" class="headerlink" title="基础部分"></a>基础部分</h1><blockquote>
-<p>由于已有编程基础，便不再事无巨细地记录了</p>
-</blockquote>
-<p>在python里，当一行代码太长，看着头皮发麻时，由于没有<code>;</code>的限制，显然不能像C语言一样直接换行。</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span>(this_sentence_is_too_long == <span class="literal">True</span>) <span class="keyword">and</span> \</span><br><span class="line">(then_write_it_like_this == <span class="literal">True</span>):</span><br><span class="line">    show() <span class="comment"># 如果一行代码太长，那就用 \ 来分割</span></span><br></pre></td></tr></table></figure>
-
-<p>不过老分号在python里还是存在的</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">x = <span class="string">&quot;123&quot;</span>; its_OK() </span><br><span class="line"><span class="comment"># 用 ; 分隔，当然这样就不能拥有代码块了</span></span><br></pre></td></tr></table></figure>
-
-<p>再看看变量赋值，真就是变量名+值，连类似JavaScript里的<code>let</code>或者<code>var</code>都没有。</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">anInt = <span class="number">12</span></span><br><span class="line">aString = <span class="string">&#x27;string&#x27;</span></span><br><span class="line">aFloat = <span class="number">0.23123</span></span><br><span class="line">anotherString = <span class="string">&#x27;str&#x27;</span> + <span class="string">&#x27;ing&#x27;</span></span><br></pre></td></tr></table></figure>
-
-<p>熟悉的<code>*=</code>、<code>-=</code>等在python里依然存在，不过自增自减就人没了<code>--</code>、<code>++</code>。</p>
-<p>python可以说是很懂人类了，看看这种赋值吧，我觉得以C或Java等，为母语的朋友们，对这样的赋值，肯定会比较新奇。</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">x, y, z = <span class="number">1</span>, <span class="number">2</span>, <span class="string">&#x27;aString&#x27;</span></span><br><span class="line">(x, y, z) = (<span class="number">1</span>, <span class="number">2</span>, <span class="string">&#x27;aString&#x27;</span>) <span class="comment"># 加上括号多少保险一点</span></span><br></pre></td></tr></table></figure>
-
-<p>及不记得在C等语言里，我x要和你y交换值，得有个中间商，而python就无需中间商。</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">x = <span class="number">1</span></span><br><span class="line">y = <span class="number">2</span></span><br><span class="line"><span class="comment"># 交换</span></span><br><span class="line">x, y = <span class="number">2</span>, <span class="number">1</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h2><h3 id="整型"><a href="#整型" class="headerlink" title="整型"></a>整型</h3><p>有一点不同，就是<code>100000000000</code>可以写成<code>100_000_000_000</code>。用下划线<code>_</code>可以分隔数字，方便阅读。</p>
-<p>加减乘除还是原来的<code>+ - * /</code>，且多了一个乘方<code>**</code>。整型用<code>/</code>除出来是浮点型，而用<code>//</code>则是整型，称之为<u>地板除</u>。浮点型不管用<code>/</code>还是<code>//</code>都是浮点型。（python 2中两个整型用<code>/</code>计算出来结果还是整型，必须有一个是浮点型结果才能使浮点型。）</p>
-<h3 id="浮点型"><a href="#浮点型" class="headerlink" title="浮点型"></a>浮点型</h3><p>依然存在这种通病。</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="number">0.2</span> + <span class="number">0.1</span></span><br><span class="line"><span class="number">0.30000000000000004</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h3><p><code>+</code>可以算数学，而且可以链接字符串，<s>让我想起了JavaScript。</s></p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>aString = <span class="string">&#x27;连接&#x27;</span> + <span class="string">&#x27;字符串&#x27;</span></span><br><span class="line"><span class="string">&#x27;连接字符串&#x27;</span></span><br></pre></td></tr></table></figure>
-
-<p>感觉python很自由对吧，但是类型不同就不能连在一起，需要用<code>str()</code>转化一下才可以。<s>道不同不相为谋。</s></p>
-<p>单引号和双引号均可。还有类似模板字面量的东西，只不过这个是用三个单引号括起来。<code>&#39;&#39;&#39;  &#39;&#39;&#39;</code>可以保留你在引号里边的操作。</p>
-<h3 id="布尔值"><a href="#布尔值" class="headerlink" title="布尔值"></a>布尔值</h3><p>布尔值是大写的<code>True</code>和<code>False</code>。布尔值可以用<code>and</code>、<code>or</code>和<code>not</code>。<s>好家伙，难怪外行想玩玩编程就会选择python。</s></p>
-<h3 id="空值None"><a href="#空值None" class="headerlink" title="空值None"></a>空值<code>None</code></h3><h2 id="常量"><a href="#常量" class="headerlink" title="常量"></a>常量</h2><p>其实没有常量，就只是把字母大写的变量。但你要认为他就是常量。</p>
-<h2 id="新东西——列表"><a href="#新东西——列表" class="headerlink" title="新东西——列表"></a>新东西——列表</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>hotwords = [<span class="string">&#x27;好家伙&#x27;</span>, <span class="string">&#x27;打工人&#x27;</span>, <span class="string">&#x27;后浪&#x27;</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(hotwords)</span><br><span class="line">[<span class="string">&#x27;好家伙&#x27;</span>, <span class="string">&#x27;打工人&#x27;</span>, <span class="string">&#x27;后浪&#x27;</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(hotwords[<span class="number">0</span>])</span><br><span class="line">好家伙</span><br></pre></td></tr></table></figure>
-
-<p><s>想起了什么？数组？一样吗，可不一样了。</s></p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(hotwords[-<span class="number">1</span>])</span><br><span class="line">后浪</span><br></pre></td></tr></table></figure>
-
-<h3 id="修改、添加、删除"><a href="#修改、添加、删除" class="headerlink" title="修改、添加、删除"></a>修改、添加、删除</h3><p>修改直接覆盖即可。</p>
-<p>添加有给定的方法</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>hotwords.append(<span class="string">&#x27;阴阳怪气&#x27;</span>) <span class="comment"># 添加到末尾</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(hotwords)</span><br><span class="line">[<span class="string">&#x27;好家伙&#x27;</span>, <span class="string">&#x27;打工人&#x27;</span>, <span class="string">&#x27;后浪&#x27;</span>, <span class="string">&#x27;阴阳怪气&#x27;</span>]</span><br></pre></td></tr></table></figure>
-
-<p>向后<code>append()</code>也可以通过建立空列表，然后向后追加来创建新列表。</p>
-<h3 id="map"><a href="#map" class="headerlink" title="map()"></a>map()</h3><p>map(function, iterbale)</p>
-<p>两个参数</p>
-<ol>
-<li>function —— 函数</li>
-<li>iterable —— 一个或多个列表</li>
-</ol>
-<h3 id="sorted"><a href="#sorted" class="headerlink" title="sorted()"></a>sorted()</h3><p>sorted(iterable, key=None, reverse=False)</p>
-]]></content>
-      <tags>
-        <tag>python学习笔记</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>读《月亮与六便士》感</title>
-    <url>/2020/12/01/%E8%AF%BB%E3%80%8A%E6%9C%88%E4%BA%AE%E4%B8%8E%E5%85%AD%E4%BE%BF%E5%A3%AB%E3%80%8B%E6%84%9F/</url>
-    <content><![CDATA[<h1 id="读毛姆《月亮与六便士》感（草稿）"><a href="#读毛姆《月亮与六便士》感（草稿）" class="headerlink" title="读毛姆《月亮与六便士》感（草稿）"></a>读毛姆《月亮与六便士》感（草稿）</h1><p>我相信很多人都听过这本书，和那句话——“满地都是六便士，他却抬头看见了月亮”</p>
-<p>这句话很浪漫，想必这本小说也是不顾一切追梦的故事吧。实际上，严格意义上，或者说我看过之后感觉，并不是。</p>
-<p>它似乎讲的是，一个接纳了内心欲望魔鬼的一个人的悲惨一生——世俗上的，当然他活着的时候是悲惨的一生，死后马上被称为传奇与辉煌的一生。这个“欲望魔鬼”体现在艺术表达。</p>
-<p>一个人抛弃了一切，去追求艺术。</p>
-<p>人们都说是和梦想有关，我看完觉得不是什么梦想，</p>
-<blockquote>
-<p>我告诉你，我必须画画。我身不由己。一个人掉进水里，他游泳游得好不好没关系，反正他得挣扎，不然就得淹死。——斯特里克兰</p>
-</blockquote>
-<blockquote>
-<p>我感觉在他的体内，仿佛有一股猛烈的力量在挣扎；这股力量强大无比，压倒一切，好像违背他自己的意志，将他紧紧攫住。我无法理解。他似乎真的被魔鬼附体了，很可能，突然就会被撕得粉碎。——我</p>
-</blockquote>
-<p>有很多人，都是以“如果你迷茫于理想与现实，那可以看一看”为推荐理由。我不知道他们都没读过这本书。我觉得，大部分的普通人，首先会去不进去这本小说。然后，即便读完，对于理想什么的也没什么答案。你别想在书中找到关于理想与现实的答案。或者说，那个答案不是给普通人，或者说不是给正常人的。</p>
-<p>书中有一个人物，一个犹太人，叫亚伯拉罕。</p>
-<blockquote>
-<p>他是个犹太人，叫做亚伯拉罕，当时是个头发金黄、特别壮实的年轻人，生性腼腆，也非常谦虚，但他才华出众。他考取了医院的奖学金，读书五年期间拿遍了所有能拿的奖励。他同时被委任为内科医院和外科医生。他的出色是公认的。最后他被选进了医院的管理层，前途一片光明。… …在履新之前，他想去度假，由于手头并不宽裕，他以外科医生的身份登上了一艘开往地中海东岸的不定期货架。… …几个星期后，医院管理层收到他的辞呈，他放弃了那个令人觊觎的职位。… …他消失了。</p>
-</blockquote>
-<p>他为什么会做出这样的举动呢？后来“我”见到了他。</p>
-<blockquote>
-<p>他和我说起了他的故事。当初启程到地中海度假时，他其实是准备回到伦敦，去圣托马斯医院履任的。那天早晨，货轮在亚历山大港靠岸，他在甲板上观察这座城市，在阳光下白花花的，还有码头上的人群，他看到了穿着褴褛长袍的本地人，苏丹来的黑人，吵吵嚷嚷、成群结队的希腊人和意大利人，戴着红色菲斯帽的、神情肃穆的土耳其人，灿烂的阳光和蓝色的天穹，他产生了某种感触。他无法描述这种感受。就像是一声惊雷，他说，但随即又推翻了这个说法，改口说是一种天启。似乎有什么东西触动了他的心灵，于是他突然觉得非常快乐，有一种无拘无束的美妙感受。他觉得他回到家乡了，不用一分钟就决定他将会在亚历山大港度过他的余生。… …我不在乎任何人的看法。其实做出决定的不是我，而是我内心某种更为强大的力量。</p>
-</blockquote>
-<p>我认为这个人，或许才是一个正常人，如何去抉择理想与现实的案例。但是小说并没有过多的讲述亚伯拉罕的故事。以上的摘抄就是关于他的大部分笔墨。</p>
-<p>因为亚伯拉罕做的决定让常人无法理解，但是他做的事，起码是人做的事，哦对了，辞职之后他还是一个医生。而斯特里克兰，很难去说他是个世俗意义上的人，更像是披着人皮的艺术肿瘤，在他身体内潜伏多年，然后爆发。爆发后，便不再做人，抛去了所有的人伦道德世俗价值，甚至抛弃了自己。</p>
-<blockquote>
-<p>他的身体瘦得像干尸。他穿着的是五年前我见到他时那套衣服，既破烂又邋遢，线头掉了不少，松松垮垮地挂在他身上，仿佛原本是为别人度身定做的。我注意到他的双手，脏兮兮的，指甲很长；那双手瘦得皮包骨，青筋全露出来。</p>
-</blockquote>
-<p>这只是我摘抄的一点点，文中有很多类似的描述。</p>
-<p>我感觉不到这是理想与现实的碰撞，更像是失去人性的人，只保留了表达艺术的原始欲望的人的故事。</p>
-<p>如果你问我，我是否推荐去读《月亮与六便士》，这时我要反问你，你为了什么去看，如果你为了我之前所说的“理想与现实”。那我完全不推荐。但是毛姆对人性的刻画很是细腻与有趣的，有些话写得一针见血。</p>
-<blockquote>
-<p>我从来没想到他骂人的本领是如此地高明，总是能够戳中这个郁闷的荷兰人最敏感的痛处。斯特里克兰挥舞的不是讽刺的细剑，而是谩骂的大棒。这次突如其来的袭击让斯特罗夫措手不及，完全失去了抵抗能力。他就像慌不择路、到处乱跑的绵羊。他惊骇莫名，不知所以。最后他的泪水滚滚而下。这件事情最糟糕的地方在于，尽管你很讨厌斯特里克兰，当时的场面也很可怕，但你就是忍不住想笑。有些人很倒霉，他们哪怕在真情流露的时候也显得滑稽可笑，德克·斯特罗夫正好就是这种人。</p>
-</blockquote>
-<blockquote>
-<p>画室里的寂静似乎已经化为实体，让人觉得简直伸手就能摸到。</p>
-</blockquote>
-<p>有些话可以细细品味</p>
-<blockquote>
-<p>世道艰难，人心险恶。我们不知道自己何以会来到人世，也不知道死后将会去往何方。我们必须保持非常卑微的心态。我们必须懂得安详的美好。我们必须过着安分守己的日子，以免引起命运女神的注意。让我们去寻求那些朴实无知的人的爱情吧。他们的愚昧比我们的学识更为可贵。让我们学会沉默，偏安于仅可容身的小角落，像他们那样驯服而温和吧。这才是生活的智慧。</p>
-</blockquote>
-<blockquote>
-<p>人们满不在乎地谈论美，由于他们说话并不经过深思熟虑，所以美这个词被用得太过泛滥，已经失去了原有的力量；许许多多微不足道的东西都冠以它的名义，于是它所代表的东西变得不再崇高。人们用美来形容裙子、小狗和布道，当遇到真正的美时，他们却又认不出来。人们试图用这种本末倒置来装饰他们毫无价值的思想，结果反而钝化了他们对美的感受力。就像那种假装一直拥有他只能偶尔感受到的通灵力量的江湖骗子，人们丧失了这种遭到他们滥用的审美能力</p>
-</blockquote>
-]]></content>
-      <tags>
-        <tag>读后感</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>关于博客内容</title>
-    <url>/2020/12/06/%E5%85%B3%E4%BA%8E%E5%8D%9A%E5%AE%A2%E5%86%85%E5%AE%B9/</url>
-    <content><![CDATA[<h1 id="关于这个博客"><a href="#关于这个博客" class="headerlink" title="关于这个博客"></a>关于这个博客</h1><blockquote>
-<p>最近要考python了，所以边学边做笔记，途中我发现自己的笔记废话连篇。写这些废话很浪费时间与精力。于是从思考“如何写笔记”，衍生到“笔记记什么”。</p>
-</blockquote>
-<p>这个博客是用来记录的，不仅仅是技术笔记，将来我有能力开发自己的主题时，就会加入更多东西。</p>
-<p>我把我的博客分为这几类</p>
-<ol>
-<li>研究笔记</li>
-<li>学习笔记</li>
-<li>实记笔记</li>
-<li>随笔</li>
-</ol>
-<h2 id="研究笔记"><a href="#研究笔记" class="headerlink" title="研究笔记"></a>研究笔记</h2><p>主要是自己的东西，通过学习、实践与理解，而研究出来东西。这种笔记正文可以有废话，可以有啰嗦的解释。</p>
-<h2 id="学习笔记"><a href="#学习笔记" class="headerlink" title="学习笔记"></a>学习笔记</h2><p>边学边做的笔记，这类笔记避免废话，避免啰嗦（可以稍微罗嗦一点，但是不要废话）。这不是写教程，自己明白就好。将知识点写明白即可。现在只是想有个大概了解，将来还有可能拿来复习，太罗嗦不好。</p>
-<h2 id="实记笔记"><a href="#实记笔记" class="headerlink" title="实记笔记"></a>实记笔记</h2><p>记录实践中遇到的问题，以及解决方案。</p>
-<h2 id="随笔"><a href="#随笔" class="headerlink" title="随笔"></a>随笔</h2><p>随笔</p>
-]]></content>
-      <tags>
-        <tag>日志</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>数据结构-栈和队列</title>
-    <url>/2020/12/07/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E6%A0%88%E5%92%8C%E9%98%9F%E5%88%97/</url>
-    <content><![CDATA[<h1 id="栈和队列"><a href="#栈和队列" class="headerlink" title="栈和队列"></a>栈和队列</h1><blockquote>
-<p>栈和队列也是线性表，只不过他们的操作受限。通常称，栈和队列是限定<u><strong>插入</strong></u>和<u><strong>删除</strong></u>只能在表的“<u><strong>端点</strong></u>”进行的线性表。</p>
-</blockquote>
-<h2 id="3-1-栈"><a href="#3-1-栈" class="headerlink" title="3.1 栈"></a>3.1 栈</h2><p>羽毛球筒，先进后出。</p>
-<h3 id="3-1-1-栈的定义"><a href="#3-1-1-栈的定义" class="headerlink" title="3.1.1 栈的定义"></a>3.1.1 栈的定义</h3><p>栈是限定仅在表尾进行插入或删除操作的线性表，表尾——栈顶，表头——栈底，不含元素的空表称<strong>空栈</strong>。特点：先进后出或后进先出。</p>
-<h3 id="3-1-2-栈的表示和实现"><a href="#3-1-2-栈的表示和实现" class="headerlink" title="3.1.2 栈的表示和实现"></a>3.1.2 栈的表示和实现</h3><p>和线性表一样，也有是有顺序存储结构与链式存储结构的。</p>
-<p>顺序栈，利用一组地址连续的存储单元依次存放字栈底到栈顶的数据元素。同时附一个top指示栈顶的位置。一般来说不设置顺序栈的最大容量，而是不够的时候添加。</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> strict &#123;</span><br><span class="line">	SElemType *base; <span class="comment">// 指向栈底的位置，为NULL则说明不存在</span></span><br><span class="line">	SElemType *top; <span class="comment">// 指向栈顶位置</span></span><br><span class="line">	<span class="keyword">int</span> stacksize; <span class="comment">// 当前可使用的最大容量</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>当top=base的时候自然是顺序栈为空的时候。每当插入一个新栈顶元素，top加一，每当删除一个栈顶元素时，top减一。</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="function">Status <span class="title">InitStack</span><span class="params">(SqStack &amp;S)</span></span>&#123;</span><br><span class="line">	<span class="comment">// 建一个新栈</span></span><br><span class="line">	S.base = (SElemType *)<span class="built_in">malloc</span>(INIT_SIZE*(<span class="keyword">sizeof</span> SElemType*));</span><br><span class="line">	<span class="comment">// 写笔记的时候，这里卡了一下，一时间没有理解为什么是S.base，</span></span><br><span class="line">    <span class="comment">// .后来翻看了一下线性表那一章的笔记，</span></span><br><span class="line">    <span class="comment">// 这个S.base应该是栈的基址</span></span><br><span class="line">	<span class="keyword">if</span>(!S.base) <span class="built_in">exit</span>(OVERFLOW);</span><br><span class="line">	S.top = S.base;</span><br><span class="line">	S.stacksize = INIT_SIZE;</span><br><span class="line">	<span class="keyword">return</span> OK;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>取栈顶元素</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="function">Status <span class="title">GetTop</span><span class="params">(SqStack S, SElemType &amp;e)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(S.top = S.base) <span class="keyword">return</span> ERROR;</span><br><span class="line">	e = *(S.top<span class="number">-1</span>);</span><br><span class="line">	<span class="keyword">return</span> OK</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>添加新的栈顶元素</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="function">Status <span class="title">Push</span><span class="params">(SqStack S, SElemType &amp;e)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(S.top-S.base&gt;=S.stacksize) &#123;</span><br><span class="line">	<span class="comment">//栈满了</span></span><br><span class="line">	S.base=</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="3-2-栈的应用举例"><a href="#3-2-栈的应用举例" class="headerlink" title="3.2 栈的应用举例"></a>3.2 栈的应用举例</h2><h3 id="3-2-1-数制转换"><a href="#3-2-1-数制转换" class="headerlink" title="3.2.1 数制转换"></a>3.2.1 数制转换</h3><p>十进制数N和其他d进制转换：<code>N=(N div d)xd+N mod d</code>（div为取整运算，mod为求余）</p>
-<p>上述计算过程，从低位到高位顺序产生d进制数，但是输出时，应该是从高位到地位输出的，正好相反。</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">conversion</span><span class="params">(d)</span> </span>&#123;</span><br><span class="line">	InitStack(S);</span><br><span class="line">	<span class="built_in">scanf</span>(“%d”, N);</span><br><span class="line">	<span class="keyword">while</span>(N) &#123;</span><br><span class="line">	<span class="comment">// 这个循环一下子没看懂的话，可以画一画图</span></span><br><span class="line">		push(S, N%d);</span><br><span class="line">		N=N/d;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">while</span>(S.top!=S.base) &#123;</span><br><span class="line">		Pop(S, e); <span class="comment">// 删除;</span></span><br><span class="line">		<span class="built_in">printf</span>(“%d”, e); <span class="comment">// 按高位到低位顺序输出</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h3 id="3-2-2-括号匹配的检验"><a href="#3-2-2-括号匹配的检验" class="headerlink" title="3.2.2 括号匹配的检验"></a>3.2.2 括号匹配的检验</h3><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function">Status <span class="title">Match</span><span class="params">()</span></span>&#123;</span><br><span class="line">	InitStack(S);</span><br><span class="line">	<span class="keyword">do</span>&#123;</span><br><span class="line">		<span class="built_in">scanf</span>(“%s”, <span class="keyword">new</span>);</span><br><span class="line">		<span class="keyword">switch</span>(<span class="keyword">new</span>) &#123;</span><br><span class="line">			<span class="keyword">case</span> ‘[‘:</span><br><span class="line">			<span class="keyword">case</span> ‘(’: Push(S, <span class="keyword">new</span>); <span class="keyword">break</span>;</span><br><span class="line">			<span class="keyword">case</span> ‘]’:</span><br><span class="line">			<span class="keyword">case</span> ‘)’:</span><br><span class="line">				<span class="keyword">if</span>(<span class="keyword">new</span> == *S.top) Pop(S, e);</span><br><span class="line">				<span class="keyword">else</span> <span class="keyword">return</span> ERROR;</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			<span class="keyword">default</span>: <span class="keyword">return</span> ERROR;</span><br><span class="line">		&#125; <span class="comment">//switch</span></span><br><span class="line">	&#125;<span class="keyword">while</span>(S.top!=S.base);</span><br><span class="line">	DestroyStack(S);</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>上边的伪代码，功能貌似是实现了，但是总感觉差点意思。 </p>
-</blockquote>
-<h3 id="3-2-2-行编辑程序"><a href="#3-2-2-行编辑程序" class="headerlink" title="3.2.2 行编辑程序"></a>3.2.2 行编辑程序</h3><p>用户要输入东西，但是你不能他输入什么你就存什么，万一他输错了呢，所以要放在缓存区内，方便用户修改。缓存区设置成一个栈，将用户输入的字符存进去，存的时候先进行判断，如果是退格符<code>#</code>，或者是退行符<code>@</code>，那就压入栈中，如果是，那要不删除栈顶元素，要不清空栈。</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">LineEdit</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	InitStack(S); <span class="comment">// 这个栈存的是一行元素</span></span><br><span class="line">	ch = getchar();</span><br><span class="line">	<span class="keyword">while</span>(ch!=EOF)&#123;</span><br><span class="line">		<span class="keyword">while</span>(ch!=EOF &amp;&amp; ch!=‘\n’) &#123;</span><br><span class="line">			<span class="keyword">switch</span>(ch)&#123;</span><br><span class="line">				<span class="keyword">case</span> ‘#’: Pop(S, e); <span class="keyword">break</span>; </span><br><span class="line">                    <span class="comment">// 如果是#就删除栈顶元素</span></span><br><span class="line">				<span class="keyword">case</span> ‘@‘: ClearStack(S); <span class="keyword">break</span>; </span><br><span class="line">                    <span class="comment">//@就把这个栈清空</span></span><br><span class="line">				<span class="keyword">default</span>: Push(S, ch); <span class="keyword">break</span>; </span><br><span class="line">                    <span class="comment">// 输入其他的就放入栈中</span></span><br><span class="line">			&#125;</span><br><span class="line">			ch = getchar();</span><br><span class="line">		&#125;</span><br><span class="line">		ClearStack(S);</span><br><span class="line">		<span class="keyword">if</span>(ch==‘\n’) ch = getchar(); </span><br><span class="line">        <span class="comment">// 如果仅仅是换行的话，就继续存</span></span><br><span class="line">	&#125;</span><br><span class="line">	DestroyStack(S); <span class="comment">// 销毁栈</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h3 id="3-2-4-迷宫求解"><a href="#3-2-4-迷宫求解" class="headerlink" title="3.2.4 迷宫求解"></a>3.2.4 迷宫求解</h3><h2 id="3-4-队列"><a href="#3-4-队列" class="headerlink" title="3.4 队列"></a>3.4 队列</h2><h3 id="3-4-1-定义"><a href="#3-4-1-定义" class="headerlink" title="3.4.1 定义"></a>3.4.1 定义</h3><p>队列和栈不同，队列一种先进先出的线性表，就和日常生活中的排队一样。在队列中，云需插入的一端叫<strong>队尾</strong>，允许删除的一端叫做<strong>队头</strong>。</p>
-<p>双端队列</p>
-<h3 id="3-4-2-链队列"><a href="#3-4-2-链队列" class="headerlink" title="3.4.2 链队列"></a>3.4.2 链队列</h3><p>需要头指针与尾指针，指向队头与队尾。</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">QNode</span> &#123;</span></span><br><span class="line">	QElemType data;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">QNode</span> *<span class="title">next</span>;</span></span><br><span class="line">&#125;QNode, *QueuePtr;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">	QueuePtr front; <span class="comment">// 队头指针</span></span><br><span class="line">	QueuePtr rear; <span class="comment">// 队尾指针</span></span><br><span class="line">&#125;LinkQueue;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>删除队头</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function">Status <span class="title">DeQueue</span><span class="params">(LinkQueue &amp;Q, QElemType &amp;e)</span> </span>&#123;</span><br><span class="line">	p = Q.front-&gt;next;</span><br><span class="line">	e = p-&gt;data;</span><br><span class="line">	Q.front-&gt;next = p.front-&gt;next;</span><br><span class="line">	<span class="keyword">if</span>(Q.rear == p) Q.rear = Q.front; </span><br><span class="line">	<span class="comment">// 如果删除的刚好就是队尾，那就需要重新赋值，不然队尾就丢了</span></span><br><span class="line">	<span class="built_in">free</span>(p);</span><br><span class="line">	<span class="keyword">return</span> OK;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h3 id="3-4-3-循环队列"><a href="#3-4-3-循环队列" class="headerlink" title="3.4.3 循环队列"></a>3.4.3 循环队列</h3><p>队列的循序表示与实现。插入新的队列尾元素时，尾指针加一；删除队列头元素时，头指针加一。非空队列中，头指针始终指向队头元素，尾指针始终指向队尾元素的后一位。</p>
-<p>可以发现，不管是添加还是删除，都会往后移一位，那么两个一直往后退，退到最后一位，前面却全空了。</p>
-<p>有一个方法(结合教材p63理解)，臆想一个环形的队列，这样就解决了空表不能存放数据的问题，但是<code>Q.front=Q.rear</code>却不能判断队列是否为空。</p>
-<p>解决上述问题：</p>
-<ol>
-<li>另外设置一个标志来区分队列是否为空</li>
-<li>少用一个元素空间，约定以“队列头指针在队列尾指针的下一位置（指环状的下一位置）上”作为队列呈“满”状态的标志。（没懂）</li>
-</ol>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXQSIZE 100 <span class="comment">//最大队列长度</span></span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">	QElemType *base; <span class="comment">//初始化动态分配存储空间</span></span><br><span class="line">	<span class="keyword">int</span> front;</span><br><span class="line">	<span class="keyword">int</span> rear;</span><br><span class="line">&#125;SqQueue;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <tags>
-        <tag>数据结构笔记</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>充电</title>
-    <url>/2020/12/11/%E5%85%85%E7%94%B5/</url>
-    <content><![CDATA[<h1 id="读书充电"><a href="#读书充电" class="headerlink" title="读书充电"></a>读书充电</h1><blockquote>
-<p>记录一个比较喜欢的知乎回答，没有注明出处，反正是自己的私人博客，不管那么多了。</p>
-</blockquote>
-<p>如何吸收书中的知识点：</p>
-<p>当你看到一个很有意思的知识点的时候，试着把它教给别人。<br>不一定真要对别人说，在脑子里想象两个人的对话也可以。<br>不明白的地方，讲不清楚的地方，再查书。<br>反复尝试，直到能不看原文，完整地用自己的话把它叙述出来为止。</p>
-<p>OK，这是第一步。</p>
-<p>然后，试着为它写一篇短文。<br>内容可以是这个知识点在任何地方的应用，关于它的一切，想到什么写什么。<br>不要与第一步重复。<br>几百字就可以。<br>如果碰到任何障碍，记下来，去弄明白，然后继续写。</p>
-<p>这是第二步。</p>
-<p>最后一步，以这个点为中心，发散思维，将你能联想到的东西全部记下来。<br>在连接处写上两点之间的联系。<br>这个图谱就是你理解和记忆这个知识点的方式。请多多翻阅。</p>
-<p><strong>第一步，是理解它的内涵。</strong><br><strong>第二步，是理解它的外延。</strong><br><strong>第三步，是将它在记忆中，以图谱的形式储存起来。</strong></p>
-<p>完成以上三步，这个知识点，就是你的了。</p>
-<p>先明确一下读书笔记的原则：</p>
-<ol>
-<li>不要为了做笔记而做笔记。<strong>笔记是帮助构建知识体系的工具。</strong>笔记代替不了思考，只能作为思考的补充。</li>
-<li>做了笔记，要多看，否则，毫无作用。</li>
-<li>不要依赖笔记。<strong>笔记的作用就是让你不再需要笔记。</strong></li>
-</ol>
-<p>再说一下读书笔记的几个误区：</p>
-<ol>
-<li>笔记就是摘抄<br>摘抄是最没效率的方法。如果需要记录大段的原文以供引用，请拍照。这就是数码时代的便利。</li>
-<li>笔记就是给一本书画大纲<br>这同样是效率极低的方法。一本书的内容，不可能全部都使你感兴趣，能纳入你的知识体系。而且，仅仅因为“这本书里有这样的内容”，就记下自己不喜欢也不需要的东西，会影响做笔记的积极性。</li>
-<li>笔记要保存起来，时时翻看<br>前期确实如此，但如果一本笔记做了几年，当你需要时，还得翻开笔记去查——那这笔记做了有什么用？你的知识是储存在大脑里的，不是储存在笔记里的。<br>笔记只有两种：一种是原文，以备查询（拍照或者用电脑录入即可）；一种是思维架构，帮助完善知识体系，用完就可以丢弃。</li>
-</ol>
-<p>说说我的笔记方法。</p>
-<p>当你看一本书，读罢一章，觉得信息量巨大，醍醐灌顶，拍案叫绝，恨不得马上把这一章画大纲、抄下来——这时，先别忙着这样做。<br>先问自己：这一章里面，感兴趣的是哪些？<strong>有哪些能纳入自己的知识体系之中</strong>？</p>
-<p>比如，读古希腊史，你也许不会对克里特宫殿里有什么器皿、迈锡尼人驯养了什么家畜、伊奥尼亚人种植了什么作物感兴趣，你比较感兴趣的是：希波战争的整个过程。它是如何发生的？双方的实力对比如何？有哪些经典的小战役？</p>
-<p>那么，带着这个问题，再读一遍，其他无关的信息，不要理会。<br>读的时候，看到任何一个不懂的词、不清楚的概念，立刻上网查，务必弄明白。<br>当你把这个过程梳理清楚了，好，眼睛离开书。现在，请你在心中想象一个听众，用你的话把这个知识点解释给他听。<br>说的过程中，遇到任何不清楚的地方，停下来，上网查，马上弄明白。</p>
-<p>等你可以流畅地把“希波战争发生的全过程”解释清楚了，打开笔记本，在本子上记下要点。这些要点，就是你在叙述时，那些比较重要的节点，那些“牵一发而动全身”的点。</p>
-<p>下一步，请你思考，这个东西，可以跟知识体系中的什么联系起来？<br>你通过这个知识点，可以联想到什么你已经知道了的东西？<br>以这个点为圆心，把它们记在它的周围。<br>这就是你关于这个知识点的图式。</p>
-<p>好了，这个知识点已经告一段落，请在笔记下面标明日期、书名、页码，然后就可以翻开下一章了。<br>接下来，只需要每周一次，或者几天一次，翻开这几天做的笔记，根据自己记下的图式，将这个知识点完完整整地回忆出来。<br>然后，根据周围的联系元素，将它在你整个知识图式中过一遍。<br>直到你对这个点已经烂熟于心，这则笔记也就完成它的使命了。</p>
-]]></content>
-      <tags>
-        <tag>随笔</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>树和二叉树</title>
-    <url>/2020/12/10/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E6%A0%91%E5%92%8C%E4%BA%8C%E5%8F%89%E6%A0%91/</url>
-    <content><![CDATA[<h1 id="第六章-树和二叉树"><a href="#第六章-树和二叉树" class="headerlink" title="第六章 树和二叉树"></a>第六章 树和二叉树</h1><blockquote>
-<p>树的结构定义是一个递归定义，即在树的定义中又用到了树的概念。树是以层次化方式组织和存放数据的数据结构。</p>
-</blockquote>
-<p>以下定义为主观臆断，非标准定义：</p>
-<p>想象真正的树，枝条之间是不会相连接。数据结构中的树也同样是这种一对多的形式。树的枝条分叉点叫做<strong>结点</strong>，其中包含着数据元素及若干指向其子树的分支。结点拥有的分叉（子树）数量叫做<strong>结点的度</strong>。度为0的结点称为<strong>叶子</strong>（或终端结点），否则称为<strong>分支节点</strong>（非终端节点）。除根结点之外，分支节点也称<strong>内部节点</strong>。<strong>树的度</strong>是内部节点度的<u>最大值</u>。</p>
-<p>直接相连的两个结点，称为<strong>双亲</strong>与<strong>孩子</strong>，同一个子树下的结点们互称<strong>兄弟</strong>，两结点的双亲是兄弟，那么他俩就是<strong>堂兄弟</strong>。不直接相连，但是从A往下能到B，那么B就是A的<strong>子孙</strong>，A就是B的<strong>祖先</strong>。</p>
-<p><strong>层次</strong>：根为第一层，根的孩子为第二层，孩子的孩子为第三层… …树的最大层次就是树的<strong>深度</strong>。</p>
-<p><strong>森林</strong>：好多树的集合。</p>
-<h2 id="6-2-二叉树"><a href="#6-2-二叉树" class="headerlink" title="6.2 二叉树"></a>6.2 二叉树</h2><h3 id="6-2-1-二叉树的定义"><a href="#6-2-1-二叉树的定义" class="headerlink" title="6.2.1 二叉树的定义"></a>6.2.1 二叉树的定义</h3><p>顾名思义，每个结点最多只有左右两个结点。</p>
-<h3 id="6-2-2-二叉树的性质"><a href="#6-2-2-二叉树的性质" class="headerlink" title="6.2.2 二叉树的性质"></a>6.2.2 二叉树的性质</h3><p>性质1：在二叉树第i层上至多有2<sup>i-1</sup>个结点。</p>
-<p>性质2：深度为k的二叉树至多有2<sup>k</sup>-1个结点。</p>
-<p>性质3：对任何一棵二叉树t，如果其终端结点数为n<sub>0</sub>，度为2的节点数为n<sub>2</sub>，则n<sub>0</sub>=n<sub>2</sub>+1。</p>
-<p>满二叉树：每一层的结点都满满的。</p>
-<p>性质4：具有n个结点的完全二叉树的深度为└log<sub>2</sub>n┘+1</p>
-<h3 id="二叉树的二叉链表存储表示"><a href="#二叉树的二叉链表存储表示" class="headerlink" title="二叉树的二叉链表存储表示"></a>二叉树的二叉链表存储表示</h3><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">BiTNode</span> &#123;</span></span><br><span class="line">    TElemType data;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">BiTNode</span> *<span class="title">lchild</span>, *<span class="title">rchild</span>;</span></span><br><span class="line">&#125;BiTNode, *BiTree;</span><br></pre></td></tr></table></figure>
-
-<p><strong>先（根）序的遍历算法</strong>（待补充）</p>
-<ol>
-<li><p>访问根结点；</p>
-</li>
-<li><p>先序遍历左子树；</p>
-</li>
-<li><p>先序遍历右子树。</p>
-</li>
-</ol>
-<p><strong>中（根）序的遍历算法</strong>（待补充）</p>
-<ol>
-<li><p>中序遍历左子树；</p>
-</li>
-<li><p>访问根结点；</p>
-</li>
-<li><p>中序遍历右子树。</p>
-</li>
-</ol>
-<p><strong>后（根）序的遍历算法</strong>（待补充）</p>
-<ol>
-<li>后序遍历左子树；</li>
-<li>后序遍历右子树；</li>
-<li>访问根结点。</li>
-</ol>
-<h3 id="6-3-2-线索二叉树"><a href="#6-3-2-线索二叉树" class="headerlink" title="6.3.2 线索二叉树"></a>6.3.2 线索二叉树</h3><div style="display: flex;text-align:center;width:70%">
-    <div style="border: 2px solid #000;flex-grow:1;">lchild</div>
-    <div style="border: 2px solid #000;flex-grow:1;">LTag</div>
-    <div style="border: 2px solid #000;flex-grow:1;">data</div>
-    <div style="border: 2px solid #000;flex-grow:1;">RTag</div>
-    <div style="border: 2px solid #000;flex-grow:1;">rchild</div>
-</div>
-
-<p>若结点有左子树，则其lchild域指示其左孩子（标志域LTag=0），否则令lchild域指示其前驱（标志域LTag=1）；若结点有右子树，则其rchild域指示其右孩子（标志域RTag=0），否则令rchild域指示其后继（标志域RTag=1）。指向结点前驱和后驱的指针叫做<strong>线索</strong>。加上线索的二叉树叫做<strong>线索二叉树</strong>。对二叉树进行遍历的时候将其变为线索二叉树的过程叫做<strong>线索化</strong></p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">enum</span> &#123;</span> Link, Thread &#125; PointerThr;  </span><br><span class="line"><span class="comment">// Link==0:指针，Thread==1:线索</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">BiThrNode</span> &#123;</span></span><br><span class="line">   TElemType data;</span><br><span class="line">   <span class="class"><span class="keyword">struct</span> <span class="title">BiThrNode</span> *<span class="title">lchild</span>, *<span class="title">rchild</span>;</span> <span class="comment">// 左右指针</span></span><br><span class="line">   PointerThr LTag, RTag; <span class="comment">// 左右标志</span></span><br><span class="line">&#125; BiThrNode, *BiThrTree;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-]]></content>
-      <tags>
-        <tag>数据结构笔记</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>JavaScript笔记</title>
-    <url>/2020/12/24/JavaScript%E7%AC%94%E8%AE%B0/</url>
-    <content><![CDATA[<h1 id="笔记"><a href="#笔记" class="headerlink" title="笔记"></a>笔记</h1><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> </span></span><br></pre></td></tr></table></figure>
-
-
-
-
-
-]]></content>
-      <tags>
-        <tag>JavaScript笔记</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>随便记一记</title>
-    <url>/2020/12/23/%E9%9A%8F%E4%BE%BF%E8%AE%B0%E4%B8%80%E8%AE%B0/</url>
-    <content><![CDATA[<h1 id="《基于C语言自制编程语言》随便记"><a href="#《基于C语言自制编程语言》随便记" class="headerlink" title="《基于C语言自制编程语言》随便记"></a>《基于C语言自制编程语言》随便记</h1><blockquote>
-<p>图书馆发现这么一本书，就当作消遣看一看吧</p>
-</blockquote>
-<p>理论为了严谨，总是把简单的东西复杂定义。通过实践，你才能发现，原来那些东西都很简单，纸上得来终觉浅，绝知此事要躬行。</p>
-]]></content>
-      <tags>
-        <tag>摘抄</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>数据结构-绪论</title>
     <url>/2020/12/27/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E7%BB%AA%E8%AE%BA/</url>
     <content><![CDATA[<blockquote>
@@ -973,6 +912,67 @@
 ]]></content>
       <tags>
         <tag>数据结构笔记</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>读《月亮与六便士》感</title>
+    <url>/2020/12/01/%E8%AF%BB%E3%80%8A%E6%9C%88%E4%BA%AE%E4%B8%8E%E5%85%AD%E4%BE%BF%E5%A3%AB%E3%80%8B%E6%84%9F/</url>
+    <content><![CDATA[<h1 id="读毛姆《月亮与六便士》感（草稿）"><a href="#读毛姆《月亮与六便士》感（草稿）" class="headerlink" title="读毛姆《月亮与六便士》感（草稿）"></a>读毛姆《月亮与六便士》感（草稿）</h1><p>我相信很多人都听过这本书，和那句话——“满地都是六便士，他却抬头看见了月亮”</p>
+<p>这句话很浪漫，想必这本小说也是不顾一切追梦的故事吧。实际上，严格意义上，或者说我看过之后感觉，并不是。</p>
+<p>它似乎讲的是，一个接纳了内心欲望魔鬼的一个人的悲惨一生——世俗上的，当然他活着的时候是悲惨的一生，死后马上被称为传奇与辉煌的一生。这个“欲望魔鬼”体现在艺术表达。</p>
+<p>一个人抛弃了一切，去追求艺术。</p>
+<p>人们都说是和梦想有关，我看完觉得不是什么梦想，</p>
+<blockquote>
+<p>我告诉你，我必须画画。我身不由己。一个人掉进水里，他游泳游得好不好没关系，反正他得挣扎，不然就得淹死。——斯特里克兰</p>
+</blockquote>
+<blockquote>
+<p>我感觉在他的体内，仿佛有一股猛烈的力量在挣扎；这股力量强大无比，压倒一切，好像违背他自己的意志，将他紧紧攫住。我无法理解。他似乎真的被魔鬼附体了，很可能，突然就会被撕得粉碎。——我</p>
+</blockquote>
+<p>有很多人，都是以“如果你迷茫于理想与现实，那可以看一看”为推荐理由。我不知道他们都没读过这本书。我觉得，大部分的普通人，首先会去不进去这本小说。然后，即便读完，对于理想什么的也没什么答案。你别想在书中找到关于理想与现实的答案。或者说，那个答案不是给普通人，或者说不是给正常人的。</p>
+<p>书中有一个人物，一个犹太人，叫亚伯拉罕。</p>
+<blockquote>
+<p>他是个犹太人，叫做亚伯拉罕，当时是个头发金黄、特别壮实的年轻人，生性腼腆，也非常谦虚，但他才华出众。他考取了医院的奖学金，读书五年期间拿遍了所有能拿的奖励。他同时被委任为内科医院和外科医生。他的出色是公认的。最后他被选进了医院的管理层，前途一片光明。… …在履新之前，他想去度假，由于手头并不宽裕，他以外科医生的身份登上了一艘开往地中海东岸的不定期货架。… …几个星期后，医院管理层收到他的辞呈，他放弃了那个令人觊觎的职位。… …他消失了。</p>
+</blockquote>
+<p>他为什么会做出这样的举动呢？后来“我”见到了他。</p>
+<blockquote>
+<p>他和我说起了他的故事。当初启程到地中海度假时，他其实是准备回到伦敦，去圣托马斯医院履任的。那天早晨，货轮在亚历山大港靠岸，他在甲板上观察这座城市，在阳光下白花花的，还有码头上的人群，他看到了穿着褴褛长袍的本地人，苏丹来的黑人，吵吵嚷嚷、成群结队的希腊人和意大利人，戴着红色菲斯帽的、神情肃穆的土耳其人，灿烂的阳光和蓝色的天穹，他产生了某种感触。他无法描述这种感受。就像是一声惊雷，他说，但随即又推翻了这个说法，改口说是一种天启。似乎有什么东西触动了他的心灵，于是他突然觉得非常快乐，有一种无拘无束的美妙感受。他觉得他回到家乡了，不用一分钟就决定他将会在亚历山大港度过他的余生。… …我不在乎任何人的看法。其实做出决定的不是我，而是我内心某种更为强大的力量。</p>
+</blockquote>
+<p>我认为这个人，或许才是一个正常人，如何去抉择理想与现实的案例。但是小说并没有过多的讲述亚伯拉罕的故事。以上的摘抄就是关于他的大部分笔墨。</p>
+<p>因为亚伯拉罕做的决定让常人无法理解，但是他做的事，起码是人做的事，哦对了，辞职之后他还是一个医生。而斯特里克兰，很难去说他是个世俗意义上的人，更像是披着人皮的艺术肿瘤，在他身体内潜伏多年，然后爆发。爆发后，便不再做人，抛去了所有的人伦道德世俗价值，甚至抛弃了自己。</p>
+<blockquote>
+<p>他的身体瘦得像干尸。他穿着的是五年前我见到他时那套衣服，既破烂又邋遢，线头掉了不少，松松垮垮地挂在他身上，仿佛原本是为别人度身定做的。我注意到他的双手，脏兮兮的，指甲很长；那双手瘦得皮包骨，青筋全露出来。</p>
+</blockquote>
+<p>这只是我摘抄的一点点，文中有很多类似的描述。</p>
+<p>我感觉不到这是理想与现实的碰撞，更像是失去人性的人，只保留了表达艺术的原始欲望的人的故事。</p>
+<p>如果你问我，我是否推荐去读《月亮与六便士》，这时我要反问你，你为了什么去看，如果你为了我之前所说的“理想与现实”。那我完全不推荐。但是毛姆对人性的刻画很是细腻与有趣的，有些话写得一针见血。</p>
+<blockquote>
+<p>我从来没想到他骂人的本领是如此地高明，总是能够戳中这个郁闷的荷兰人最敏感的痛处。斯特里克兰挥舞的不是讽刺的细剑，而是谩骂的大棒。这次突如其来的袭击让斯特罗夫措手不及，完全失去了抵抗能力。他就像慌不择路、到处乱跑的绵羊。他惊骇莫名，不知所以。最后他的泪水滚滚而下。这件事情最糟糕的地方在于，尽管你很讨厌斯特里克兰，当时的场面也很可怕，但你就是忍不住想笑。有些人很倒霉，他们哪怕在真情流露的时候也显得滑稽可笑，德克·斯特罗夫正好就是这种人。</p>
+</blockquote>
+<blockquote>
+<p>画室里的寂静似乎已经化为实体，让人觉得简直伸手就能摸到。</p>
+</blockquote>
+<p>有些话可以细细品味</p>
+<blockquote>
+<p>世道艰难，人心险恶。我们不知道自己何以会来到人世，也不知道死后将会去往何方。我们必须保持非常卑微的心态。我们必须懂得安详的美好。我们必须过着安分守己的日子，以免引起命运女神的注意。让我们去寻求那些朴实无知的人的爱情吧。他们的愚昧比我们的学识更为可贵。让我们学会沉默，偏安于仅可容身的小角落，像他们那样驯服而温和吧。这才是生活的智慧。</p>
+</blockquote>
+<blockquote>
+<p>人们满不在乎地谈论美，由于他们说话并不经过深思熟虑，所以美这个词被用得太过泛滥，已经失去了原有的力量；许许多多微不足道的东西都冠以它的名义，于是它所代表的东西变得不再崇高。人们用美来形容裙子、小狗和布道，当遇到真正的美时，他们却又认不出来。人们试图用这种本末倒置来装饰他们毫无价值的思想，结果反而钝化了他们对美的感受力。就像那种假装一直拥有他只能偶尔感受到的通灵力量的江湖骗子，人们丧失了这种遭到他们滥用的审美能力</p>
+</blockquote>
+]]></content>
+      <tags>
+        <tag>读后感</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>随便记一记</title>
+    <url>/2020/12/23/%E9%9A%8F%E4%BE%BF%E8%AE%B0%E4%B8%80%E8%AE%B0/</url>
+    <content><![CDATA[<h1 id="《基于C语言自制编程语言》随便记"><a href="#《基于C语言自制编程语言》随便记" class="headerlink" title="《基于C语言自制编程语言》随便记"></a>《基于C语言自制编程语言》随便记</h1><blockquote>
+<p>图书馆发现这么一本书，就当作消遣看一看吧</p>
+</blockquote>
+<p>理论为了严谨，总是把简单的东西复杂定义。通过实践，你才能发现，原来那些东西都很简单，纸上得来终觉浅，绝知此事要躬行。</p>
+]]></content>
+      <tags>
+        <tag>摘抄</tag>
       </tags>
   </entry>
 </search>

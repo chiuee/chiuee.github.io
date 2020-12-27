@@ -1,14 +1,14 @@
 :root {
   --background-color: #fff;
   --second-background-color: #f7f7f7;
-  --primary-color: #06c;
+  --primary-color: #f30;
   --first-text-color: #484848;
   --second-text-color: #4c4c4c;
   --third-text-color: #858585;
   --fourth-text-color: #ededed;
   --default-text-color: #505050;
   --border-color: #b3b3b3;
-  --selection-color: #0075eb;
+  --selection-color: #ff471a;
   --shadow-color: rgba(0,0,0,0.2);
   --shadow-hover-color: rgba(0,0,0,0.28);
   --scroll-bar-color: #737373;
@@ -20,14 +20,14 @@
   :root {
     --background-color: #363636;
     --second-background-color: #313131;
-    --primary-color: #06c;
+    --primary-color: #f30;
     --first-text-color: #cecbd4;
     --second-text-color: #c7c4ce;
     --third-text-color: #928ca0;
     --fourth-text-color: #242229;
     --default-text-color: #b9b5c2;
     --border-color: #5e5e5e;
-    --selection-color: #0075eb;
+    --selection-color: #ff471a;
     --shadow-color: rgba(128,128,128,0.2);
     --shadow-hover-color: rgba(128,128,128,0.28);
     --scroll-bar-color: #262626;
@@ -39,14 +39,14 @@
 .light-mode {
   --background-color: #fff;
   --second-background-color: #f7f7f7;
-  --primary-color: #06c;
+  --primary-color: #f30;
   --first-text-color: #484848;
   --second-text-color: #4c4c4c;
   --third-text-color: #858585;
   --fourth-text-color: #ededed;
   --default-text-color: #505050;
   --border-color: #b3b3b3;
-  --selection-color: #0075eb;
+  --selection-color: #ff471a;
   --shadow-color: rgba(0,0,0,0.2);
   --shadow-hover-color: rgba(0,0,0,0.28);
   --scroll-bar-color: #737373;
@@ -57,14 +57,14 @@
 .dark-mode {
   --background-color: #363636;
   --second-background-color: #313131;
-  --primary-color: #06c;
+  --primary-color: #f30;
   --first-text-color: #cecbd4;
   --second-text-color: #c7c4ce;
   --third-text-color: #928ca0;
   --fourth-text-color: #242229;
   --default-text-color: #b9b5c2;
   --border-color: #5e5e5e;
-  --selection-color: #0075eb;
+  --selection-color: #ff471a;
   --shadow-color: rgba(128,128,128,0.2);
   --shadow-hover-color: rgba(128,128,128,0.28);
   --scroll-bar-color: #262626;
