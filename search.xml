@@ -1,0 +1,976 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>数据结构-图</title>
+    <url>/2020/11/30/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E5%9B%BE/</url>
+    <content><![CDATA[<h1 id="第七章-图"><a href="#第七章-图" class="headerlink" title="第七章 图"></a>第七章 图</h1><img src="D:\personal\study\notes\data structure C\数据结构-图img\图.png" style="zoom:50%;" />
+
+<h2 id="7-1-图的定义与术语"><a href="#7-1-图的定义与术语" class="headerlink" title="7.1 图的定义与术语"></a>7.1 图的定义与术语</h2><p>图是一种“多对多”的关系。用点代表事物，用两点的连线代表事物之间的关系。</p>
+<h3 id="图是由顶点与边组成的-可以没有边，但至少有一个点-："><a href="#图是由顶点与边组成的-可以没有边，但至少有一个点-：" class="headerlink" title="图是由顶点与边组成的(可以没有边，但至少有一个点)："></a>图是由顶点与边组成的(可以没有边，但至少有一个点)：</h3><ul>
+<li><p>通常使用<code>V</code>表示顶点的用穷非空集合</p>
+</li>
+<li><p>用<code>VR</code>表示顶点之间的关系的集合</p>
+</li>
+</ul>
+<p>若&lt;v, w&gt;∈VR，则&lt;v, w&gt;表示从v到w的一条<strong>弧</strong>，用箭头表示为v—&gt;w。v为<strong>弧尾</strong>（起始点），w为<strong>弧头</strong>（终端点）。</p>
+<h3 id="图可以分为有向图与无向图"><a href="#图可以分为有向图与无向图" class="headerlink" title="图可以分为有向图与无向图"></a>图可以分为有向图与无向图</h3><ul>
+<li>(v, w) 表示v与w之间有一条<strong>边</strong>，就是没箭头，v与w互通</li>
+<li>&lt;v, w&gt; 表示v到w之间有一条<strong>弧</strong>，就是右箭头，始于v终于w</li>
+</ul>
+<h3 id="图可以分为有权图和无权图"><a href="#图可以分为有权图和无权图" class="headerlink" title="图可以分为有权图和无权图"></a>图可以分为有权图和无权图</h3><p>有时弧或边有与其相关的数，这种与图的边或弧相关的数叫<strong>弧</strong>。这些权可以表示为一个顶点到另一个顶点的距离或者消耗。带权的图通常称为<strong>网</strong>。</p>
+<ul>
+<li>有权图：每条边具有一定的权重，通常是一个数</li>
+<li>无权图：每条边没有权重</li>
+</ul>
+<h3 id="有一种图叫做完全图"><a href="#有一种图叫做完全图" class="headerlink" title="有一种图叫做完全图"></a>有一种图叫做完全图</h3><p>我们用n代表图中的顶点数，用e表示边或弧的数目。</p>
+<ul>
+<li>满足 <code>e = n(n-1)/2</code> 的无向图称为<strong>完全图</strong></li>
+<li>满足<code>e = n(n-1)</code>的有向图称为<strong>有向完全图</strong></li>
+</ul>
+<h3 id="图可以分为稀疏图与稠密图"><a href="#图可以分为稀疏图与稠密图" class="headerlink" title="图可以分为稀疏图与稠密图"></a>图可以分为稀疏图与稠密图</h3><p>满足<code>e &lt; nlogn</code>的图称为稀疏图，反则称为稠密图。</p>
+<h3 id="图中有子图的概念"><a href="#图中有子图的概念" class="headerlink" title="图中有子图的概念"></a>图中有子图的概念</h3><p>互相没有联系的图组成一个图，在组成的图中称为<strong>子图</strong></p>
+<h3 id="图的顶点有度的概念"><a href="#图的顶点有度的概念" class="headerlink" title="图的顶点有度的概念"></a>图的顶点有度的概念</h3><ul>
+<li>无向图<ul>
+<li>度：与该顶点链接点的个数</li>
+</ul>
+</li>
+<li>有向图<ul>
+<li>入度：该顶点作为弧头的数目，也就是指向该顶点的弧的数量</li>
+<li>出度：该顶点作为弧尾的数目，也就是指向其他顶点的弧的数量</li>
+</ul>
+</li>
+</ul>
+<h3 id="图可以分为连通图与非连通图"><a href="#图可以分为连通图与非连通图" class="headerlink" title="图可以分为连通图与非连通图"></a>图可以分为连通图与非连通图</h3><p>如果从顶点A到顶点B有路径，则称A与B是<strong>连通</strong>的</p>
+<p>所有顶点可以直接或者间接产生联系的图，称为<strong>连通图</strong>。</p>
+<h2 id="7-2-图的储存结构"><a href="#7-2-图的储存结构" class="headerlink" title="7.2 图的储存结构"></a>7.2 图的储存结构</h2><p>图的结构杂乱，任意两个顶点都有可能产生联系，所以不能使用存储区中的物理位置来表示元素之间的关系。但是可以借助数组的数据类型来表示元素之间的关系。</p>
+<p>另外，使用多重链表表示图也是自然而然的事情。即，由一个数据域与多个指针域组成的节点来表示。但是每一个节点的度并不确定，所以如果统一定义度会浪费空间，而如果按照实际情况来分配，操作又很麻烦。</p>
+<h3 id="7-2-1-数组表示法（邻接矩阵）"><a href="#7-2-1-数组表示法（邻接矩阵）" class="headerlink" title="7.2.1 数组表示法（邻接矩阵）"></a>7.2.1 数组表示法（邻接矩阵）</h3><blockquote>
+<p>用数组分别存储数据元素（顶点）的信息和数据元素之间的关系（边或弧）的信息。</p>
+</blockquote>
+<h4 id="图的数组（邻接矩阵）存储表示"><a href="#图的数组（邻接矩阵）存储表示" class="headerlink" title="图的数组（邻接矩阵）存储表示"></a>图的数组（邻接矩阵）存储表示</h4><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#difine INFINITY</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>n个顶点的图需要n×n大小的矩阵</li>
+<li>在无权图里，矩阵坐标中的每个位置为1表示两点有边，0表示无边。</li>
+<li>在有权图里，矩阵坐标中的每个位置代表权重，∞代表不相连</li>
+<li>在无向图中，邻接矩阵关于对角线相等</li>
+</ul>
+<img src="D:\personal\study\notes\data structure C\数据结构-图img\邻接矩阵1.png" alt="邻接矩阵1" style="zoom:50%;" />
+
+<img src="D:\personal\study\notes\data structure C\数据结构-图img\邻接矩阵2.png" alt="邻接矩阵2" style="zoom: 67%;" />
+
+<p>这里有一个问题，无向图的邻接矩阵是对称的，那么意味着有一半的数据是重复的，会占用资源，如何使资源不被浪费，这就成了一个需要考虑的问题。</p>
+<p>答案就是，真的只存一半的数据。砍掉一半，后就不能是二位数组了，那就只能是一维数组，砍掉右上角的三角形后，左下角的三角形中的元素按照从上到下，从左到右的排列方式。{G<del>00</del>, G<del>10</del>, G<del>11</del>, G<del>20</del>, … G<del>n-10</del>, … G<del>n-1n-1</del>}</p>
+<p>之前想要查看v<del>1</del>与v<del>2</del>的关系只要查看<code>arr[1][2]</code> 即可，而现在变成一维数组之后就比较难找。</p>
+<img src="D:\personal\study\notes\data structure C\数据结构-图img\邻接矩阵节省空间.png" style="zoom: 80%;" />
+
+<p>但是因为排列是有规律的，所以，我们只要找到一个公式即可。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;&#x2F; 二维G[i][j]在一维中对应的下标</span><br><span class="line">( i*(i+1)&#x2F;2 + j )</span><br></pre></td></tr></table></figure>
+
+<h4 id="邻接矩阵优点"><a href="#邻接矩阵优点" class="headerlink" title="邻接矩阵优点"></a>邻接矩阵优点</h4><ol>
+<li>直观</li>
+<li>方便检查一对顶点的关系</li>
+<li>方便找到任一顶点的所有“链接点”</li>
+<li>方便计算任一顶点的“度”<ol>
+<li>对于无向图，看元素所在行（列）的非零元素的个数</li>
+<li>对于有向图，对应行为“出度”，对应列为“入度”（有向图的邻接矩阵是行指向列，所以行是“出度”列是“入度”）</li>
+</ol>
+</li>
+</ol>
+<h4 id="邻接矩阵的缺点"><a href="#邻接矩阵的缺点" class="headerlink" title="邻接矩阵的缺点"></a>邻接矩阵的缺点</h4><ol>
+<li>稠密图（或完全图）还好，但如果是稀疏图，比如只有一条边，很多很多顶点，那就太浪费空间了</li>
+<li>如上，还浪费时间</li>
+</ol>
+<h3 id="7-2-2-邻接表"><a href="#7-2-2-邻接表" class="headerlink" title="7.2.2 邻接表"></a>7.2.2 邻接表</h3><p>![](D:\personal\study\notes\data structure C\数据结构-图img\邻接表演示图.png)</p>
+<h2 id="7-3-图的遍历"><a href="#7-3-图的遍历" class="headerlink" title="7.3 图的遍历"></a>7.3 图的遍历</h2><h3 id="7-3-1-深度优先搜索"><a href="#7-3-1-深度优先搜索" class="headerlink" title="7.3.1 深度优先搜索"></a>7.3.1 深度优先搜索</h3><p>假设初始状态是图中所有顶点未曾被访问，则深度优先搜索可从图中的某个顶点v出发，访问此顶点，然后依次从v的未被访问的邻接点除法深度优先遍历图，直至图中所有和v有路径的顶点都被访问到；若此时图中尚有未被访问的顶点，则重复上述操作，直到图中所有顶点均被访问。</p>
+<p>说人话，比方说你走进一个迷宫，每遇到一个路口就选一条路，直到走到死胡同，这时原路返回到上一个路口，选择另一条路继续走，如果足够倒霉，就会把所有的路和路口都走一遍。但是这也不够严谨，需要把这个迷宫魔改一下，让出口和入口是同一个地方，当你再回到入口时，这就相当于<u><strong>深度优先遍历</strong></u>。</p>
+<p>当然，你会问，走着走着忘记哪条路走过哪条路没走过怎么办？有办法，在走过的路口做<strong>标记</strong>。程序也是这样，你可以定义一个数组，专门用来存放标记，初始值为true，一旦被访问过就被标记为false。</p>
+<h3 id="7-3-2-广度优先搜索"><a href="#7-3-2-广度优先搜索" class="headerlink" title="7.3.2 广度优先搜索"></a>7.3.2 广度优先搜索</h3><p>广度优先搜索，就好像剥洋葱，一层一层剥开。</p>
+<p>从一个顶点开始，一次访问他的邻接点，然后按照次序，再依次访问邻接点的邻接点，直到全部访问完为止。注意是<strong>依次</strong>。</p>
+<h2 id="7-4-图的连通性问题"><a href="#7-4-图的连通性问题" class="headerlink" title="7.4 图的连通性问题"></a>7.4 图的连通性问题</h2><h3 id="7-4-1-无向图的连通分量和生成树"><a href="#7-4-1-无向图的连通分量和生成树" class="headerlink" title="7.4.1 无向图的连通分量和生成树"></a>7.4.1 无向图的连通分量和生成树</h3><ol>
+<li>连通分量：目前有点概念不清，先不写了</li>
+<li>生成树：<ol>
+<li>深度优先遍历的叫<strong>深度优先生成树</strong></li>
+<li>广度优先遍历的叫<strong>广度优先生成树</strong></li>
+</ol>
+</li>
+<li>生成森林：若干生成树构成的非连通子图</li>
+</ol>
+<h3 id="7-4-2-有向图的强连通分量（有待补充）"><a href="#7-4-2-有向图的强连通分量（有待补充）" class="headerlink" title="7.4.2 有向图的强连通分量（有待补充）"></a>7.4.2 有向图的强连通分量（有待补充）</h3><h3 id="7-4-3-最小生成树"><a href="#7-4-3-最小生成树" class="headerlink" title="7.4.3 最小生成树"></a>7.4.3 最小生成树</h3><blockquote>
+<p>技术都是用来解决实际问题的。</p>
+</blockquote>
+<p>假设要在n个城市之间建立通信联络网，则连通n个城市只需要n-1条线路。这是自然会考虑这样的问题，如何在最节省经费的情况下，将这几个城市连通？</p>
+<p>这个问题就是构造连通网的<strong>最小代价生成树</strong>（简称为<strong>最小生成树</strong>）的问题，一棵生成树的代价就是树上各边代价之和。</p>
+<h4 id="普里姆算法（适用于稠密图）"><a href="#普里姆算法（适用于稠密图）" class="headerlink" title="普里姆算法（适用于稠密图）"></a>普里姆算法（适用于稠密图）</h4><p>正儿八经：</p>
+<ol>
+<li>假设N={V, {E}}是连通图，TE是N上最小生成树的集合。算法从U={u<del>0</del>}(u<del>0</del>∈V)，TE={ }开始，重复执行以下操作：</li>
+<li>在所有u∈U，v∈V-U的边(u, v)∈E 中找到一条代价最小的边(u<del>0</del>, v<del>0</del>)并入集合TE，同时v<del>0</del>并入U，直至U=V为止。此时TE中必有n-1条边，则T={V, {TE}}为N的最小生成树。</li>
+</ol>
+<p>非官方语言：</p>
+<ol>
+<li>按顶点搜索，先找一个点v，然后查询比较依附于其的各边的权值，取最小权值的边相连的顶点v<del>新</del>。</li>
+<li>将这个新顶点v<del>新</del>与之前的旧顶点v囊括在一起，看作一个整体，然后以这个整体重复步骤1，直到所有顶点都被遍历过为止。</li>
+</ol>
+<p>算法实现：</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">    VertexType adjvex; <span class="comment">// 集合U中的顶点</span></span><br><span class="line">    VRType lowcost; <span class="comment">// 边的权值</span></span><br><span class="line">&#125; closedge[MAX_VERTEX_NUM];</span><br><span class="line"></span><br><span class="line"><span class="comment">// 用普利姆算法从顶点u除法构造网G的最小生成树</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">MiniSpanTree_PRIM</span> <span class="params">(MGraph G, VertexType u)</span> </span>&#123;</span><br><span class="line">    k = LocateVex(G, u); </span><br><span class="line">    <span class="comment">// LocateVex(G, u):若G中存在顶点u，则返回该顶点再图中的位置</span></span><br><span class="line">	<span class="keyword">for</span>(j=<span class="number">0</span>; j&lt;G.vexnum; ++j) </span><br><span class="line">    <span class="comment">// 辅助数组初始化，G.vexnum:顶点数</span></span><br><span class="line">        <span class="keyword">if</span> (j!=k) closedge[j] = &#123;u, G.arcs[k][j].adj&#125; </span><br><span class="line">    	<span class="comment">// 录入顶点与其(众多)边信息&#123;adjvex, lowcost&#125;</span></span><br><span class="line">    closedge[k].lowcost = <span class="number">0</span>; </span><br><span class="line">    <span class="comment">// 初始，U=&#123;u&#125; 把边的权值变为0，就相当于把这几个顶点归为一类</span></span><br><span class="line">    <span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;G.vexnum; ++i) &#123;</span><br><span class="line">        k = minimum(closedge);</span><br><span class="line">        <span class="comment">// 求出加入生成树的下一个顶点k</span></span><br><span class="line">        <span class="built_in">printf</span>(closedge[k].adjvex, G.vex[k]);</span><br><span class="line">        <span class="comment">// 输入生成树上一条边</span></span><br><span class="line">        closedge[k].lowcost = <span class="number">0</span>;</span><br><span class="line">        <span class="comment">// 第k个顶点并入集合U</span></span><br><span class="line">        <span class="keyword">for</span> (j=<span class="number">0</span>; j&lt;G.vexnum; ++j)</span><br><span class="line">            <span class="comment">// 新顶点并入U后重新选择最小边</span></span><br><span class="line">            <span class="keyword">if</span>(G.arcs[k][j].adj&lt;closedge[j].lowcost)</span><br><span class="line">                closedge[j]=&#123;G.vexs[k], G.arcs[k][j].adj&#125;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="克鲁斯卡尔算法（适用于稀疏图）"><a href="#克鲁斯卡尔算法（适用于稀疏图）" class="headerlink" title="克鲁斯卡尔算法（适用于稀疏图）"></a>克鲁斯卡尔算法（适用于稀疏图）</h4><ol>
+<li>按边进行搜索，把权值最小的边标记出来</li>
+<li>一直执行步骤1，但是不能出现回路的情况</li>
+</ol>
+<h3 id="7-4-4-关节点和重连通分量"><a href="#7-4-4-关节点和重连通分量" class="headerlink" title="7.4.4 关节点和重连通分量"></a>7.4.4 关节点和重连通分量</h3><p>若在删去顶点v以及和v相关联的各边之后，将图的一个连通分量分割成两个或两个以上的连通分量，则称顶点v为该图的<strong>关节点</strong>。</p>
+<p>一个没有关节点的连通图称为<strong>重连通图</strong>。</p>
+<p>若连通图上至少删除k个顶点才能破坏图的连通性，则称此图的<strong>连通度</strong>为k。</p>
+<p>利用深度优先搜索可求得图的关键点。</p>
+<ol>
+<li>若生成树的根有两颗或两颗以上的子树，则此根必为关节点。</li>
+<li>若生成树中某个非叶子顶点v，其某棵子树的根和子树中的其他节点均没有指向v的祖先的回边。</li>
+</ol>
+<h3 id="7-5-1-拓扑排序"><a href="#7-5-1-拓扑排序" class="headerlink" title="7.5.1 拓扑排序"></a>7.5.1 拓扑排序</h3><blockquote>
+<p>结合《数据结构》严蔚敏版180页学习</p>
+</blockquote>
+<p>什么是<strong>拓扑排序</strong>？由某个集合上的一个偏序得到该集合上的一个全序，这个操作称为拓扑排序。</p>
+<p>那书本上的例子来说：</p>
+<p>软件工程专业有很多课程需要学习，比如在学数据结构前，要求必须学习离散数学和程序设计基础，那么离散和程序设计就是数据结构的先决条件。当然，不可能只学这几门课，课程环环相扣，很多课程都需要基础才能学。然后我们要求，一次只能学一门，那么这时候就需要先排个序了。</p>
+<p>我们用顶点表示活动（在上边所举例子中表示课程），弧表示活动间的优先关系这样的有向图，简称<strong>AOV-网</strong>。</p>
+<p>在AOV-网中<strong>不能出现环</strong>，因为如果出现环，就意味着有以自己作为先决条件，这合理吗，这不合理。</p>
+<p>拓扑排序的过程：</p>
+<ol>
+<li>在有向图中选一个没有前驱的顶点且输出</li>
+<li>从图中删去该顶点和所有以它为尾的弧</li>
+</ol>
+<p>重复上述步骤，直到图中不存在有前驱的顶点。</p>
+<h3 id="7-5-2-关键路径"><a href="#7-5-2-关键路径" class="headerlink" title="7.5.2 关键路径"></a>7.5.2 关键路径</h3><p>与AOV-网对应的是AOE-网，AOE-网是一个带权的有向无环图。</p>
+<p>一道小学题：</p>
+<p>小红想：“我感冒了，吃完药后要赶快休息。”请你帮小红想一想如何合理安排以上事情？</p>
+<table>
+<thead>
+<tr>
+<th align="center">事情</th>
+<th align="center">时间</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">倒开水</td>
+<td align="center">1分钟</td>
+</tr>
+<tr>
+<td align="center">等开水变温</td>
+<td align="center">6分钟</td>
+</tr>
+<tr>
+<td align="center">找感冒药</td>
+<td align="center">1分钟</td>
+</tr>
+<tr>
+<td align="center">量体温</td>
+<td align="center">5分钟</td>
+</tr>
+</tbody></table>
+<p>我觉得这道题很能说明AOE-网。</p>
+<p>路径长度最长叫做<strong>关键路径</strong>，也好理解，只有它执行完了，整张图才能结束。</p>
+]]></content>
+      <tags>
+        <tag>数据结构笔记</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>数据结构-查找</title>
+    <url>/2020/11/30/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E6%9F%A5%E6%89%BE/</url>
+    <content><![CDATA[<h1 id="第九章-查找"><a href="#第九章-查找" class="headerlink" title="第九章 查找"></a>第九章 <a title="《数据结构》严蔚敏 | p214" style="color: #000">查找</a></h1><blockquote>
+<p>查找表是由<strong>同一类型</strong>数据元素（或记录）构成的集合</p>
+<p>由于“集合”中的数据元素之间存在着松散的关系，因此查找表是一种应用灵便的结构。</p>
+</blockquote>
+<p>对查找表进行的操作</p>
+<ol>
+<li><u><strong>查询</strong></u>某个“特定的”数据元素是否在查找表中</li>
+<li><u><strong>检索</strong></u>某个“特定的”数据元素的各种属性</li>
+<li>在查找表中<u><strong>插入</strong></u>一个数据元素</li>
+<li>从查找表中<u><strong>删去</strong></u>某个数据元素</li>
+</ol>
+<p>一些概念：</p>
+<ol>
+<li><u><strong>关键字</strong></u>是数据元素(或记录)中某个<strong>数据项</strong>的值，用以<strong>标识</strong>(识别)一个数据元素(或记录)。</li>
+<li>若此关键字可以识别<u>唯一</u>的一个数据元素(或记录)，则称之为<u><strong>主关键字</strong></u></li>
+<li>若此关键字能识别<u>若干</u>记录，则称之为<u><strong>次关键字</strong></u></li>
+</ol>
+<p>典型的关键字类型说明可以是</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">float</span> KeyType; <span class="comment">// 实型</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">int</span> KeyType; <span class="comment">// 整型</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">char</span> *KeyType; <span class="comment">// 字符串型</span></span><br></pre></td></tr></table></figure>
+
+<p>数据元素类型定义为</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">    KeyType key; <span class="comment">// 关键字域</span></span><br><span class="line">    ... <span class="comment">// 其他域</span></span><br><span class="line">&#125;SElemType;</span><br></pre></td></tr></table></figure>
+
+<p>对两个关键字的比较约定如下的宏定义</p>
+<blockquote>
+<p><code>#define</code>可以当作简单的函数使用。</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 对数值类型关键字</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> EQ(a, b) ( (a) == (b) )</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LT(a, b) ( (a) &lt; (b) )</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LQ(a, b) ( (a) &lt;= (b) )</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 对字符串类型关键字</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> EQ(a, b) ( !strcmp( (a), (b) ) )</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LT(a, b) ( strcmp( (a), (b) ) &lt; 0 )</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LQ(a, b) ( strcmp( (a), (b) ) &lt;= 0 )</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 为什么多此一举？直接比不行吗？</span></span><br><span class="line"><span class="comment">// 我觉得啊，一是语义化，二是让判断变简单，有时候不知道用来判断的两个值是什么类型</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="9-1-静态查找表"><a href="#9-1-静态查找表" class="headerlink" title="9.1 静态查找表"></a>9.1 <a title="《数据结构》严蔚敏 | p216" style="color: #000">静态查找表</a></h2><blockquote>
+<p>仅作<strong>查询</strong>和<strong>检索</strong>操作的查找表</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">Create(&amp;ST, n); <span class="comment">// 构造一个含有n个数据元素的静态查找表ST</span></span><br><span class="line">Destroy(&amp;ST); <span class="comment">// 销毁ST</span></span><br><span class="line">Search(ST, key); <span class="comment">// 查找ST中关键字为key的数据元素的值，否则返回空</span></span><br><span class="line">Traverse(ST, Visit()); </span><br><span class="line"><span class="comment">// 对每个ST中的元素调用一起visit，一旦visit失败则操作失败</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="9-1-1-顺序表的查找"><a href="#9-1-1-顺序表的查找" class="headerlink" title="9.1.1 顺序表的查找"></a>9.1.1 <a title="《数据结构》严蔚敏 | p216" style="color: #000">顺序表的查找</a></h3><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">    ElemType * elem; </span><br><span class="line">    <span class="comment">// 数据元素储存空间基址，建表时按照实际长度分配，0号单元留空</span></span><br><span class="line">    <span class="keyword">int</span> length; <span class="comment">// 表长度</span></span><br><span class="line">&#125;SSTable;</span><br></pre></td></tr></table></figure>
+
+<p><strong>顺序查找</strong>就是，先把要查的值放在0号单元，然后从后往前一个一个比较，然后返回比较结果，如果返回的结果是0，则说明没有找到，如果非0则说明查找成功。</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 在顺序表ST中查找其关键字等于key的数据元素，返回元素在表中的位置</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Search_Seq</span><span class="params">(SSTable ST, KeyType key)</span> </span>&#123;</span><br><span class="line">    ST.elem[<span class="number">0</span>].key = key; <span class="comment">// 哨兵</span></span><br><span class="line">    <span class="comment">// 先把表的0号位置填上待查值key</span></span><br><span class="line">    <span class="keyword">for</span>(i=ST.length; !EQ(ST,elem[i].key, key); --i);</span><br><span class="line">    <span class="comment">// 然后一个一个比较</span></span><br><span class="line">    <span class="keyword">return</span> i; <span class="comment">// 如果返回0就说明没找到</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>设置哨兵可以避免像之前一样，每次比较都需要检测整个表知否查找完毕。这样一个小操作居然可以使查找时间缩小近一半。</p>
+<h4 id="性能分析"><a href="#性能分析" class="headerlink" title="性能分析"></a>性能分析</h4><p>通常以“关键字和给定值进行过比较的记录个数的平均值”来衡量查找算法。</p>
+<p>为确定记录在查找表中的位置，需和给定值进行比较的关键字个数的期望值称为查找算法在查找成功时的<strong>平均查找长度</strong>(Average Search Length)。</p>
+<div style = "border: 2px solid #000; text-align: center">
+    ASL = (n+1)/2
+</div>
+
+<p>这是查找成功的ASL，还有查找失败的情况吧。大部分实际情况下，找到的可能性都比找不到的可能性大很多，查找失败的情况可以忽略，尤其是记录数很大很大的时候。但有时候确实不能忽略，那就得计算了。</p>
+<p>当查找失败的情况不能忽略的时候，查找算法的平均长度应该是<u>查找成功时的平均查找长度</u>与<u>查找失败时的平均查找长度</u>之<strong>和</strong>。</p>
+<div style = "border: 2px solid #000; text-align: center">
+    ASL = 3/4 × (n+1)
+</div>
+
+<p>有时候，表中的元素被查询频率不同，如果我们把频率高的排到后边，那么查的时候效率就会变高。当然，我们一开始没办法直到查询频率，所以可以在每个记录里设置一个<u>访问频率域</u>，并使顺序表按频率<u>非递减有序排列</u>，让概率大的都往后边。或者也可以搞简单点，每次查完就放表尾。</p>
+<h4 id="优与缺"><a href="#优与缺" class="headerlink" title="优与缺"></a>优与缺</h4><p>优点：</p>
+<ol>
+<li>算法简单，适用面广</li>
+<li>对线性关系没有其他要求</li>
+<li>对存储结构没有要求</li>
+</ol>
+<p>缺点：</p>
+<ol>
+<li>平均查找长度较大</li>
+</ol>
+<h3 id="9-1-2-有序表的查找"><a href="#9-1-2-有序表的查找" class="headerlink" title="9.1.2 有序表的查找"></a>9.1.2<a title="《数据结构》严蔚敏 | p218" style="color: #000"> 有序表的查找</a></h3><p><strong>折半查找</strong>就是数学上的二分法，所以也叫二分查找。</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Search_Bin</span><span class="params">( SSTable ST, KeyType key )</span></span>&#123;</span><br><span class="line">    low = <span class="number">1</span>;</span><br><span class="line">    high = ST.length;</span><br><span class="line">    <span class="keyword">while</span>( low&lt;=high )&#123;</span><br><span class="line">        mid = (low+high)/<span class="number">2</span>;</span><br><span class="line">        <span class="keyword">if</span>(EQ(key, ST.elem[mid].key)) <span class="keyword">return</span> mid;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(LT(key, ST.elem[mid].key)) high = mid<span class="number">-1</span>;</span><br><span class="line">        <span class="keyword">else</span> low = mid+<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>二分查找就和数学里的二分法一个道理。</p>
+<ol>
+<li>首先让low指向第一个元素，high指向最后一个元素，mid只想中间的元素（向下取整），让待查询的key与mid指向的元素作比较。</li>
+<li>如果key小于mid就将high指向mid的前一位，然后重新让mid指向中间元素。</li>
+<li>如果key大于mid就将low指向mid的后一位，然后再重新让mid指向中间元素。</li>
+<li>如果，到最后low反而比high大，那说明没找到这个值。</li>
+</ol>
+<h4 id="性能分析-1"><a href="#性能分析-1" class="headerlink" title="性能分析"></a>性能分析</h4><p>这个查找过程可以用二叉树来描述，折半查找最多不过树的深度</p>
+<div style = "border: 2px solid #000; text-align: center">
+    ASL = log<sub>2</sub>(n + 1) - 1
+</div>
+
+<h4 id="索引顺序表"><a href="#索引顺序表" class="headerlink" title="索引顺序表"></a>索引顺序表</h4><p>关于索引查找表，索引查找表思路上，也和折半查找差不多吧。也是一个缩小区间的查找过程。</p>
+<p>索引表根据查找表的特点来构造。比如说，把固定的几个人放一组，选一个年龄最大的当组长，他的名字是组名。最后我们通过比较组长的年龄，来寻找我们要找的人的年龄。当然啊，这个比较不是很准确，但就那个意思。</p>
+<p>索引查找的平均查找长度=查找索引的平均查找长度+查找顺序表的平均查找长度</p>
+<p>若用顺序表确定所在块，则平均查找长度为(s为块数)</p>
+<div style = "border: 2px solid #000; text-align: center">
+    ASL = 1/2 * (n/s + s) + 1
+</div>
+
+<p>若用折半查找确定所在块</p>
+<div style = "border: 2px solid #000; text-align: center">
+    ASL = log<sub>2</sub>(n/s + 1) + s/2
+</div>
+
+
+
+<h2 id="9-2-动态查找表"><a href="#9-2-动态查找表" class="headerlink" title="9.2 动态查找表"></a>9.2 动态查找表</h2><p>表结构本身是在查找的过程中建立的，对于给定的key，如果有记录的关键字等于key，就返回成功，否则就插入关键字等于key的记录。</p>
+]]></content>
+      <tags>
+        <tag>数据结构笔记</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>数据结构-线性表</title>
+    <url>/2020/11/30/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E7%BA%BF%E6%80%A7%E8%A1%A8/</url>
+    <content><![CDATA[<h1 id="第2章-线性表"><a href="#第2章-线性表" class="headerlink" title="第2章 线性表"></a>第2章 线性表</h1><p>线性结构的特点：</p>
+<p>在数据元素的非空有限集合中</p>
+<ol>
+<li>存在唯一一个被称作“第一个”的数据元素</li>
+<li>存在唯一一个被称作“最后一个”的数据元素</li>
+<li>除第一个以外，所有数据元素只存在一个前驱</li>
+<li>除最后一个外，所有数据元素只存在一个后继</li>
+</ol>
+<h2 id="2-1-线性表的类型定义"><a href="#2-1-线性表的类型定义" class="headerlink" title="2.1 线性表的类型定义"></a>2.1 线性表的类型定义</h2><p><strong>线性表</strong>是最常用且最简单的一种数据结构。线性表是由n个数据元素的<strong>有限序列</strong>。</p>
+<p>数据元素可能有很多个<strong>数据项</strong>组成，这样的数据元素称为<strong>记录</strong>，有很多个记录的线性表称为<strong>文件</strong>。</p>
+<p>a<del>i</del>是第i个数据元素，称i为数据元素a在线性表中的<strong>位序</strong>。</p>
+<h2 id="2-2-线性表的顺序表示和实现"><a href="#2-2-线性表的顺序表示和实现" class="headerlink" title="2.2 线性表的顺序表示和实现"></a>2.2 线性表的顺序表示和实现</h2><p>线性表的顺序表示指的是用一组地址连续的存储单位一次存储线性表的数据元素。</p>
+<p>线性表这种机内表示称作线性表的<strong>顺序存储结构</strong>或者<strong>顺序映像</strong>。就是说表中相邻的元素，实际上也是物理意义上的相邻。</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LIST_INIT_SIZE 100 <span class="comment">// 线性表存储空间的初是分量</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LISTINCREMENT 10 <span class="comment">// 线性表存储空间的分配增量</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ERROR 0</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> OK 1</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> OVERFLOW -2</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">int</span> ElemType; <span class="comment">// 暂定为int类型</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">    ElemType *elem; <span class="comment">// 存储空间的基址</span></span><br><span class="line">    <span class="keyword">int</span> length; <span class="comment">// 当前长度</span></span><br><span class="line">    <span class="keyword">int</span> listsize; <span class="comment">// 当前分配的存储容量</span></span><br><span class="line">    			  <span class="comment">// 以sizeof(ElemType)为单位</span></span><br><span class="line">&#125;SqList; <span class="comment">// 俗称：顺序表</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">// Status不是给关键字，这是伪代码</span></span><br><span class="line"><span class="function">Status <span class="title">InitList_Sq</span><span class="params">(SqList &amp;L)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 构造一个空的线性表</span></span><br><span class="line">    L.elem=(ElemtYPE*)<span class="built_in">malloc</span>(LIST_INIT_SIZE*<span class="keyword">sizeof</span>(ElemType));</span><br><span class="line">    <span class="keyword">if</span>(!L.elem) <span class="built_in">exit</span>(OVERFLOW);</span><br><span class="line">    L.length = <span class="number">0</span>; <span class="comment">// 初始化</span></span><br><span class="line">    L.listsize = LIST_INIT_SIZE;</span><br><span class="line">    <span class="keyword">return</span> OK;</span><br><span class="line">&#125; <span class="comment">// 时间复杂度O(1)</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="2-2-1-增加数据元素"><a href="#2-2-1-增加数据元素" class="headerlink" title="2.2.1 增加数据元素"></a>2.2.1 增加数据元素</h3><p>在顺序表L的第i个元素之前插入新的元素e</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">/* 为什么是&amp;L呢 破案了，C语言里&amp;是取地址的意思，不能表示引用，可以改成SqList *L，相应的，在使用L的地方改成(*L)*/</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">insert</span><span class="params">(SqList &amp;L, <span class="keyword">int</span> i, ElemType e)</span> </span>&#123;</span><br><span class="line">	<span class="comment">// 首先判断位置是否存在，然后判断线性表够不够长，然后插入</span></span><br><span class="line">	<span class="keyword">if</span>(L.length&lt;i || i&lt;<span class="number">0</span>) <span class="keyword">return</span> ERROR; <span class="comment">//不要忘记i&lt;0</span></span><br><span class="line">	</span><br><span class="line">	<span class="comment">// 判断线性表长度</span></span><br><span class="line">	<span class="keyword">if</span>(L.length &gt;= L.listsize) &#123;</span><br><span class="line">		ElemType *newbase; <span class="comment">//定义新基址</span></span><br><span class="line">		newbase=(ElemType *)<span class="built_in">malloc</span>(L.elem,</span><br><span class="line">				(L.listsize+LISTINCREMENT)*<span class="keyword">sizeof</span>(ElemType));</span><br><span class="line">		<span class="keyword">if</span>(!newbase) <span class="built_in">exit</span>(OVERFLOW); <span class="comment">// 分配失败</span></span><br><span class="line">		L.elem = newbase;</span><br><span class="line">		L.listsize += LISTINCREMENT;</span><br><span class="line">	&#125;</span><br><span class="line">	ElemType *p = &amp;L.elem[L.length<span class="number">-1</span>]; <span class="comment">// 线性表最后一个元素地址</span></span><br><span class="line">	<span class="comment">/* 可以用数组下表表示，毕竟elem就是指针类型，这个结论其实是显而易见的，但是我确实想了好久，虽然比较蠢，但是还是记下来吧 */</span></span><br><span class="line">	ElemType *q = &amp;(L.elem[i<span class="number">-1</span>]); <span class="comment">// 待插入地址</span></span><br><span class="line">	<span class="keyword">for</span>(; p&gt;=q; p--)</span><br><span class="line">	<span class="comment">// 这里建议画图理解，为什么是&gt;=，而不是&gt;</span></span><br><span class="line">		*(p+<span class="number">1</span>) = *p; <span class="comment">// 将值赋予后继</span></span><br><span class="line">	*q = e; <span class="comment">// 插入e</span></span><br><span class="line">	++L.length;</span><br><span class="line">	<span class="keyword">return</span> OK;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>补充关于<code>realloc</code>的相关知识：</p>
+<ol>
+<li>如果当前内存段后面有需要的内存空间，则直接扩展这段内存空间，<code>realloc()</code>将返回原指针。</li>
+<li>如果当前内存段后面的<u>空闲字节不够</u>（没懂），那么就使用堆中的第一个能够满足这一要求的内存块，将目前的数据复制到新的位置，并将原来的数据块释放掉，返回新的内存块位置。</li>
+<li>如果申请失败，将返回NULL，此时，原来的指针仍然有效。</li>
+</ol>
+<p>若<strong>假定</strong>在线性表中的任何一个位置上进行插入的概率都是相等的，则<strong>移动元素的期望值</strong>为：E<sub>is</sub>=n/2</p>
+<h3 id="2-2-2-删除数据元素"><a href="#2-2-2-删除数据元素" class="headerlink" title="2.2.2 删除数据元素"></a>2.2.2 删除数据元素</h3><p>我写的</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">/* 为什么是&amp;e */</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">delete</span><span class="params">(SqList &amp;L, <span class="keyword">int</span> i, ElemType &amp;e)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(i&lt;<span class="number">1</span> || i&gt;L.length) <span class="keyword">return</span> ERROR;</span><br><span class="line">	ElemType *q = &amp;(L.elem[i<span class="number">-1</span>]);</span><br><span class="line">	e = *q;</span><br><span class="line">	<span class="keyword">for</span>(; q&lt;=&amp;(L.elem[L.length<span class="number">-1</span>]); q--)</span><br><span class="line">		*q = *(q+<span class="number">1</span>);</span><br><span class="line">	--L.length;</span><br><span class="line">	<span class="keyword">return</span> OK;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>书本上的</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">delete</span><span class="params">(SqList &amp;L, <span class="keyword">int</span> i, ElemType &amp;e)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(i&lt;<span class="number">1</span> || i&gt;L.length) <span class="keyword">return</span> ERROR;</span><br><span class="line">	ElemType *p = &amp;(L.elem[i<span class="number">-1</span>]);</span><br><span class="line">	e = *p;</span><br><span class="line">	q = L.elem + L.length<span class="number">-1</span>;</span><br><span class="line">	<span class="keyword">for</span>(++p; p&lt;=q; ++p) *(p<span class="number">-1</span>) = *p;</span><br><span class="line">	--L.length;</span><br><span class="line">	<span class="keyword">return</span> OK;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>不太会判断那一个好，我觉得我的简洁哈哈哈。</p>
+<p>若<strong>假定</strong>在线性表中的任何一个位置上进行删除的概率都是相等的，则<strong>移动元素的期望值</strong>为：E=(n-1)/2</p>
+<h3 id="线性表的顺序存储结构的特点"><a href="#线性表的顺序存储结构的特点" class="headerlink" title="线性表的顺序存储结构的特点"></a>线性表的顺序存储结构的特点</h3><ol>
+<li>存储方式自然</li>
+<li>随机存取元素</li>
+<li>插入、删除操作效率低</li>
+<li>存储区域连续且独占使用</li>
+</ol>
+<h3 id="合并两表"><a href="#合并两表" class="headerlink" title="合并两表"></a>合并两表</h3><p>将<strong>非递减<u>有序</u>排列</strong>的线性表A与B合并到C中</p>
+<blockquote>
+<p>创建一个Lc，La与Lb的第  j个进行比较，如果<code>aj&lt;=bj</code>那么将<code>aj</code>放入Lc中，把La向后移动一位，继续如上操作。如果<code>aj&gt;bj</code>就把<code>bj</code>往后移动一位，继续进行如上操作。</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">mergeList</span><span class="params">(SqList La, SqList Lb, SqList &amp;Lc)</span> </span>&#123;</span><br><span class="line">	ElemType *pa = La.elem;</span><br><span class="line">	ElemType *pb = Lb.elem;</span><br><span class="line">	ElemType *La_last = La.elem + La.length<span class="number">-1</span>;</span><br><span class="line">	ElemType *Lb_last = Lb.elem + Lb.length<span class="number">-1</span>;</span><br><span class="line">	</span><br><span class="line">	Lc.listsize = La.listsize + Lb.listsize;</span><br><span class="line">	<span class="comment">// 教材：Lc.listsize=La.length+lb.length</span></span><br><span class="line">	Lc.elem=(ElemType *)<span class="built_in">malloc</span>(Lc.listsize*<span class="keyword">sizeof</span>(ElemType));</span><br><span class="line">	ElemType *pc = Lc.elem;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">while</span>(pa&lt;=La_last &amp;&amp; pb&lt;=Lb_last) &#123;</span><br><span class="line">		<span class="keyword">if</span>(*pa &gt;= *pb) *pc++ = *pb++;</span><br><span class="line">		<span class="keyword">else</span> *pc++ = *pa++;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">while</span>(pa&lt;=La_last) *pc++ = *pa++;</span><br><span class="line">	<span class="keyword">while</span>(pb&lt;=Lb_last) *pc++ = *pb++;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>时间复杂度</p>
+<div style = "border: 2px solid #000; text-align: center">
+    O( ListLength(La) ＋ ListLength(Lb) )
+</div>
+
+<h2 id="2-3-线性表的链式表示和实现"><a href="#2-3-线性表的链式表示和实现" class="headerlink" title="2.3 线性表的链式表示和实现"></a>2.3 线性表的链式表示和实现</h2><blockquote>
+<p>线性表的顺序存储结构储存的数据元素，在逻辑与物理上都是相邻的，这样有一个好处，就是存储位置可以用一个简单的直观的公式来表达。但是也早就了一个缺陷，在删除或插入数据的时候，变得极其复杂。</p>
+</blockquote>
+<h3 id="2-3-1-线性链表"><a href="#2-3-1-线性链表" class="headerlink" title="2.3.1 线性链表"></a>2.3.1 线性链表</h3><p>用一组<u><strong>地址任意</strong></u>的存储单元存放线性表中的数据元素。之前顺序表中的单元，现在称之为<strong>结点</strong>。一个结点包含两个域，一个存放数据的<strong>数据域</strong>，一个存放<u>直接后继</u>的<strong>指针域</strong>。</p>
+<p>以线性表中第一个数据元素的存储地址为线性表的地址，称作线性表的<strong>头指针</strong>。有时为了操作方便，在第一个结点之前虚假一个“头结点”，以指向头节点的指针为链表的头指针。</p>
+<p>头结点、首元结点（第一个结点）、头指针的概念区分：</p>
+<ol>
+<li><strong>头结点</strong>：在首元结点前虚设的，不存放数据，但是可以存放链表信息，比如表长。头结点的设置，使删除或插入首元结点变得容易。</li>
+<li><strong>头指针</strong>：指向第一个结点的指针</li>
+<li><strong>首元结点</strong>：链表的第一个结点</li>
+</ol>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">LNode</span>&#123;</span></span><br><span class="line">    ElemType data; <span class="comment">// 数据域</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">LNode</span> *<span class="title">next</span>;</span> <span class="comment">// 指针域</span></span><br><span class="line">&#125;LNode, *LinkList;</span><br></pre></td></tr></table></figure>
+
+<h4 id="GetELem-取第i个元素"><a href="#GetELem-取第i个元素" class="headerlink" title="GetELem() 取第i个元素"></a>GetELem() 取第i个元素</h4><p>让指针p从第一个结点往后指，直到用来计数的j与i相等，才停止，这时候p也指着i，接下来就用e来接收i的值即可。</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="function">Status <span class="title">GetElem_L</span><span class="params">(LinkList L, <span class="keyword">int</span> i, ElemType &amp;e)</span> </span>&#123;</span><br><span class="line"><span class="comment">// L是带头结点的链表的头指针</span></span><br><span class="line">    p = L-&gt;next; <span class="comment">// p指向第一个结点</span></span><br><span class="line">    j = <span class="number">1</span>; <span class="comment">// j为计数器</span></span><br><span class="line">    <span class="keyword">while</span>(p &amp;&amp; j&lt;i) &#123;</span><br><span class="line">    <span class="comment">// 顺指针向后查找，直到p指向第i个元素，或者p为空。</span></span><br><span class="line">        p = p-&gt;next;</span><br><span class="line">        ++j;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(!p || j&gt;i) <span class="keyword">return</span> ERROR; <span class="comment">// 不存在</span></span><br><span class="line">    e = p-&gt;data; <span class="comment">// 获取第一个元素</span></span><br><span class="line">    <span class="keyword">return</span> OK;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>时间复杂度</p>
+<div style = "border: 2px solid #000; text-align: center">
+    O(ListLength(L))
+</div>
+
+<h4 id="ListInsert-amp-L-i-e-插入"><a href="#ListInsert-amp-L-i-e-插入" class="headerlink" title="ListInsert(&amp;L, i, e) 插入"></a>ListInsert(&amp;L, i, e) 插入</h4><blockquote>
+<p>描述：单链表就和吸铁石一样，一排磁铁，如果你想在中间加进去一个磁铁，只需要把中间打断，但后放入磁铁，然后再重新连接即可。</p>
+<p>当然计算机和人不一样。首先新创建一个结点，将新结点指向第i个结点，然后再让第i-1个结点指向新结点。不能直接让第i-1个结点指向新结点，这样的话后边的东西就丢了。</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="function">Status <span class="title">ListInsert_L</span><span class="params">(LinkList &amp;L, <span class="keyword">int</span> i, ElemType e)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 先找到</span></span><br><span class="line">    p = L; j = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(p &amp;&amp; j&lt;i<span class="number">-1</span>) &#123;</span><br><span class="line">        p = p-&gt;next;</span><br><span class="line">        ++j;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(!p || j&gt;i<span class="number">-1</span>) <span class="keyword">return</span> ERROR;</span><br><span class="line">    <span class="comment">// 再插入</span></span><br><span class="line">    s = (LinkList)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(LNode)); <span class="comment">// 生成新结点</span></span><br><span class="line">    s-&gt;next = e;</span><br><span class="line">    s-&gt;next = p-&gt;next; <span class="comment">// 现在p指向的是i-1，p-&gt;next自然是i</span></span><br><span class="line">    p-&gt;next = s; <span class="comment">// 将i-1从指向i改成指向s</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>时间复杂度</p>
+<div style = "border: 2px solid #000; text-align: center">
+    O(ListLength(L))
+</div>
+
+<h4 id="ListDelete-删除元素"><a href="#ListDelete-删除元素" class="headerlink" title="ListDelete() 删除元素"></a>ListDelete() 删除元素</h4><p>不过是把插入的过程倒放了一遍而已</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="function">Status <span class="title">ListDelete_L</span><span class="params">(LinkList &amp;L, <span class="keyword">int</span> i, ElemType &amp;e)</span> </span>&#123;</span><br><span class="line">    p = L; j = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(p-&gt;next &amp;&amp; j&lt;i<span class="number">-1</span>) &#123;</span><br><span class="line">        p = p-&gt;next;</span><br><span class="line">        ++j;</span><br><span class="line">    &#125;</span><br><span class="line">	<span class="keyword">if</span>(!(p-&gt;next) || j&gt;i<span class="number">-1</span>) <span class="keyword">return</span> ERROR;</span><br><span class="line">    q = p-&gt;next;</span><br><span class="line">    p-&gt;next = q-&gt;next; <span class="comment">// 删除并释放结点</span></span><br><span class="line">    e = q-&gt;data;</span><br><span class="line">    <span class="built_in">free</span>(q);</span><br><span class="line">    <span class="keyword">return</span> OK;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>时间复杂度</p>
+<div style = "border: 2px solid #000; text-align: center">
+    O(ListLength(L))
+</div>
+#### ClearList() 重置一个链表
+
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">ClearList</span><span class="params">(&amp;L)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">while</span>(L-&gt;next) &#123;</span><br><span class="line">        p = L-&gt;next;</span><br><span class="line">        L-&gt;next = p-&gt;next;</span><br><span class="line">        <span class="built_in">free</span>(p); <span class="comment">// 把L-&gt;next一个一个地删除</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>时间复杂度</p>
+<div style = "border: 2px solid #000; text-align: center">
+    O(ListLength(L))
+</div>
+#### CreateList_L() 新建链表
+
+<p>和单链表插入元素一样，创建新表的过程是在头结点位置添加。</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">CreateList_L</span><span class="params">(LinkList &amp;L, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    L = (LinkList)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(LNode));</span><br><span class="line">    L-&gt;next = <span class="literal">NULL</span>; <span class="comment">// 先创建一个带头结点的单链表</span></span><br><span class="line">    <span class="keyword">for</span>(i=n; i&gt;<span class="number">0</span>; --i) &#123;</span><br><span class="line">        p = (LinkList)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(LNode));</span><br><span class="line">        <span class="built_in">scanf</span>(&amp;p-&gt;data);</span><br><span class="line">        p-&gt;next = L-&gt;next;</span><br><span class="line">        L-&gt;next = p; <span class="comment">// 插到表头</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>时间复杂度</p>
+<div style = "border: 2px solid #000; text-align: center">
+    O(ListLength(L))
+</div>
+
+<h4 id="合并两链表为一个表"><a href="#合并两链表为一个表" class="headerlink" title="合并两链表为一个表"></a>合并两链表为一个表</h4><p>和上边顺序表合并条件相同，但是这回要将Lb并入La中。</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">MergeList_L</span><span class="params">(LinkList &amp;La, LinkList &amp;La, LinkList &amp;Lc)</span> </span>&#123;</span><br><span class="line">	pa = La-&gt;next;</span><br><span class="line">	pb = Lb-&gt;next;</span><br><span class="line">	Lc = pc = La;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">while</span>(pa &amp;&amp; pb) &#123;</span><br><span class="line">		<span class="keyword">if</span>(pa-&gt;data &lt;= pb-&gt;data) &#123;</span><br><span class="line">			pc-&gt;next = pa;</span><br><span class="line">			pc = pa;</span><br><span class="line">			pa = pa-&gt;next;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span>&#123;</span><br><span class="line">			pc-&gt;next = pb;</span><br><span class="line">			pc = pb;</span><br><span class="line">			pb = pb-&gt;next;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	pc-&gt;next = pa ? pa : pb;</span><br><span class="line">	<span class="built_in">free</span>(Lb);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="2-3-2-循环链表"><a href="#2-3-2-循环链表" class="headerlink" title="2.3.2 循环链表"></a>2.3.2 循环链表</h2><h3 id="循环链表"><a href="#循环链表" class="headerlink" title="循环链表"></a>循环链表</h3><p>最后一个结点指回第一个结点，就变成循环链表，这样的话，循环判断时，从判断p-&gt;next是否为空，变成判断p-&gt;next是否为<u>头指针</u>（指向的并不是头结点的地址，而是首元结点的地址）。</p>
+<p><i>p35“但有时候，若在循环链表中设立尾指针而不设头指针，可是某些操作简化。例如两个线性表合并成一个表时，仅需将一个表的表尾和另一个表的表头相接。”</i>不太懂，意思是不设头结点的表？</p>
+<h3 id="双向链表"><a href="#双向链表" class="headerlink" title="双向链表"></a>双向链表</h3><p>前面讲到的链表，都是单向的，双向链表有两个指针域，一个指向前驱，一个指向后继。</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">DuLNode</span> &#123;</span></span><br><span class="line">    ElemType data;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">DuLNode</span> *<span class="title">prior</span>;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">DuLNode</span> *<span class="title">next</span>;</span></span><br><span class="line">&#125;DuLNode, *DuLinkList;</span><br></pre></td></tr></table></figure>
+
+<p>对于双向链表的插入和删除，仅仅是操作上比较复杂，动了好多指针，但是操作顺序上貌似不和单链表一样单一（有待考证），毕竟在操作单链表时，需要注意后边的结点不会丢失，而双向链表因为既有指向前驱的指针，又有指向后继的指针，不需要担心丢失的问题。</p>
+<h4 id="插入元素"><a href="#插入元素" class="headerlink" title="插入元素"></a>插入元素</h4><p>稍稍描述一下，把q插到pr之间。</p>
+<ol>
+<li>将q的前驱指向p，后继指向r。</li>
+<li>将r的前驱指向q。实际插入时，可能并不知道r，可以用q-&gt;next代替</li>
+<li>将p的后继指向q</li>
+</ol>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 在p后插入q</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 将q的前驱指向p，后继指向r</span></span><br><span class="line">q-&gt;prior = p;</span><br><span class="line">q-&gt;next = p-&gt;next;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 将r的前驱指向q</span></span><br><span class="line">p-&gt;next-&gt;prior = q;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 将p的后继指向q</span></span><br><span class="line">p-&gt;next = q;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 不能先让p的后继指向q</span></span><br></pre></td></tr></table></figure>
+
+
+
+<blockquote>
+<p>链式存储结构的特点</p>
+<ol>
+<li>不能随机存取元素</li>
+<li>插入、删除操作效率高</li>
+<li>存储区域不一定连续</li>
+<li>存储空间可共享使用</li>
+</ol>
+</blockquote>
+<h2 id="2-4-一元多项式的表示及相加"><a href="#2-4-一元多项式的表示及相加" class="headerlink" title="2.4 一元多项式的表示及相加"></a>2.4 一元多项式的表示及相加</h2><p>p<sub>n</sub>(x) = p<sub>0</sub> + p<sub>1</sub>x + p<sub>2</sub>x<sup>2</sup> + … + p<sub>n</sub>x<sup>n</sup> 在计算机中可以用一个线性表来表示：P=(p<sub>0</sub>, p<sub>1</sub>, …, p<sub>n</sub>)（p的下标就是x的幂）。但是对于形如S(x) = 1 + 3x<sup>10000</sup> - 2x<sup>20000</sup> 就…</p>
+<p>一般情况下的<strong>一元稀疏多项式</strong>可以写成P<sub>n</sub>(x) = p<sub>1</sub>x<sup>e1</sup> + p<sub>2</sub>x<sup>e2</sup> + … + p<sub>m</sub>x<sup>em</sup> 其中：p<sub>i</sub>是指数为e<sub>i</sub>的项的非零系数0&lt;=e<sub>1</sub>&lt;e<sub>2</sub>&lt; … &lt;e<sub>m</sub> = n可以用下列线性表示：((p<sub>1</sub>, e<sub>1</sub>), (p<sub>2</sub>, e<sub>2</sub>), … ,  (p<sub>m</sub>, e<sub>m</sub>))</p>
+<p>例如P<sub>999</sub>(x) = 7x<sup>3</sup> - 2x<sup>12</sup> - 8x<sup>999</sup> 可用线性表((7, 3), (-2, 12), (-8, 999))表示</p>
+]]></content>
+      <tags>
+        <tag>数据结构笔记</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>数据结构-内部排序</title>
+    <url>/2020/12/01/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E5%86%85%E9%83%A8%E6%8E%92%E5%BA%8F/</url>
+    <content><![CDATA[<h1 id="第十章-内部排序"><a href="#第十章-内部排序" class="headerlink" title="第十章 内部排序"></a>第十章 内部排序</h1><h2 id="10-1-概述"><a href="#10-1-概述" class="headerlink" title="10.1 概述"></a>10.1 概述</h2><p>排序使用的关键字可以是主关键字也可以是次关键字，如果是主关键字，那排序肯定是唯一的，但是如果是次关键字，那排序就不止一种情况了。</p>
+<p>如果使用次关键字排序，这时K<sub>i</sub>=K<sub>j</sub>，在排序前K<sub>i</sub>的记录在K<sub>j</sub>前，排序后也是K<sub>i</sub>为关键字的记录在K<sub>j</sub>前，那就说顺序没变，那么称所用的**<u>排序方法是稳定的</u>**。否则就说不稳定。</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXSIZE 20</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">int</span> KeyType; <span class="comment">// 关键字类型为整型</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">    KeyType key; <span class="comment">// 关键字</span></span><br><span class="line">    InforType otherinfor; <span class="comment">// 其他数据项</span></span><br><span class="line">&#125;RedType; <span class="comment">// 记录数据</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">    RedType r[MAXSIZE+<span class="number">1</span>]; <span class="comment">// r[0]闲置或者做哨兵</span></span><br><span class="line">    <span class="keyword">int</span> length; <span class="comment">// 顺序表长度</span></span><br><span class="line">&#125;SqList;</span><br></pre></td></tr></table></figure>
+
+<h2 id="10-2-插入排序"><a href="#10-2-插入排序" class="headerlink" title="10.2 插入排序"></a>10.2 插入排序</h2><h3 id="10-2-1-直接插入排序"><a href="#10-2-1-直接插入排序" class="headerlink" title="10.2.1 直接插入排序"></a>10.2.1 直接插入排序</h3><p>把一个表分为有序表和无序表，零号单元作为中转站不放任何东西。1号单元单独组成有序表（能理解吧，一个元素还不是有序？），后边自然就是无序表，2号单元内的元素自然是无序表的第一个元素。从无序表的第一个元素开始，从有序表的最后依次与其元素作比较，找准机会就插入。</p>
+<p>啰里啰唆一大堆废话可以不看，直接上代码。</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">InsertSort</span><span class="params">(SqList &amp;L)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(i=<span class="number">2</span>; i&lt;=L.length; ++i) &#123;</span><br><span class="line">        <span class="keyword">if</span>(L.r[i].key&lt;L.r[i<span class="number">-1</span>].key) &#123;</span><br><span class="line">            L.r[<span class="number">0</span>]=L.r[i]; <span class="comment">// 先存起来</span></span><br><span class="line">            <span class="keyword">for</span>(j=i<span class="number">-1</span>; L.r[<span class="number">0</span>].key&lt;L.r[j].key; --j)</span><br><span class="line">            <span class="comment">//开始搬运，为待插入记录腾出空间</span></span><br><span class="line">                L.r[j+<span class="number">1</span>]=L.r[j];</span><br><span class="line">            L.r[j+<span class="number">1</span>]=L.r[<span class="number">0</span>]; <span class="comment">// 插入</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="性能分析"><a href="#性能分析" class="headerlink" title="性能分析"></a>性能分析</h4><p>内部排序的两个操作：</p>
+<ol>
+<li>比较关键字大小</li>
+<li>移动记录</li>
+</ol>
+<p>最好的结果，人家本来就是正序排列的，这样比较次数为<code>n-1</code>，元素也不移动；最坏的结果，本来是逆序排列，这样比较次数就是<code>(n-1)(n+2)/2</code>，移动次数为<code>(n+4)(n-1)/2</code>。</p>
+<ol>
+<li><p>**时间复杂度为O(n<sup>2</sup>)**。</p>
+</li>
+<li><p><strong>空间复杂度</strong>是O(1)，因为就借助了零号单元（原因是这个吧？）。</p>
+</li>
+<li><p>直接插入排序是稳定的排序方法</p>
+</li>
+<li><p>适用于元素初始排序基本有序和元素个数较少的情况</p>
+</li>
+</ol>
+<h3 id="10-2-2-折半插入排序"><a href="#10-2-2-折半插入排序" class="headerlink" title="10.2.2 折半插入排序"></a>10.2.2 折半插入排序</h3><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">BInsertSort</span><span class="params">(SqList &amp;L)</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+]]></content>
+      <tags>
+        <tag>数据结构笔记</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Flex简单总结</title>
+    <url>/2020/12/01/Flex%E7%AE%80%E5%8D%95%E6%80%BB%E7%BB%93/</url>
+    <content><![CDATA[<p>flexbox 是一种一维布局，因为 flexbox 一次性只能处理一个维度上的元素布局。<br>本文为简单介绍。</p>
+<a id="more"></a>
+
+
+
+
+
+<h1 id="Flex弹性盒模型基本概念"><a href="#Flex弹性盒模型基本概念" class="headerlink" title="Flex弹性盒模型基本概念"></a>Flex弹性盒模型基本概念</h1><p><br><br></p>
+<hr>
+<p><br><br></p>
+<h2 id="flexbox-的两根轴线"><a href="#flexbox-的两根轴线" class="headerlink" title="flexbox 的两根轴线"></a>flexbox 的两根轴线</h2><blockquote>
+<p>主轴与交叉轴（副轴）。</p>
+</blockquote>
+<h3 id="主轴"><a href="#主轴" class="headerlink" title="主轴"></a>主轴</h3><p>主轴由<code>flex-direction</code>定义，有四个值：</p>
+<ul>
+<li><code>row</code>：从左至右</li>
+<li><code>row-reverse</code>：从右至左</li>
+<li><code>column</code>：从上到下</li>
+<li><code>column-reverse</code>：从下到上</li>
+</ul>
+<p>默认情况下是<code>row</code>。</p>
+<h3 id="交叉轴"><a href="#交叉轴" class="headerlink" title="交叉轴"></a>交叉轴</h3><p>也就是副轴，垂直于<code>flex-direction</code>设置的主轴方向。</p>
+<p>主轴与交叉轴的概念很重要，因为 flexbox 一次性只能调控一个维度的元素。</p>
+<p><br><br></p>
+<hr>
+<p><br><br></p>
+<h2 id="Flex-容器"><a href="#Flex-容器" class="headerlink" title="Flex 容器"></a>Flex 容器</h2><p>采用 flexbox 的区域就叫做 flex 容器。</p>
+<p>将一个容器的<code>display</code>属性值改为<code>flex</code>或者<code>inline-flex</code>后，该容器就会变成 flex 容器，而容器中的元素则会变成 <strong>flex 元素</strong> 。</p>
+<p>flex 元素的初始值：</p>
+<ul>
+<li>元素按行排列（<code>flex--direction</code>属性的初始值是<code>row</code>）</li>
+<li>元素从主轴的起始线（start）开始。</li>
+<li>元素不会拉伸，但是可以缩小。</li>
+<li>元素被拉伸来填充交叉轴大小。（？）</li>
+<li><code>flex-basis</code>属性为<code>auto</code></li>
+<li><code>flex-wrap</code>属性为<code>nowrap</code></li>
+</ul>
+<p>注意，以上为默认属性值。</p>
+<h3 id="更改flex方向flex-direction"><a href="#更改flex方向flex-direction" class="headerlink" title="更改flex方向flex-direction"></a>更改flex方向flex-direction</h3><p>flex容器中更改<code>flex-direction</code>属性可以改变flex容器中元素的排列方向。</p>
+<p>设置<code>flex-direction: row-reverse</code>让元素从右向左排列，但是在flex容器中，不说左和右，而是<strong>起始线</strong>与<strong>终止线</strong>。</p>
+<p><br><br></p>
+<hr>
+<p><br><br></p>
+<h2 id="用flex-wrap实现多行Flex容器"><a href="#用flex-wrap实现多行Flex容器" class="headerlink" title="用flex-wrap实现多行Flex容器"></a>用flex-wrap实现多行Flex容器</h2><p><code>flex-wrap</code>默认值为<code>nowrap</code>，意思是不换行，元素挤不下就先变小然后挤进去。改成<code>wrap</code>后挤不进去就会换行。如果有些元素无法缩小，那么默认的<code>nowrap</code>会导致元素溢出。</p>
+<p><br><br></p>
+<hr>
+<p><br><br></p>
+<h2 id="简写属性flex-flow"><a href="#简写属性flex-flow" class="headerlink" title="简写属性flex-flow"></a>简写属性flex-flow</h2><p><code>flex-flow</code>是<code>flex-direction</code>与<code>flex-wrap</code>的简写形式，第一个写<code>flex-direction</code>的值，第二个写<code>flex-wrap</code>的值。</p>
+<p><br><br></p>
+<hr>
+<p><br><br></p>
+<h2 id="flex-元素上的属性"><a href="#flex-元素上的属性" class="headerlink" title="flex 元素上的属性"></a>flex 元素上的属性</h2><p>为了更好的控制flex元素，有三个属性可以作用于他们：</p>
+<ul>
+<li><code>flex-grow</code></li>
+<li><code>flex-shrink</code></li>
+<li><code>flex-basis</code></li>
+</ul>
+<p>在使用这几个属性之前，先明白一个概念——<strong>可用空间</strong>。这几个属性的作用其实就是在改变flex容器中的可用空间。</p>
+<p>假设一个容器宽 100px ，其中的元素有三个，宽均为 20px 。那么剩下的40px就是可用空间。默认情况下，这40px的可用空间放在最后一个元素后边。</p>
+<p>控制元素去使用可用空间，就是这些属性要做的事。</p>
+<h3 id="Flex-元素属性：flex-basis"><a href="#Flex-元素属性：flex-basis" class="headerlink" title="Flex 元素属性：flex-basis"></a>Flex 元素属性：<code>flex-basis</code></h3><p><code>flex-basis</code>定义了该元素的<strong>空间大小</strong>，flex容器里除了元素所占的空间以外的其余空间就是<strong>可用空间</strong>。属性的默认值为<code>auto</code>。如果元素已经设置了宽度（width），那么<code>flex-basis</code>就是宽度的值。</p>
+<p>如果元素没有设置宽度，那么<code>flex-basis</code>的值就只是刚好放下元素里的内容。</p>
+<p>如果宽度于其一同设置，那以<code>flex-basis</code>为准。</p>
+<h3 id="Flex-元素属性：flex-grow"><a href="#Flex-元素属性：flex-grow" class="headerlink" title="Flex 元素属性：flex-grow"></a>Flex 元素属性：<code>flex-grow</code></h3><p>如果单独一个元素的<code>flex-grow</code>被赋予一个整数值，那么该元素会被拉伸然后占据全部可用空间。</p>
+<p>当多个元素的<code>flex-grow</code>均被赋值时，可用空间会按比例被元素瓜分。<br>$$<br>元素瓜分的可用空间 = (容器总宽度 - 各元素宽度) × (该元素flex-grow值/各元素flex-grow值之和)<br>$$<br>比如</p>
+<figure class="highlight less"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 一个&lt;main&gt;里有三个&lt;div&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="selector-tag">main</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">400px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">270px</span>;</span><br><span class="line">    <span class="attribute">display</span>: flex;</span><br><span class="line"></span><br><span class="line">    <span class="selector-pseudo">:nth-child(1)</span> &#123;</span><br><span class="line">        <span class="attribute">flex-grow</span>: <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="selector-pseudo">:nth-child(2)</span> &#123;</span><br><span class="line">        <span class="attribute">flex-grow</span>: <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="selector-pseudo">:nth-child(3)</span> &#123;</span><br><span class="line">        <span class="attribute">flex-grow</span>: <span class="number">2</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="selector-tag">div</span> &#123;</span><br><span class="line">        <span class="attribute">width</span>: <span class="number">50px</span>;</span><br><span class="line">        <span class="attribute">height</span>: <span class="number">50px</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>第一个div在原来宽度的基础上，再增加已瓜分的可用空间，得到<code>width: 112.5px</code></p>
+<p>第二个div得到<code>width: 112.5px</code></p>
+<p>第三个div得到<code>width: 175px</code></p>
+<h3 id="Flex-元素属性：flex-shrink"><a href="#Flex-元素属性：flex-shrink" class="headerlink" title="Flex 元素属性：flex-shrink"></a>Flex 元素属性：<code>flex-shrink</code></h3><p>这个是用来缩小元素的。<br>$$<br>现在的宽度=原宽度-(各元素宽度之和-容器总宽度)×(该元素flex-shrink值/各元素flex-shrink值之和)<br>$$</p>
+<p>例如</p>
+<figure class="highlight less"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">main</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">500px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">270px</span>;</span><br><span class="line">    <span class="attribute">display</span>: flex;</span><br><span class="line"></span><br><span class="line">    <span class="selector-pseudo">:nth-child(1)</span> &#123;</span><br><span class="line">        <span class="attribute">flex-shrink</span>: <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="selector-pseudo">:nth-child(2)</span> &#123;</span><br><span class="line">        <span class="attribute">flex-shrink</span>: <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="selector-pseudo">:nth-child(3)</span> &#123;</span><br><span class="line">        <span class="attribute">flex-shrink</span>: <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="selector-pseudo">:nth-child(4)</span> &#123;</span><br><span class="line">        <span class="attribute">flex-shrink</span>: <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="selector-tag">div</span> &#123;</span><br><span class="line">        <span class="attribute">width</span>: <span class="number">200px</span>;</span><br><span class="line">        <span class="attribute">height</span>: <span class="number">50px</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>容器总宽度是500px，元素宽度之和为4x200px，溢出来的空间有300px，第一个元素flex-shrink为0，那他就是原长200px。剩下的都是1，于是平分300px，每一个分到100px，最后的长度为200-100。</p>
+<h3 id="Flex-属性的简写"><a href="#Flex-属性的简写" class="headerlink" title="Flex 属性的简写"></a>Flex 属性的简写</h3><blockquote>
+<p>（我还没想清楚为什么将这三个明明比较冲突的属性写在一起，所以先不详细地写了）</p>
+</blockquote>
+<p>进行开发时，一般不会就属性单独使用，因为实际开发中，某一元素的属性有很多。所以会有一种简写形式供大家选择。</p>
+<p><code>flex</code>允许你把上边的三个值按顺序依次书写——<code>flex-gorw</code>，<code>flex-shrink</code>，<code>flex-basis</code>。</p>
+<p>当然，也有一些预制效果：</p>
+<ul>
+<li>flex: initial -&gt; flex: 0 1 auto</li>
+<li>flex: auto -&gt; 1 1 auto</li>
+<li>flex: none -&gt; flex: 0 0 auto</li>
+<li>flex: <positive-number> -&gt; </li>
+</ul>
+<p><br><br></p>
+<hr>
+<p><br><br></p>
+<h2 id="元素间的对齐和空间分配"><a href="#元素间的对齐和空间分配" class="headerlink" title="元素间的对齐和空间分配"></a>元素间的对齐和空间分配</h2><h3 id="align-items"><a href="#align-items" class="headerlink" title="align-items"></a>align-items</h3><p>该属性可以使元素在交叉轴方向对齐。</p>
+<p>属性：</p>
+<ul>
+<li>stretch</li>
+<li>flex-start：怼向起始线</li>
+<li>flex-end：怼向终止线</li>
+<li>center：在交叉轴居中</li>
+</ul>
+<h3 id="justify-content"><a href="#justify-content" class="headerlink" title="justify-content"></a>justify-content</h3><p>该属性决定元素在主轴方向的对齐方式。</p>
+<p>属性：</p>
+<ul>
+<li>stretch</li>
+<li>flex-start：对齐到起始线</li>
+<li>flex-end：对齐到终止线</li>
+<li>center：在主轴方向居中</li>
+<li>space-around：元素周围均匀地围一圈空白，但是和padding或者margin不一样的是，他不对重叠在一起，所以这个属性值用得比较少。</li>
+<li>space-between：两边属性往边靠，元素间的空隙均匀分配</li>
+</ul>
+<p><br><br></p>
+<hr>
+<p><br><br></p>
+<p>大概就是这样了。</p>
+]]></content>
+      <tags>
+        <tag>CSS笔记</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>LeetCode | 两数之和</title>
+    <url>/2020/12/02/LeetCode-%E4%B8%A4%E6%95%B0%E4%B9%8B%E5%92%8C/</url>
+    <content><![CDATA[<h1 id="两数之和"><a href="#两数之和" class="headerlink" title="两数之和"></a>两数之和</h1><h2 id="C语言实现"><a href="#C语言实现" class="headerlink" title="C语言实现"></a>C语言实现</h2><p>一开始傻了逼了，一直想着让每一个与自己</p>
+]]></content>
+      <tags>
+        <tag>LeetCode简单题</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>python基础部分</title>
+    <url>/2020/12/05/python%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%86/</url>
+    <content><![CDATA[<h1 id="基础部分"><a href="#基础部分" class="headerlink" title="基础部分"></a>基础部分</h1><blockquote>
+<p>由于已有编程基础，便不再事无巨细地记录了</p>
+</blockquote>
+<p>在python里，当一行代码太长，看着头皮发麻时，由于没有<code>;</code>的限制，显然不能像C语言一样直接换行。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span>(this_sentence_is_too_long == <span class="literal">True</span>) <span class="keyword">and</span> \</span><br><span class="line">(then_write_it_like_this == <span class="literal">True</span>):</span><br><span class="line">    show() <span class="comment"># 如果一行代码太长，那就用 \ 来分割</span></span><br></pre></td></tr></table></figure>
+
+<p>不过老分号在python里还是存在的</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">x = <span class="string">&quot;123&quot;</span>; its_OK() </span><br><span class="line"><span class="comment"># 用 ; 分隔，当然这样就不能拥有代码块了</span></span><br></pre></td></tr></table></figure>
+
+<p>再看看变量赋值，真就是变量名+值，连类似JavaScript里的<code>let</code>或者<code>var</code>都没有。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">anInt = <span class="number">12</span></span><br><span class="line">aString = <span class="string">&#x27;string&#x27;</span></span><br><span class="line">aFloat = <span class="number">0.23123</span></span><br><span class="line">anotherString = <span class="string">&#x27;str&#x27;</span> + <span class="string">&#x27;ing&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>熟悉的<code>*=</code>、<code>-=</code>等在python里依然存在，不过自增自减就人没了<code>--</code>、<code>++</code>。</p>
+<p>python可以说是很懂人类了，看看这种赋值吧，我觉得以C或Java等，为母语的朋友们，对这样的赋值，肯定会比较新奇。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">x, y, z = <span class="number">1</span>, <span class="number">2</span>, <span class="string">&#x27;aString&#x27;</span></span><br><span class="line">(x, y, z) = (<span class="number">1</span>, <span class="number">2</span>, <span class="string">&#x27;aString&#x27;</span>) <span class="comment"># 加上括号多少保险一点</span></span><br></pre></td></tr></table></figure>
+
+<p>及不记得在C等语言里，我x要和你y交换值，得有个中间商，而python就无需中间商。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">x = <span class="number">1</span></span><br><span class="line">y = <span class="number">2</span></span><br><span class="line"><span class="comment"># 交换</span></span><br><span class="line">x, y = <span class="number">2</span>, <span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h2><h3 id="整型"><a href="#整型" class="headerlink" title="整型"></a>整型</h3><p>有一点不同，就是<code>100000000000</code>可以写成<code>100_000_000_000</code>。用下划线<code>_</code>可以分隔数字，方便阅读。</p>
+<p>加减乘除还是原来的<code>+ - * /</code>，且多了一个乘方<code>**</code>。整型用<code>/</code>除出来是浮点型，而用<code>//</code>则是整型，称之为<u>地板除</u>。浮点型不管用<code>/</code>还是<code>//</code>都是浮点型。（python 2中两个整型用<code>/</code>计算出来结果还是整型，必须有一个是浮点型结果才能使浮点型。）</p>
+<h3 id="浮点型"><a href="#浮点型" class="headerlink" title="浮点型"></a>浮点型</h3><p>依然存在这种通病。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="number">0.2</span> + <span class="number">0.1</span></span><br><span class="line"><span class="number">0.30000000000000004</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h3><p><code>+</code>可以算数学，而且可以链接字符串，<s>让我想起了JavaScript。</s></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>aString = <span class="string">&#x27;连接&#x27;</span> + <span class="string">&#x27;字符串&#x27;</span></span><br><span class="line"><span class="string">&#x27;连接字符串&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>感觉python很自由对吧，但是类型不同就不能连在一起，需要用<code>str()</code>转化一下才可以。<s>道不同不相为谋。</s></p>
+<p>单引号和双引号均可。还有类似模板字面量的东西，只不过这个是用三个单引号括起来。<code>&#39;&#39;&#39;  &#39;&#39;&#39;</code>可以保留你在引号里边的操作。</p>
+<h3 id="布尔值"><a href="#布尔值" class="headerlink" title="布尔值"></a>布尔值</h3><p>布尔值是大写的<code>True</code>和<code>False</code>。布尔值可以用<code>and</code>、<code>or</code>和<code>not</code>。<s>好家伙，难怪外行想玩玩编程就会选择python。</s></p>
+<h3 id="空值None"><a href="#空值None" class="headerlink" title="空值None"></a>空值<code>None</code></h3><h2 id="常量"><a href="#常量" class="headerlink" title="常量"></a>常量</h2><p>其实没有常量，就只是把字母大写的变量。但你要认为他就是常量。</p>
+<h2 id="新东西——列表"><a href="#新东西——列表" class="headerlink" title="新东西——列表"></a>新东西——列表</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>hotwords = [<span class="string">&#x27;好家伙&#x27;</span>, <span class="string">&#x27;打工人&#x27;</span>, <span class="string">&#x27;后浪&#x27;</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(hotwords)</span><br><span class="line">[<span class="string">&#x27;好家伙&#x27;</span>, <span class="string">&#x27;打工人&#x27;</span>, <span class="string">&#x27;后浪&#x27;</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(hotwords[<span class="number">0</span>])</span><br><span class="line">好家伙</span><br></pre></td></tr></table></figure>
+
+<p><s>想起了什么？数组？一样吗，可不一样了。</s></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(hotwords[-<span class="number">1</span>])</span><br><span class="line">后浪</span><br></pre></td></tr></table></figure>
+
+<h3 id="修改、添加、删除"><a href="#修改、添加、删除" class="headerlink" title="修改、添加、删除"></a>修改、添加、删除</h3><p>修改直接覆盖即可。</p>
+<p>添加有给定的方法</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>hotwords.append(<span class="string">&#x27;阴阳怪气&#x27;</span>) <span class="comment"># 添加到末尾</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(hotwords)</span><br><span class="line">[<span class="string">&#x27;好家伙&#x27;</span>, <span class="string">&#x27;打工人&#x27;</span>, <span class="string">&#x27;后浪&#x27;</span>, <span class="string">&#x27;阴阳怪气&#x27;</span>]</span><br></pre></td></tr></table></figure>
+
+<p>向后<code>append()</code>也可以通过建立空列表，然后向后追加来创建新列表。</p>
+<h3 id="map"><a href="#map" class="headerlink" title="map()"></a>map()</h3><p>map(function, iterbale)</p>
+<p>两个参数</p>
+<ol>
+<li>function —— 函数</li>
+<li>iterable —— 一个或多个列表</li>
+</ol>
+<h3 id="sorted"><a href="#sorted" class="headerlink" title="sorted()"></a>sorted()</h3><p>sorted(iterable, key=None, reverse=False)</p>
+]]></content>
+      <tags>
+        <tag>python学习笔记</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>读《月亮与六便士》感</title>
+    <url>/2020/12/01/%E8%AF%BB%E3%80%8A%E6%9C%88%E4%BA%AE%E4%B8%8E%E5%85%AD%E4%BE%BF%E5%A3%AB%E3%80%8B%E6%84%9F/</url>
+    <content><![CDATA[<h1 id="读毛姆《月亮与六便士》感（草稿）"><a href="#读毛姆《月亮与六便士》感（草稿）" class="headerlink" title="读毛姆《月亮与六便士》感（草稿）"></a>读毛姆《月亮与六便士》感（草稿）</h1><p>我相信很多人都听过这本书，和那句话——“满地都是六便士，他却抬头看见了月亮”</p>
+<p>这句话很浪漫，想必这本小说也是不顾一切追梦的故事吧。实际上，严格意义上，或者说我看过之后感觉，并不是。</p>
+<p>它似乎讲的是，一个接纳了内心欲望魔鬼的一个人的悲惨一生——世俗上的，当然他活着的时候是悲惨的一生，死后马上被称为传奇与辉煌的一生。这个“欲望魔鬼”体现在艺术表达。</p>
+<p>一个人抛弃了一切，去追求艺术。</p>
+<p>人们都说是和梦想有关，我看完觉得不是什么梦想，</p>
+<blockquote>
+<p>我告诉你，我必须画画。我身不由己。一个人掉进水里，他游泳游得好不好没关系，反正他得挣扎，不然就得淹死。——斯特里克兰</p>
+</blockquote>
+<blockquote>
+<p>我感觉在他的体内，仿佛有一股猛烈的力量在挣扎；这股力量强大无比，压倒一切，好像违背他自己的意志，将他紧紧攫住。我无法理解。他似乎真的被魔鬼附体了，很可能，突然就会被撕得粉碎。——我</p>
+</blockquote>
+<p>有很多人，都是以“如果你迷茫于理想与现实，那可以看一看”为推荐理由。我不知道他们都没读过这本书。我觉得，大部分的普通人，首先会去不进去这本小说。然后，即便读完，对于理想什么的也没什么答案。你别想在书中找到关于理想与现实的答案。或者说，那个答案不是给普通人，或者说不是给正常人的。</p>
+<p>书中有一个人物，一个犹太人，叫亚伯拉罕。</p>
+<blockquote>
+<p>他是个犹太人，叫做亚伯拉罕，当时是个头发金黄、特别壮实的年轻人，生性腼腆，也非常谦虚，但他才华出众。他考取了医院的奖学金，读书五年期间拿遍了所有能拿的奖励。他同时被委任为内科医院和外科医生。他的出色是公认的。最后他被选进了医院的管理层，前途一片光明。… …在履新之前，他想去度假，由于手头并不宽裕，他以外科医生的身份登上了一艘开往地中海东岸的不定期货架。… …几个星期后，医院管理层收到他的辞呈，他放弃了那个令人觊觎的职位。… …他消失了。</p>
+</blockquote>
+<p>他为什么会做出这样的举动呢？后来“我”见到了他。</p>
+<blockquote>
+<p>他和我说起了他的故事。当初启程到地中海度假时，他其实是准备回到伦敦，去圣托马斯医院履任的。那天早晨，货轮在亚历山大港靠岸，他在甲板上观察这座城市，在阳光下白花花的，还有码头上的人群，他看到了穿着褴褛长袍的本地人，苏丹来的黑人，吵吵嚷嚷、成群结队的希腊人和意大利人，戴着红色菲斯帽的、神情肃穆的土耳其人，灿烂的阳光和蓝色的天穹，他产生了某种感触。他无法描述这种感受。就像是一声惊雷，他说，但随即又推翻了这个说法，改口说是一种天启。似乎有什么东西触动了他的心灵，于是他突然觉得非常快乐，有一种无拘无束的美妙感受。他觉得他回到家乡了，不用一分钟就决定他将会在亚历山大港度过他的余生。… …我不在乎任何人的看法。其实做出决定的不是我，而是我内心某种更为强大的力量。</p>
+</blockquote>
+<p>我认为这个人，或许才是一个正常人，如何去抉择理想与现实的案例。但是小说并没有过多的讲述亚伯拉罕的故事。以上的摘抄就是关于他的大部分笔墨。</p>
+<p>因为亚伯拉罕做的决定让常人无法理解，但是他做的事，起码是人做的事，哦对了，辞职之后他还是一个医生。而斯特里克兰，很难去说他是个世俗意义上的人，更像是披着人皮的艺术肿瘤，在他身体内潜伏多年，然后爆发。爆发后，便不再做人，抛去了所有的人伦道德世俗价值，甚至抛弃了自己。</p>
+<blockquote>
+<p>他的身体瘦得像干尸。他穿着的是五年前我见到他时那套衣服，既破烂又邋遢，线头掉了不少，松松垮垮地挂在他身上，仿佛原本是为别人度身定做的。我注意到他的双手，脏兮兮的，指甲很长；那双手瘦得皮包骨，青筋全露出来。</p>
+</blockquote>
+<p>这只是我摘抄的一点点，文中有很多类似的描述。</p>
+<p>我感觉不到这是理想与现实的碰撞，更像是失去人性的人，只保留了表达艺术的原始欲望的人的故事。</p>
+<p>如果你问我，我是否推荐去读《月亮与六便士》，这时我要反问你，你为了什么去看，如果你为了我之前所说的“理想与现实”。那我完全不推荐。但是毛姆对人性的刻画很是细腻与有趣的，有些话写得一针见血。</p>
+<blockquote>
+<p>我从来没想到他骂人的本领是如此地高明，总是能够戳中这个郁闷的荷兰人最敏感的痛处。斯特里克兰挥舞的不是讽刺的细剑，而是谩骂的大棒。这次突如其来的袭击让斯特罗夫措手不及，完全失去了抵抗能力。他就像慌不择路、到处乱跑的绵羊。他惊骇莫名，不知所以。最后他的泪水滚滚而下。这件事情最糟糕的地方在于，尽管你很讨厌斯特里克兰，当时的场面也很可怕，但你就是忍不住想笑。有些人很倒霉，他们哪怕在真情流露的时候也显得滑稽可笑，德克·斯特罗夫正好就是这种人。</p>
+</blockquote>
+<blockquote>
+<p>画室里的寂静似乎已经化为实体，让人觉得简直伸手就能摸到。</p>
+</blockquote>
+<p>有些话可以细细品味</p>
+<blockquote>
+<p>世道艰难，人心险恶。我们不知道自己何以会来到人世，也不知道死后将会去往何方。我们必须保持非常卑微的心态。我们必须懂得安详的美好。我们必须过着安分守己的日子，以免引起命运女神的注意。让我们去寻求那些朴实无知的人的爱情吧。他们的愚昧比我们的学识更为可贵。让我们学会沉默，偏安于仅可容身的小角落，像他们那样驯服而温和吧。这才是生活的智慧。</p>
+</blockquote>
+<blockquote>
+<p>人们满不在乎地谈论美，由于他们说话并不经过深思熟虑，所以美这个词被用得太过泛滥，已经失去了原有的力量；许许多多微不足道的东西都冠以它的名义，于是它所代表的东西变得不再崇高。人们用美来形容裙子、小狗和布道，当遇到真正的美时，他们却又认不出来。人们试图用这种本末倒置来装饰他们毫无价值的思想，结果反而钝化了他们对美的感受力。就像那种假装一直拥有他只能偶尔感受到的通灵力量的江湖骗子，人们丧失了这种遭到他们滥用的审美能力</p>
+</blockquote>
+]]></content>
+      <tags>
+        <tag>读后感</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>关于博客内容</title>
+    <url>/2020/12/06/%E5%85%B3%E4%BA%8E%E5%8D%9A%E5%AE%A2%E5%86%85%E5%AE%B9/</url>
+    <content><![CDATA[<h1 id="关于这个博客"><a href="#关于这个博客" class="headerlink" title="关于这个博客"></a>关于这个博客</h1><blockquote>
+<p>最近要考python了，所以边学边做笔记，途中我发现自己的笔记废话连篇。写这些废话很浪费时间与精力。于是从思考“如何写笔记”，衍生到“笔记记什么”。</p>
+</blockquote>
+<p>这个博客是用来记录的，不仅仅是技术笔记，将来我有能力开发自己的主题时，就会加入更多东西。</p>
+<p>我把我的博客分为这几类</p>
+<ol>
+<li>研究笔记</li>
+<li>学习笔记</li>
+<li>实记笔记</li>
+<li>随笔</li>
+</ol>
+<h2 id="研究笔记"><a href="#研究笔记" class="headerlink" title="研究笔记"></a>研究笔记</h2><p>主要是自己的东西，通过学习、实践与理解，而研究出来东西。这种笔记正文可以有废话，可以有啰嗦的解释。</p>
+<h2 id="学习笔记"><a href="#学习笔记" class="headerlink" title="学习笔记"></a>学习笔记</h2><p>边学边做的笔记，这类笔记避免废话，避免啰嗦（可以稍微罗嗦一点，但是不要废话）。这不是写教程，自己明白就好。将知识点写明白即可。现在只是想有个大概了解，将来还有可能拿来复习，太罗嗦不好。</p>
+<h2 id="实记笔记"><a href="#实记笔记" class="headerlink" title="实记笔记"></a>实记笔记</h2><p>记录实践中遇到的问题，以及解决方案。</p>
+<h2 id="随笔"><a href="#随笔" class="headerlink" title="随笔"></a>随笔</h2><p>随笔</p>
+]]></content>
+      <tags>
+        <tag>日志</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>数据结构-栈和队列</title>
+    <url>/2020/12/07/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E6%A0%88%E5%92%8C%E9%98%9F%E5%88%97/</url>
+    <content><![CDATA[<h1 id="栈和队列"><a href="#栈和队列" class="headerlink" title="栈和队列"></a>栈和队列</h1><blockquote>
+<p>栈和队列也是线性表，只不过他们的操作受限。通常称，栈和队列是限定<u><strong>插入</strong></u>和<u><strong>删除</strong></u>只能在表的“<u><strong>端点</strong></u>”进行的线性表。</p>
+</blockquote>
+<h2 id="3-1-栈"><a href="#3-1-栈" class="headerlink" title="3.1 栈"></a>3.1 栈</h2><p>羽毛球筒，先进后出。</p>
+<h3 id="3-1-1-栈的定义"><a href="#3-1-1-栈的定义" class="headerlink" title="3.1.1 栈的定义"></a>3.1.1 栈的定义</h3><p>栈是限定仅在表尾进行插入或删除操作的线性表，表尾——栈顶，表头——栈底，不含元素的空表称<strong>空栈</strong>。特点：先进后出或后进先出。</p>
+<h3 id="3-1-2-栈的表示和实现"><a href="#3-1-2-栈的表示和实现" class="headerlink" title="3.1.2 栈的表示和实现"></a>3.1.2 栈的表示和实现</h3><p>和线性表一样，也有是有顺序存储结构与链式存储结构的。</p>
+<p>顺序栈，利用一组地址连续的存储单元依次存放字栈底到栈顶的数据元素。同时附一个top指示栈顶的位置。一般来说不设置顺序栈的最大容量，而是不够的时候添加。</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> strict &#123;</span><br><span class="line">	SElemType *base; <span class="comment">// 指向栈底的位置，为NULL则说明不存在</span></span><br><span class="line">	SElemType *top; <span class="comment">// 指向栈顶位置</span></span><br><span class="line">	<span class="keyword">int</span> stacksize; <span class="comment">// 当前可使用的最大容量</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>当top=base的时候自然是顺序栈为空的时候。每当插入一个新栈顶元素，top加一，每当删除一个栈顶元素时，top减一。</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="function">Status <span class="title">InitStack</span><span class="params">(SqStack &amp;S)</span></span>&#123;</span><br><span class="line">	<span class="comment">// 建一个新栈</span></span><br><span class="line">	S.base = (SElemType *)<span class="built_in">malloc</span>(INIT_SIZE*(<span class="keyword">sizeof</span> SElemType*));</span><br><span class="line">	<span class="comment">// 写笔记的时候，这里卡了一下，一时间没有理解为什么是S.base，</span></span><br><span class="line">    <span class="comment">// .后来翻看了一下线性表那一章的笔记，</span></span><br><span class="line">    <span class="comment">// 这个S.base应该是栈的基址</span></span><br><span class="line">	<span class="keyword">if</span>(!S.base) <span class="built_in">exit</span>(OVERFLOW);</span><br><span class="line">	S.top = S.base;</span><br><span class="line">	S.stacksize = INIT_SIZE;</span><br><span class="line">	<span class="keyword">return</span> OK;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>取栈顶元素</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="function">Status <span class="title">GetTop</span><span class="params">(SqStack S, SElemType &amp;e)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(S.top = S.base) <span class="keyword">return</span> ERROR;</span><br><span class="line">	e = *(S.top<span class="number">-1</span>);</span><br><span class="line">	<span class="keyword">return</span> OK</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>添加新的栈顶元素</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="function">Status <span class="title">Push</span><span class="params">(SqStack S, SElemType &amp;e)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(S.top-S.base&gt;=S.stacksize) &#123;</span><br><span class="line">	<span class="comment">//栈满了</span></span><br><span class="line">	S.base=</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="3-2-栈的应用举例"><a href="#3-2-栈的应用举例" class="headerlink" title="3.2 栈的应用举例"></a>3.2 栈的应用举例</h2><h3 id="3-2-1-数制转换"><a href="#3-2-1-数制转换" class="headerlink" title="3.2.1 数制转换"></a>3.2.1 数制转换</h3><p>十进制数N和其他d进制转换：<code>N=(N div d)xd+N mod d</code>（div为取整运算，mod为求余）</p>
+<p>上述计算过程，从低位到高位顺序产生d进制数，但是输出时，应该是从高位到地位输出的，正好相反。</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">conversion</span><span class="params">(d)</span> </span>&#123;</span><br><span class="line">	InitStack(S);</span><br><span class="line">	<span class="built_in">scanf</span>(“%d”, N);</span><br><span class="line">	<span class="keyword">while</span>(N) &#123;</span><br><span class="line">	<span class="comment">// 这个循环一下子没看懂的话，可以画一画图</span></span><br><span class="line">		push(S, N%d);</span><br><span class="line">		N=N/d;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">while</span>(S.top!=S.base) &#123;</span><br><span class="line">		Pop(S, e); <span class="comment">// 删除;</span></span><br><span class="line">		<span class="built_in">printf</span>(“%d”, e); <span class="comment">// 按高位到低位顺序输出</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="3-2-2-括号匹配的检验"><a href="#3-2-2-括号匹配的检验" class="headerlink" title="3.2.2 括号匹配的检验"></a>3.2.2 括号匹配的检验</h3><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function">Status <span class="title">Match</span><span class="params">()</span></span>&#123;</span><br><span class="line">	InitStack(S);</span><br><span class="line">	<span class="keyword">do</span>&#123;</span><br><span class="line">		<span class="built_in">scanf</span>(“%s”, <span class="keyword">new</span>);</span><br><span class="line">		<span class="keyword">switch</span>(<span class="keyword">new</span>) &#123;</span><br><span class="line">			<span class="keyword">case</span> ‘[‘:</span><br><span class="line">			<span class="keyword">case</span> ‘(’: Push(S, <span class="keyword">new</span>); <span class="keyword">break</span>;</span><br><span class="line">			<span class="keyword">case</span> ‘]’:</span><br><span class="line">			<span class="keyword">case</span> ‘)’:</span><br><span class="line">				<span class="keyword">if</span>(<span class="keyword">new</span> == *S.top) Pop(S, e);</span><br><span class="line">				<span class="keyword">else</span> <span class="keyword">return</span> ERROR;</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			<span class="keyword">default</span>: <span class="keyword">return</span> ERROR;</span><br><span class="line">		&#125; <span class="comment">//switch</span></span><br><span class="line">	&#125;<span class="keyword">while</span>(S.top!=S.base);</span><br><span class="line">	DestroyStack(S);</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>上边的伪代码，功能貌似是实现了，但是总感觉差点意思。 </p>
+</blockquote>
+<h3 id="3-2-2-行编辑程序"><a href="#3-2-2-行编辑程序" class="headerlink" title="3.2.2 行编辑程序"></a>3.2.2 行编辑程序</h3><p>用户要输入东西，但是你不能他输入什么你就存什么，万一他输错了呢，所以要放在缓存区内，方便用户修改。缓存区设置成一个栈，将用户输入的字符存进去，存的时候先进行判断，如果是退格符<code>#</code>，或者是退行符<code>@</code>，那就压入栈中，如果是，那要不删除栈顶元素，要不清空栈。</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">LineEdit</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	InitStack(S); <span class="comment">// 这个栈存的是一行元素</span></span><br><span class="line">	ch = getchar();</span><br><span class="line">	<span class="keyword">while</span>(ch!=EOF)&#123;</span><br><span class="line">		<span class="keyword">while</span>(ch!=EOF &amp;&amp; ch!=‘\n’) &#123;</span><br><span class="line">			<span class="keyword">switch</span>(ch)&#123;</span><br><span class="line">				<span class="keyword">case</span> ‘#’: Pop(S, e); <span class="keyword">break</span>; </span><br><span class="line">                    <span class="comment">// 如果是#就删除栈顶元素</span></span><br><span class="line">				<span class="keyword">case</span> ‘@‘: ClearStack(S); <span class="keyword">break</span>; </span><br><span class="line">                    <span class="comment">//@就把这个栈清空</span></span><br><span class="line">				<span class="keyword">default</span>: Push(S, ch); <span class="keyword">break</span>; </span><br><span class="line">                    <span class="comment">// 输入其他的就放入栈中</span></span><br><span class="line">			&#125;</span><br><span class="line">			ch = getchar();</span><br><span class="line">		&#125;</span><br><span class="line">		ClearStack(S);</span><br><span class="line">		<span class="keyword">if</span>(ch==‘\n’) ch = getchar(); </span><br><span class="line">        <span class="comment">// 如果仅仅是换行的话，就继续存</span></span><br><span class="line">	&#125;</span><br><span class="line">	DestroyStack(S); <span class="comment">// 销毁栈</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="3-2-4-迷宫求解"><a href="#3-2-4-迷宫求解" class="headerlink" title="3.2.4 迷宫求解"></a>3.2.4 迷宫求解</h3><h2 id="3-4-队列"><a href="#3-4-队列" class="headerlink" title="3.4 队列"></a>3.4 队列</h2><h3 id="3-4-1-定义"><a href="#3-4-1-定义" class="headerlink" title="3.4.1 定义"></a>3.4.1 定义</h3><p>队列和栈不同，队列一种先进先出的线性表，就和日常生活中的排队一样。在队列中，云需插入的一端叫<strong>队尾</strong>，允许删除的一端叫做<strong>队头</strong>。</p>
+<p>双端队列</p>
+<h3 id="3-4-2-链队列"><a href="#3-4-2-链队列" class="headerlink" title="3.4.2 链队列"></a>3.4.2 链队列</h3><p>需要头指针与尾指针，指向队头与队尾。</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">QNode</span> &#123;</span></span><br><span class="line">	QElemType data;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">QNode</span> *<span class="title">next</span>;</span></span><br><span class="line">&#125;QNode, *QueuePtr;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">	QueuePtr front; <span class="comment">// 队头指针</span></span><br><span class="line">	QueuePtr rear; <span class="comment">// 队尾指针</span></span><br><span class="line">&#125;LinkQueue;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>删除队头</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function">Status <span class="title">DeQueue</span><span class="params">(LinkQueue &amp;Q, QElemType &amp;e)</span> </span>&#123;</span><br><span class="line">	p = Q.front-&gt;next;</span><br><span class="line">	e = p-&gt;data;</span><br><span class="line">	Q.front-&gt;next = p.front-&gt;next;</span><br><span class="line">	<span class="keyword">if</span>(Q.rear == p) Q.rear = Q.front; </span><br><span class="line">	<span class="comment">// 如果删除的刚好就是队尾，那就需要重新赋值，不然队尾就丢了</span></span><br><span class="line">	<span class="built_in">free</span>(p);</span><br><span class="line">	<span class="keyword">return</span> OK;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="3-4-3-循环队列"><a href="#3-4-3-循环队列" class="headerlink" title="3.4.3 循环队列"></a>3.4.3 循环队列</h3><p>队列的循序表示与实现。插入新的队列尾元素时，尾指针加一；删除队列头元素时，头指针加一。非空队列中，头指针始终指向队头元素，尾指针始终指向队尾元素的后一位。</p>
+<p>可以发现，不管是添加还是删除，都会往后移一位，那么两个一直往后退，退到最后一位，前面却全空了。</p>
+<p>有一个方法(结合教材p63理解)，臆想一个环形的队列，这样就解决了空表不能存放数据的问题，但是<code>Q.front=Q.rear</code>却不能判断队列是否为空。</p>
+<p>解决上述问题：</p>
+<ol>
+<li>另外设置一个标志来区分队列是否为空</li>
+<li>少用一个元素空间，约定以“队列头指针在队列尾指针的下一位置（指环状的下一位置）上”作为队列呈“满”状态的标志。（没懂）</li>
+</ol>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXQSIZE 100 <span class="comment">//最大队列长度</span></span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">	QElemType *base; <span class="comment">//初始化动态分配存储空间</span></span><br><span class="line">	<span class="keyword">int</span> front;</span><br><span class="line">	<span class="keyword">int</span> rear;</span><br><span class="line">&#125;SqQueue;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <tags>
+        <tag>数据结构笔记</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>充电</title>
+    <url>/2020/12/11/%E5%85%85%E7%94%B5/</url>
+    <content><![CDATA[<h1 id="读书充电"><a href="#读书充电" class="headerlink" title="读书充电"></a>读书充电</h1><blockquote>
+<p>记录一个比较喜欢的知乎回答，没有注明出处，反正是自己的私人博客，不管那么多了。</p>
+</blockquote>
+<p>如何吸收书中的知识点：</p>
+<p>当你看到一个很有意思的知识点的时候，试着把它教给别人。<br>不一定真要对别人说，在脑子里想象两个人的对话也可以。<br>不明白的地方，讲不清楚的地方，再查书。<br>反复尝试，直到能不看原文，完整地用自己的话把它叙述出来为止。</p>
+<p>OK，这是第一步。</p>
+<p>然后，试着为它写一篇短文。<br>内容可以是这个知识点在任何地方的应用，关于它的一切，想到什么写什么。<br>不要与第一步重复。<br>几百字就可以。<br>如果碰到任何障碍，记下来，去弄明白，然后继续写。</p>
+<p>这是第二步。</p>
+<p>最后一步，以这个点为中心，发散思维，将你能联想到的东西全部记下来。<br>在连接处写上两点之间的联系。<br>这个图谱就是你理解和记忆这个知识点的方式。请多多翻阅。</p>
+<p><strong>第一步，是理解它的内涵。</strong><br><strong>第二步，是理解它的外延。</strong><br><strong>第三步，是将它在记忆中，以图谱的形式储存起来。</strong></p>
+<p>完成以上三步，这个知识点，就是你的了。</p>
+<p>先明确一下读书笔记的原则：</p>
+<ol>
+<li>不要为了做笔记而做笔记。<strong>笔记是帮助构建知识体系的工具。</strong>笔记代替不了思考，只能作为思考的补充。</li>
+<li>做了笔记，要多看，否则，毫无作用。</li>
+<li>不要依赖笔记。<strong>笔记的作用就是让你不再需要笔记。</strong></li>
+</ol>
+<p>再说一下读书笔记的几个误区：</p>
+<ol>
+<li>笔记就是摘抄<br>摘抄是最没效率的方法。如果需要记录大段的原文以供引用，请拍照。这就是数码时代的便利。</li>
+<li>笔记就是给一本书画大纲<br>这同样是效率极低的方法。一本书的内容，不可能全部都使你感兴趣，能纳入你的知识体系。而且，仅仅因为“这本书里有这样的内容”，就记下自己不喜欢也不需要的东西，会影响做笔记的积极性。</li>
+<li>笔记要保存起来，时时翻看<br>前期确实如此，但如果一本笔记做了几年，当你需要时，还得翻开笔记去查——那这笔记做了有什么用？你的知识是储存在大脑里的，不是储存在笔记里的。<br>笔记只有两种：一种是原文，以备查询（拍照或者用电脑录入即可）；一种是思维架构，帮助完善知识体系，用完就可以丢弃。</li>
+</ol>
+<p>说说我的笔记方法。</p>
+<p>当你看一本书，读罢一章，觉得信息量巨大，醍醐灌顶，拍案叫绝，恨不得马上把这一章画大纲、抄下来——这时，先别忙着这样做。<br>先问自己：这一章里面，感兴趣的是哪些？<strong>有哪些能纳入自己的知识体系之中</strong>？</p>
+<p>比如，读古希腊史，你也许不会对克里特宫殿里有什么器皿、迈锡尼人驯养了什么家畜、伊奥尼亚人种植了什么作物感兴趣，你比较感兴趣的是：希波战争的整个过程。它是如何发生的？双方的实力对比如何？有哪些经典的小战役？</p>
+<p>那么，带着这个问题，再读一遍，其他无关的信息，不要理会。<br>读的时候，看到任何一个不懂的词、不清楚的概念，立刻上网查，务必弄明白。<br>当你把这个过程梳理清楚了，好，眼睛离开书。现在，请你在心中想象一个听众，用你的话把这个知识点解释给他听。<br>说的过程中，遇到任何不清楚的地方，停下来，上网查，马上弄明白。</p>
+<p>等你可以流畅地把“希波战争发生的全过程”解释清楚了，打开笔记本，在本子上记下要点。这些要点，就是你在叙述时，那些比较重要的节点，那些“牵一发而动全身”的点。</p>
+<p>下一步，请你思考，这个东西，可以跟知识体系中的什么联系起来？<br>你通过这个知识点，可以联想到什么你已经知道了的东西？<br>以这个点为圆心，把它们记在它的周围。<br>这就是你关于这个知识点的图式。</p>
+<p>好了，这个知识点已经告一段落，请在笔记下面标明日期、书名、页码，然后就可以翻开下一章了。<br>接下来，只需要每周一次，或者几天一次，翻开这几天做的笔记，根据自己记下的图式，将这个知识点完完整整地回忆出来。<br>然后，根据周围的联系元素，将它在你整个知识图式中过一遍。<br>直到你对这个点已经烂熟于心，这则笔记也就完成它的使命了。</p>
+]]></content>
+      <tags>
+        <tag>随笔</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>树和二叉树</title>
+    <url>/2020/12/10/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E6%A0%91%E5%92%8C%E4%BA%8C%E5%8F%89%E6%A0%91/</url>
+    <content><![CDATA[<h1 id="第六章-树和二叉树"><a href="#第六章-树和二叉树" class="headerlink" title="第六章 树和二叉树"></a>第六章 树和二叉树</h1><blockquote>
+<p>树的结构定义是一个递归定义，即在树的定义中又用到了树的概念。树是以层次化方式组织和存放数据的数据结构。</p>
+</blockquote>
+<p>以下定义为主观臆断，非标准定义：</p>
+<p>想象真正的树，枝条之间是不会相连接。数据结构中的树也同样是这种一对多的形式。树的枝条分叉点叫做<strong>结点</strong>，其中包含着数据元素及若干指向其子树的分支。结点拥有的分叉（子树）数量叫做<strong>结点的度</strong>。度为0的结点称为<strong>叶子</strong>（或终端结点），否则称为<strong>分支节点</strong>（非终端节点）。除根结点之外，分支节点也称<strong>内部节点</strong>。<strong>树的度</strong>是内部节点度的<u>最大值</u>。</p>
+<p>直接相连的两个结点，称为<strong>双亲</strong>与<strong>孩子</strong>，同一个子树下的结点们互称<strong>兄弟</strong>，两结点的双亲是兄弟，那么他俩就是<strong>堂兄弟</strong>。不直接相连，但是从A往下能到B，那么B就是A的<strong>子孙</strong>，A就是B的<strong>祖先</strong>。</p>
+<p><strong>层次</strong>：根为第一层，根的孩子为第二层，孩子的孩子为第三层… …树的最大层次就是树的<strong>深度</strong>。</p>
+<p><strong>森林</strong>：好多树的集合。</p>
+<h2 id="6-2-二叉树"><a href="#6-2-二叉树" class="headerlink" title="6.2 二叉树"></a>6.2 二叉树</h2><h3 id="6-2-1-二叉树的定义"><a href="#6-2-1-二叉树的定义" class="headerlink" title="6.2.1 二叉树的定义"></a>6.2.1 二叉树的定义</h3><p>顾名思义，每个结点最多只有左右两个结点。</p>
+<h3 id="6-2-2-二叉树的性质"><a href="#6-2-2-二叉树的性质" class="headerlink" title="6.2.2 二叉树的性质"></a>6.2.2 二叉树的性质</h3><p>性质1：在二叉树第i层上至多有2<sup>i-1</sup>个结点。</p>
+<p>性质2：深度为k的二叉树至多有2<sup>k</sup>-1个结点。</p>
+<p>性质3：对任何一棵二叉树t，如果其终端结点数为n<sub>0</sub>，度为2的节点数为n<sub>2</sub>，则n<sub>0</sub>=n<sub>2</sub>+1。</p>
+<p>满二叉树：每一层的结点都满满的。</p>
+<p>性质4：具有n个结点的完全二叉树的深度为└log<sub>2</sub>n┘+1</p>
+<h3 id="二叉树的二叉链表存储表示"><a href="#二叉树的二叉链表存储表示" class="headerlink" title="二叉树的二叉链表存储表示"></a>二叉树的二叉链表存储表示</h3><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">BiTNode</span> &#123;</span></span><br><span class="line">    TElemType data;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">BiTNode</span> *<span class="title">lchild</span>, *<span class="title">rchild</span>;</span></span><br><span class="line">&#125;BiTNode, *BiTree;</span><br></pre></td></tr></table></figure>
+
+<p><strong>先（根）序的遍历算法</strong>（待补充）</p>
+<ol>
+<li><p>访问根结点；</p>
+</li>
+<li><p>先序遍历左子树；</p>
+</li>
+<li><p>先序遍历右子树。</p>
+</li>
+</ol>
+<p><strong>中（根）序的遍历算法</strong>（待补充）</p>
+<ol>
+<li><p>中序遍历左子树；</p>
+</li>
+<li><p>访问根结点；</p>
+</li>
+<li><p>中序遍历右子树。</p>
+</li>
+</ol>
+<p><strong>后（根）序的遍历算法</strong>（待补充）</p>
+<ol>
+<li>后序遍历左子树；</li>
+<li>后序遍历右子树；</li>
+<li>访问根结点。</li>
+</ol>
+<h3 id="6-3-2-线索二叉树"><a href="#6-3-2-线索二叉树" class="headerlink" title="6.3.2 线索二叉树"></a>6.3.2 线索二叉树</h3><div style="display: flex;text-align:center;width:70%">
+    <div style="border: 2px solid #000;flex-grow:1;">lchild</div>
+    <div style="border: 2px solid #000;flex-grow:1;">LTag</div>
+    <div style="border: 2px solid #000;flex-grow:1;">data</div>
+    <div style="border: 2px solid #000;flex-grow:1;">RTag</div>
+    <div style="border: 2px solid #000;flex-grow:1;">rchild</div>
+</div>
+
+<p>若结点有左子树，则其lchild域指示其左孩子（标志域LTag=0），否则令lchild域指示其前驱（标志域LTag=1）；若结点有右子树，则其rchild域指示其右孩子（标志域RTag=0），否则令rchild域指示其后继（标志域RTag=1）。指向结点前驱和后驱的指针叫做<strong>线索</strong>。加上线索的二叉树叫做<strong>线索二叉树</strong>。对二叉树进行遍历的时候将其变为线索二叉树的过程叫做<strong>线索化</strong></p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">enum</span> &#123;</span> Link, Thread &#125; PointerThr;  </span><br><span class="line"><span class="comment">// Link==0:指针，Thread==1:线索</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">BiThrNode</span> &#123;</span></span><br><span class="line">   TElemType data;</span><br><span class="line">   <span class="class"><span class="keyword">struct</span> <span class="title">BiThrNode</span> *<span class="title">lchild</span>, *<span class="title">rchild</span>;</span> <span class="comment">// 左右指针</span></span><br><span class="line">   PointerThr LTag, RTag; <span class="comment">// 左右标志</span></span><br><span class="line">&#125; BiThrNode, *BiThrTree;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+]]></content>
+      <tags>
+        <tag>数据结构笔记</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>JavaScript笔记</title>
+    <url>/2020/12/24/JavaScript%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<h1 id="笔记"><a href="#笔记" class="headerlink" title="笔记"></a>笔记</h1><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> </span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+]]></content>
+      <tags>
+        <tag>JavaScript笔记</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>随便记一记</title>
+    <url>/2020/12/23/%E9%9A%8F%E4%BE%BF%E8%AE%B0%E4%B8%80%E8%AE%B0/</url>
+    <content><![CDATA[<h1 id="《基于C语言自制编程语言》随便记"><a href="#《基于C语言自制编程语言》随便记" class="headerlink" title="《基于C语言自制编程语言》随便记"></a>《基于C语言自制编程语言》随便记</h1><blockquote>
+<p>图书馆发现这么一本书，就当作消遣看一看吧</p>
+</blockquote>
+<p>理论为了严谨，总是把简单的东西复杂定义。通过实践，你才能发现，原来那些东西都很简单，纸上得来终觉浅，绝知此事要躬行。</p>
+]]></content>
+      <tags>
+        <tag>摘抄</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>数据结构-绪论</title>
+    <url>/2020/12/27/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E7%BB%AA%E8%AE%BA/</url>
+    <content><![CDATA[<h1 id="绪论"><a href="#绪论" class="headerlink" title="绪论"></a>绪论</h1><h2 id="基本概念与术语"><a href="#基本概念与术语" class="headerlink" title="基本概念与术语"></a>基本概念与术语</h2><h3 id="数据"><a href="#数据" class="headerlink" title="数据"></a>数据</h3><p>能输入到计算机并且被处理的字符的总称。</p>
+<h3 id="数据元素"><a href="#数据元素" class="headerlink" title="数据元素"></a>数据元素</h3><p>数据的基本单位，通常作为一个整体考虑。</p>
+<p>一个数据元素可以由若干个<strong>数据项</strong>组成，数据项是不可再分割的最小单位。</p>
+<h3 id="数据对象"><a href="#数据对象" class="headerlink" title="数据对象"></a>数据对象</h3><p><u>性质相同</u>的数据元素的<u>集合</u>，是<u>数据</u>的一个子集。和Java中的对象概念相同。</p>
+<hr>
+<p>人员表</p>
+<table>
+<thead>
+<tr>
+<th align="center">姓名</th>
+<th align="center">性别</th>
+<th align="center">身高</th>
+<th align="center">课程代号</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">小王</td>
+<td align="center">男</td>
+<td align="center">175</td>
+<td align="center">A</td>
+</tr>
+<tr>
+<td align="center">小张</td>
+<td align="center">女</td>
+<td align="center">165</td>
+<td align="center">B</td>
+</tr>
+</tbody></table>
+<p>课程表</p>
+<table>
+<thead>
+<tr>
+<th align="center">课程代号</th>
+<th align="center">课程名</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">A</td>
+<td align="center">数学</td>
+</tr>
+<tr>
+<td align="center">B</td>
+<td align="center">语文</td>
+</tr>
+</tbody></table>
+<p>如上两表，组合起来可称为<strong>数据</strong>；其中每一张表为<strong>数据对象</strong>，因为具有相同的属性；每一行叫<strong>数据元素</strong>；每一行中的单个信息，比如性别，姓名等称为<strong>数据项</strong>。</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 结构体定义的是个数据项</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">    <span class="keyword">char</span> name[<span class="number">10</span>]; <span class="comment">// 数据项</span></span><br><span class="line">    <span class="keyword">char</span> gender[<span class="number">5</span>]; <span class="comment">// 数据项</span></span><br><span class="line">    <span class="keyword">int</span> height; <span class="comment">// 数据项</span></span><br><span class="line">    <span class="keyword">char</span> curriculum; <span class="comment">// 数据项</span></span><br><span class="line">&#125; Students;</span><br><span class="line"></span><br><span class="line">Students xiaohong; <span class="comment">// 单个定义了小红，就是个数据项</span></span><br><span class="line">Students students[<span class="number">10</span>]; <span class="comment">// 这是一个学生信息的集合，所以数据对象</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+]]></content>
+      <tags>
+        <tag>数据结构笔记</tag>
+      </tags>
+  </entry>
+</search>
