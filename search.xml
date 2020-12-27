@@ -288,6 +288,9 @@
 
 
 ]]></content>
+      <categories>
+        <category>数据结构学习笔记</category>
+      </categories>
       <tags>
         <tag>数据结构笔记</tag>
       </tags>
@@ -462,6 +465,9 @@
 <p>我觉得这道题很能说明AOE-网。</p>
 <p>路径长度最长叫做<strong>关键路径</strong>，也好理解，只有它执行完了，整张图才能结束。</p>
 ]]></content>
+      <categories>
+        <category>数据结构学习笔记</category>
+      </categories>
       <tags>
         <tag>数据结构笔记</tag>
       </tags>
@@ -564,6 +570,9 @@
 
 <h2 id="9-2-动态查找表"><a href="#9-2-动态查找表" class="headerlink" title="9.2 动态查找表"></a>9.2 动态查找表</h2><p>表结构本身是在查找的过程中建立的，对于给定的key，如果有记录的关键字等于key，就返回成功，否则就插入关键字等于key的记录。</p>
 ]]></content>
+      <categories>
+        <category>数据结构学习笔记</category>
+      </categories>
       <tags>
         <tag>数据结构笔记</tag>
       </tags>
@@ -625,7 +634,7 @@
       </tags>
   </entry>
   <entry>
-    <title>树和二叉树</title>
+    <title>数据结构-树和二叉树</title>
     <url>/2020/12/10/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E6%A0%91%E5%92%8C%E4%BA%8C%E5%8F%89%E6%A0%91/</url>
     <content><![CDATA[<h1 id="第六章-树和二叉树"><a href="#第六章-树和二叉树" class="headerlink" title="第六章 树和二叉树"></a>第六章 树和二叉树</h1><blockquote>
 <p>树的结构定义是一个递归定义，即在树的定义中又用到了树的概念。树是以层次化方式组织和存放数据的数据结构。</p>
@@ -697,6 +706,9 @@
 
 
 ]]></content>
+      <categories>
+        <category>数据结构学习笔记</category>
+      </categories>
       <tags>
         <tag>数据结构笔记</tag>
       </tags>
@@ -843,6 +855,9 @@
 <p>一般情况下的<strong>一元稀疏多项式</strong>可以写成P<sub>n</sub>(x) = p<sub>1</sub>x<sup>e1</sup> + p<sub>2</sub>x<sup>e2</sup> + … + p<sub>m</sub>x<sup>em</sup> 其中：p<sub>i</sub>是指数为e<sub>i</sub>的项的非零系数0&lt;=e<sub>1</sub>&lt;e<sub>2</sub>&lt; … &lt;e<sub>m</sub> = n可以用下列线性表示：((p<sub>1</sub>, e<sub>1</sub>), (p<sub>2</sub>, e<sub>2</sub>), … ,  (p<sub>m</sub>, e<sub>m</sub>))</p>
 <p>例如P<sub>999</sub>(x) = 7x<sup>3</sup> - 2x<sup>12</sup> - 8x<sup>999</sup> 可用线性表((7, 3), (-2, 12), (-8, 999))表示</p>
 ]]></content>
+      <categories>
+        <category>数据结构学习笔记</category>
+      </categories>
       <tags>
         <tag>数据结构笔记</tag>
         <tag>线性表</tag>
@@ -962,10 +977,10 @@
   <entry>
     <title>随便记一记</title>
     <url>/2020/12/23/%E9%9A%8F%E4%BE%BF%E8%AE%B0%E4%B8%80%E8%AE%B0/</url>
-    <content><![CDATA[<h1 id="《基于C语言自制编程语言》随便记"><a href="#《基于C语言自制编程语言》随便记" class="headerlink" title="《基于C语言自制编程语言》随便记"></a>《基于C语言自制编程语言》随便记</h1><blockquote>
-<p>图书馆发现这么一本书，就当作消遣看一看吧</p>
-</blockquote>
-<p>理论为了严谨，总是把简单的东西复杂定义。通过实践，你才能发现，原来那些东西都很简单，纸上得来终觉浅，绝知此事要躬行。</p>
+    <content><![CDATA[<p>图书馆发现这么一本书，就当作消遣看一看吧</p>
+<a id="more"></a>
+
+<h1 id="《基于C语言自制编程语言》随便记"><a href="#《基于C语言自制编程语言》随便记" class="headerlink" title="《基于C语言自制编程语言》随便记"></a>《基于C语言自制编程语言》随便记</h1><p>理论为了严谨，总是把简单的东西复杂定义。通过实践，你才能发现，原来那些东西都很简单，纸上得来终觉浅，绝知此事要躬行。</p>
 ]]></content>
       <tags>
         <tag>摘抄</tag>
@@ -974,7 +989,27 @@
   <entry>
     <title>期末习题-线性表</title>
     <url>/2020/12/27/%E6%9C%9F%E6%9C%AB%E4%B9%A0%E9%A2%98-%E7%BA%BF%E6%80%A7%E8%A1%A8/</url>
-    <content><![CDATA[<h1 id="期末复习"><a href="#期末复习" class="headerlink" title="期末复习"></a>期末复习</h1>]]></content>
+    <content><![CDATA[<h1 id="期末复习-线性表"><a href="#期末复习-线性表" class="headerlink" title="期末复习-线性表"></a>期末复习-线性表</h1><h2 id="单链表逆置"><a href="#单链表逆置" class="headerlink" title="单链表逆置"></a>单链表逆置</h2><p>题目：逆置带头结点的单链表</p>
+<p>思路：</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="function">LNode <span class="title">reverse</span><span class="params">(LNode L)</span></span>&#123;</span><br><span class="line">    p = L-&gt;next;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+]]></content>
       <categories>
         <category>数据结构学习笔记</category>
       </categories>
