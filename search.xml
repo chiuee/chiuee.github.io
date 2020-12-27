@@ -420,6 +420,7 @@
 ]]></content>
       <tags>
         <tag>数据结构笔记</tag>
+        <tag>线性表</tag>
       </tags>
   </entry>
   <entry>
@@ -463,10 +464,6 @@
     <url>/2020/12/01/Flex%E7%AE%80%E5%8D%95%E6%80%BB%E7%BB%93/</url>
     <content><![CDATA[<p>flexbox 是一种一维布局，因为 flexbox 一次性只能处理一个维度上的元素布局。<br>本文为简单介绍。</p>
 <a id="more"></a>
-
-
-
-
 
 <h1 id="Flex弹性盒模型基本概念"><a href="#Flex弹性盒模型基本概念" class="headerlink" title="Flex弹性盒模型基本概念"></a>Flex弹性盒模型基本概念</h1><p><br><br></p>
 <hr>
@@ -914,7 +911,12 @@
   <entry>
     <title>数据结构-绪论</title>
     <url>/2020/12/27/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E7%BB%AA%E8%AE%BA/</url>
-    <content><![CDATA[<h1 id="绪论"><a href="#绪论" class="headerlink" title="绪论"></a>绪论</h1><h2 id="基本概念与术语"><a href="#基本概念与术语" class="headerlink" title="基本概念与术语"></a>基本概念与术语</h2><h3 id="数据"><a href="#数据" class="headerlink" title="数据"></a>数据</h3><p>能输入到计算机并且被处理的字符的总称。</p>
+    <content><![CDATA[<blockquote>
+<p>《数据结构与算法》严蔚敏版教材学习笔记<br>绪论主要是介绍一些术语和基本概念</p>
+</blockquote>
+<a id="more"></a>
+
+<h1 id="绪论"><a href="#绪论" class="headerlink" title="绪论"></a>绪论</h1><h2 id="基本概念与术语"><a href="#基本概念与术语" class="headerlink" title="基本概念与术语"></a>基本概念与术语</h2><h3 id="数据"><a href="#数据" class="headerlink" title="数据"></a>数据</h3><p>能输入到计算机并且被处理的字符的总称。</p>
 <h3 id="数据元素"><a href="#数据元素" class="headerlink" title="数据元素"></a>数据元素</h3><p>数据的基本单位，通常作为一个整体考虑。</p>
 <p>一个数据元素可以由若干个<strong>数据项</strong>组成，数据项是不可再分割的最小单位。</p>
 <h3 id="数据对象"><a href="#数据对象" class="headerlink" title="数据对象"></a>数据对象</h3><p><u>性质相同</u>的数据元素的<u>集合</u>，是<u>数据</u>的一个子集。和Java中的对象概念相同。</p>
