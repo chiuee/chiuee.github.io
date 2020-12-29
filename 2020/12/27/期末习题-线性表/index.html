@@ -50,7 +50,7 @@
                     <a class=""
                        href="/"
                     >
-                        首页
+                        HOME
                     </a>
                 </li>
             
@@ -58,7 +58,7 @@
                     <a class=""
                        href="/archives"
                     >
-                        归档
+                        ARCHIVES
                     </a>
                 </li>
             
@@ -66,7 +66,7 @@
                     <a class=""
                        href="/categories"
                     >
-                        分类
+                        CATEGORIES
                     </a>
                 </li>
             
@@ -74,7 +74,7 @@
                     <a class=""
                        href="/tags"
                     >
-                        标签
+                        TAGS
                     </a>
                 </li>
             
@@ -82,7 +82,7 @@
                     <a class=""
                        href="/about"
                     >
-                        关于
+                        ABOUT
                     </a>
                 </li>
             
@@ -98,27 +98,27 @@
             
                 <li class="drawer-menu-item flex-center">
                     <a class=""
-                       href="/">首页</a>
+                       href="/">HOME</a>
                 </li>
             
                 <li class="drawer-menu-item flex-center">
                     <a class=""
-                       href="/archives">归档</a>
+                       href="/archives">ARCHIVES</a>
                 </li>
             
                 <li class="drawer-menu-item flex-center">
                     <a class=""
-                       href="/categories">分类</a>
+                       href="/categories">CATEGORIES</a>
                 </li>
             
                 <li class="drawer-menu-item flex-center">
                     <a class=""
-                       href="/tags">标签</a>
+                       href="/tags">TAGS</a>
                 </li>
             
                 <li class="drawer-menu-item flex-center">
                     <a class=""
-                       href="/about">关于</a>
+                       href="/about">ABOUT</a>
                 </li>
             
         </ul>
@@ -211,21 +211,34 @@
 <p>思路：先找到尾结点，注意判断是否为尾结点的标志是，其next是否为首元结点。然后连接。</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">connect</span><span class="params">(LNode *L1, LNode *L2)</span> </span>&#123;</span><br><span class="line">    LNode *p, *q;</span><br><span class="line">    p = L1-&gt;next;</span><br><span class="line">    q = L2-&gt;next;</span><br><span class="line">    <span class="keyword">while</span>(p-&gt;next != L1) &#123;</span><br><span class="line">        p = p-&gt;next;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span>(q-&gt;next != L2) &#123;</span><br><span class="line">        q = q-&gt;next;</span><br><span class="line">    &#125;</span><br><span class="line">    p-&gt;next = L2;</span><br><span class="line">    q-&gt;next = L1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h2 id=""><a href="#" class="headerlink" title=""></a></h2>
+<h2 id="0"><a href="#0" class="headerlink" title="0"></a>0</h2><p>题目：设一个带头结点的单向链表的头指针为head，设计算法，将链表的记录，按照data域的值递增排序。</p>
+<h2 id="0-1"><a href="#0-1" class="headerlink" title="0"></a>0</h2><p>题目：编写算法,将一个头指针为head不带头结点的单链表改造为一个单向循环链表，并分析算法的时间复杂度。</p>
+<h2 id="0-2"><a href="#0-2" class="headerlink" title="0"></a>0</h2><p>题目：已知head为带头结点的单循环链表的头指针，链表中的数据元素依次为(a<sub>1</sub>, a<sub>2</sub>, a<sub>3</sub>, a<sub>4</sub>, …, a<sub>n</sub>)，A为指向空的顺序表的指针。阅读以下程序段，并回答问题：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(head-&gt;next!=head)&#123;</span><br><span class="line">		p=head-&gt;next;</span><br><span class="line">		A-&gt;length=<span class="number">0</span>;</span><br><span class="line">		<span class="keyword">while</span>(p-&gt;next!=head)&#123;</span><br><span class="line">		p=p-&gt;next;</span><br><span class="line">		A-&gt;data[A-&gt;length ++]=p-&gt;data;</span><br><span class="line">		<span class="keyword">if</span>(p-&gt;next!=head) p=p-&gt;next;</span><br><span class="line">		&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>（1）写出执行下列程序段后的顺序表A中的数据元素；</p>
+<p>（2）简要叙述该程序段的功能。</p>
+<h2 id="0-3"><a href="#0-3" class="headerlink" title="0"></a>0</h2><p>题目：设顺序表va中的数据元数递增有序。试写一算法，将x插入到顺序表的适当位置上，以保持该表的有序性。</p>
+<h2 id="0-4"><a href="#0-4" class="headerlink" title="0"></a>0</h2><p>题目：假设线性表采用顺序存储结构，表中元素值为整型。阅读算法f2，设顺序表L=(3,7,3,2,1,1,8,7,3),写出执行算法f2后的线性表L的数据元素，并描述该算法的功能。</p>
+<h2 id="0-5"><a href="#0-5" class="headerlink" title="0"></a>0</h2><p>题目：已知线性表中的元素以值递增有序排列，并以单链表作存储结构。试写一算法，删除表中所有大于x且小于y的元素（若表中存在这样的元素）同时释放被删除结点空间。</p>
+<h2 id="0-6"><a href="#0-6" class="headerlink" title="0"></a>0</h2><p>题目：在带头结点的循环链表L中，结点的数据元素为整型，且按值递增有序存放。给定两个整数a和b，且a&lt;b，编写算法删除链表L中元素值大于a且小于b的所有结点。</p>
+
         </div>
 
         
             <div class="post-copyright-info">
                 <div class="article-copyright-info-container">
     <ul>
-        <li>本文标题：期末习题-线性表</li>
-        <li>本文作者：赵一凡</li>
-        <li>创建时间：2020-12-27 19:07:16</li>
+        <li>Post title：期末习题-线性表</li>
+        <li>Post author：赵一凡</li>
+        <li>Create time：2020-12-27 19:07:16</li>
         <li>
-            本文链接：https://chiuee.github.io/2020/12/27/期末习题-线性表/
+            Post link：https://chiuee.github.io/2020/12/27/期末习题-线性表/
         </li>
         <li>
-            版权声明：本博客所有文章除特别声明外，均采用 <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> 许可协议。转载请注明出处！
+            Copyright Notice：All articles in this blog are licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> unless stating additionally.
         </li>
     </ul>
 </div>
@@ -244,7 +257,7 @@
                         >
                             <span class="title flex-center">
                                 <span class="post-nav-title-item">数据结构-绪论</span>
-                                <span class="post-nav-item">下一篇</span>
+                                <span class="post-nav-item">Next posts</span>
                             </span>
                             <span class="right arrow-icon flex-center" >
                               <i class="fas fa-chevron-right"></i>
@@ -280,18 +293,18 @@
             <div class="website-count info-item">
                 
                     <span id="busuanzi_container_site_uv">
-                        访问人数 <span id="busuanzi_value_site_uv"></span>&ensp;
+                        Visitor Count <span id="busuanzi_value_site_uv"></span>&ensp;
                     </span>
                 
                 
                     <span id="busuanzi_container_site_pv">
-                        总访问量 <span id="busuanzi_value_site_pv"></span>
+                        Totalview <span id="busuanzi_value_site_pv"></span>
                     </span>
                 
             </div>
         
         <div class="theme-info info-item">
-            由 <a target="_blank" href="https://hexo.io">Hexo</a> 驱动 | 主题 <a class="theme-version" target="_blank"></a>
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a> | Theme <a class="theme-version" target="_blank"></a>
         </div>
     </div>
 </footer>
@@ -370,7 +383,7 @@
         
             <div class="post-toc-wrap">
     <div class="post-toc">
-        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9C%9F%E6%9C%AB%E4%B9%A0%E9%A2%98-%E7%BA%BF%E6%80%A7%E8%A1%A8"><span class="nav-number">1.</span> <span class="nav-text">期末习题-线性表</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%95%E9%93%BE%E8%A1%A8%E9%80%86%E7%BD%AE"><span class="nav-number">1.1.</span> <span class="nav-text">单链表逆置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%9E%E6%8E%A5%E4%B8%A4%E4%B8%AA%E5%BE%AA%E7%8E%AF%E9%93%BE%E8%A1%A8"><span class="nav-number">1.2.</span> <span class="nav-text">连接两个循环链表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.3.</span> <span class="nav-text"></span></a></li></ol></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9C%9F%E6%9C%AB%E4%B9%A0%E9%A2%98-%E7%BA%BF%E6%80%A7%E8%A1%A8"><span class="nav-number">1.</span> <span class="nav-text">期末习题-线性表</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%95%E9%93%BE%E8%A1%A8%E9%80%86%E7%BD%AE"><span class="nav-number">1.1.</span> <span class="nav-text">单链表逆置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%9E%E6%8E%A5%E4%B8%A4%E4%B8%AA%E5%BE%AA%E7%8E%AF%E9%93%BE%E8%A1%A8"><span class="nav-number">1.2.</span> <span class="nav-text">连接两个循环链表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0"><span class="nav-number">1.3.</span> <span class="nav-text">0</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0-1"><span class="nav-number">1.4.</span> <span class="nav-text">0</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0-2"><span class="nav-number">1.5.</span> <span class="nav-text">0</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0-3"><span class="nav-number">1.6.</span> <span class="nav-text">0</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0-4"><span class="nav-number">1.7.</span> <span class="nav-text">0</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0-5"><span class="nav-number">1.8.</span> <span class="nav-text">0</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0-6"><span class="nav-number">1.9.</span> <span class="nav-text">0</span></a></li></ol></li></ol>
     </div>
 </div>
         
@@ -398,7 +411,7 @@
                 <input autocomplete="off"
                        autocorrect="off"
                        autocapitalize="off"
-                       placeholder="搜索..."
+                       placeholder="Search..."
                        spellcheck="false"
                        type="search"
                        class="search-input"

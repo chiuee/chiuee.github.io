@@ -997,7 +997,20 @@
 <p>思路：先找到尾结点，注意判断是否为尾结点的标志是，其next是否为首元结点。然后连接。</p>
 <figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">connect</span><span class="params">(LNode *L1, LNode *L2)</span> </span>&#123;</span><br><span class="line">    LNode *p, *q;</span><br><span class="line">    p = L1-&gt;next;</span><br><span class="line">    q = L2-&gt;next;</span><br><span class="line">    <span class="keyword">while</span>(p-&gt;next != L1) &#123;</span><br><span class="line">        p = p-&gt;next;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span>(q-&gt;next != L2) &#123;</span><br><span class="line">        q = q-&gt;next;</span><br><span class="line">    &#125;</span><br><span class="line">    p-&gt;next = L2;</span><br><span class="line">    q-&gt;next = L1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h2 id=""><a href="#" class="headerlink" title=""></a></h2>]]></content>
+<h2 id="0"><a href="#0" class="headerlink" title="0"></a>0</h2><p>题目：设一个带头结点的单向链表的头指针为head，设计算法，将链表的记录，按照data域的值递增排序。</p>
+<h2 id="0-1"><a href="#0-1" class="headerlink" title="0"></a>0</h2><p>题目：编写算法,将一个头指针为head不带头结点的单链表改造为一个单向循环链表，并分析算法的时间复杂度。</p>
+<h2 id="0-2"><a href="#0-2" class="headerlink" title="0"></a>0</h2><p>题目：已知head为带头结点的单循环链表的头指针，链表中的数据元素依次为(a<sub>1</sub>, a<sub>2</sub>, a<sub>3</sub>, a<sub>4</sub>, …, a<sub>n</sub>)，A为指向空的顺序表的指针。阅读以下程序段，并回答问题：</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span>(head-&gt;next!=head)&#123;</span><br><span class="line">		p=head-&gt;next;</span><br><span class="line">		A-&gt;length=<span class="number">0</span>;</span><br><span class="line">		<span class="keyword">while</span>(p-&gt;next!=head)&#123;</span><br><span class="line">		p=p-&gt;next;</span><br><span class="line">		A-&gt;data[A-&gt;length ++]=p-&gt;data;</span><br><span class="line">		<span class="keyword">if</span>(p-&gt;next!=head) p=p-&gt;next;</span><br><span class="line">		&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>（1）写出执行下列程序段后的顺序表A中的数据元素；</p>
+<p>（2）简要叙述该程序段的功能。</p>
+<h2 id="0-3"><a href="#0-3" class="headerlink" title="0"></a>0</h2><p>题目：设顺序表va中的数据元数递增有序。试写一算法，将x插入到顺序表的适当位置上，以保持该表的有序性。</p>
+<h2 id="0-4"><a href="#0-4" class="headerlink" title="0"></a>0</h2><p>题目：假设线性表采用顺序存储结构，表中元素值为整型。阅读算法f2，设顺序表L=(3,7,3,2,1,1,8,7,3),写出执行算法f2后的线性表L的数据元素，并描述该算法的功能。</p>
+<h2 id="0-5"><a href="#0-5" class="headerlink" title="0"></a>0</h2><p>题目：已知线性表中的元素以值递增有序排列，并以单链表作存储结构。试写一算法，删除表中所有大于x且小于y的元素（若表中存在这样的元素）同时释放被删除结点空间。</p>
+<h2 id="0-6"><a href="#0-6" class="headerlink" title="0"></a>0</h2><p>题目：在带头结点的循环链表L中，结点的数据元素为整型，且按值递增有序存放。给定两个整数a和b，且a&lt;b，编写算法删除链表L中元素值大于a且小于b的所有结点。</p>
+]]></content>
       <categories>
         <category>数据结构学习笔记</category>
       </categories>
