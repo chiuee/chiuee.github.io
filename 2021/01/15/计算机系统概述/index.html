@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
     <title>
-        操作系统结构 |
+        计算机系统概述 |
         
         Zhaoyifan&#39;s Blog
     </title>
@@ -140,7 +140,7 @@
     <div class="article-content-container">
 
         <div class="article-title">
-            <span class="title-hover-animation">操作系统结构</span>
+            <span class="title-hover-animation">计算机系统概述</span>
         </div>
 
         
@@ -156,7 +156,7 @@
                     <div class="meta-info">
                         <div class="article-meta-info">
     <span class="article-date article-meta-item">
-        <i class="fas fa-calendar"></i> 2021-01-10 21:47:27
+        <i class="fas fa-calendar"></i> 2021-01-15 09:54:27
     </span>
     
         <span class="article-categories article-meta-item">
@@ -164,7 +164,7 @@
             <ul>
                 
                     <li>
-                        <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a>
+                        <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A1%AC%E4%BB%B6%E7%B3%BB%E7%BB%9F/">计算机硬件系统</a>
                     </li>
                 
             </ul>
@@ -176,7 +176,7 @@
             <ul>
                 
                     <li>
-                        <a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">操作系统学习笔记</a>
+                        <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%BF%B0/">计算机系统概述</a>
                     </li>
                 
             </ul>
@@ -199,10 +199,25 @@
         
 
         <div class="article-content markdown-body">
-            <h1 id="操作系统结构"><a href="#操作系统结构" class="headerlink" title="操作系统结构"></a>操作系统结构</h1><p>操作系统上下分别是虚拟机器操作系统界面和物理机器界面。处于物理机器界面下的是硬件，处于虚拟机器界面之上的是应用软件。</p>
-<p>应用软件运行在操作系统提供的界面，操作系统与应用一样，都是程序，程序与程序的关系无非就是调用与被调用。</p>
-<p>谁调用谁？举个例子，当你想读写磁盘的时候，会通过应用程序，告诉操作系统你的要求，然后操作系统执行你的要求。这样看来，应该是应用程序调用操作系统。</p>
-<p>我们一般接触到的，常见的操作系统主要有<code>Windows</code>、<code>Linux</code>、<code>FreeBSD</code>与<code>OS X</code>，这种带图形化界面的，称为图形用户界面（Graphical User Interface, GUI）。而</p>
+            <h1 id="计算机系统概述"><a href="#计算机系统概述" class="headerlink" title="计算机系统概述"></a>计算机系统概述</h1><h2 id="基本构成"><a href="#基本构成" class="headerlink" title="基本构成"></a>基本构成</h2><p>从顶层来看，计算机由处理器、存储器和输入/输出部件组成，此三部件每个又都有各种模块。而这么多模块之间需要互动与交流。所以，计算机主要有4个主要的结构化部件：</p>
+<ol>
+<li>处理器（processor）：控制计算机的操作，执行数据处理功能。<u>当只有一个处理器</u>，它通常指中央处理单元（CPU）。</li>
+<li>内存（main memory）：存储数据和程序。内存通常称为<strong>实存储器</strong>或者<strong>主存储器</strong>。</li>
+<li>输入/输出模块（I/O module）：在计算机和外部环境之间移动数据。</li>
+<li>系统总线（system bus）：为处理器、内存和输入/输出模块间<u>提供通信</u>的设施。</li>
+</ol>
+<p>处理器的一种功能是与存储器交换数据，所以，有两个内部寄存器：</p>
+<ul>
+<li>存储器地址寄存器（Memory Address Register， MAR），确定下一次读写的存储器地址。</li>
+<li>存储器缓冲寄存器（Memory Buffer Register，MBR），存放要写入存储器的数据或者从存储器读取的数据。</li>
+</ul>
+<p>同理，有</p>
+<ul>
+<li>I/O Address Register（I/O AR）：确定一个特定的I/O设备。</li>
+<li>I/O Buffer Register（I/O BR）：用于与处理器交换数据。</li>
+</ul>
+<p>内存模块有一组单元组成，这些单元由顺序编号的地址定义。每个单元包含一个二进制数，可以解释为一个指令或者数据。</p>
+<p>I/O在外部设备与处理器和存储器之间传送数据。I/O包含一个内存缓冲区，用于临时保存数据，知道数据被发送出去。</p>
 
         </div>
 
@@ -210,11 +225,11 @@
             <div class="post-copyright-info">
                 <div class="article-copyright-info-container">
     <ul>
-        <li>Post title：操作系统结构</li>
+        <li>Post title：计算机系统概述</li>
         <li>Post author：赵一凡</li>
-        <li>Create time：2021-01-10 21:47:27</li>
+        <li>Create time：2021-01-15 09:54:27</li>
         <li>
-            Post link：https://chiuee.github.io/2021/01/10/操作系统结构/
+            Post link：https://chiuee.github.io/2021/01/15/计算机系统概述/
         </li>
         <li>
             Copyright Notice：All articles in this blog are licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> unless stating additionally.
@@ -232,10 +247,10 @@
                     <div class="article-next">
                         <a class="next"
                            rel="next"
-                           href="/2020/12/27/%E6%9C%9F%E6%9C%AB%E4%B9%A0%E9%A2%98-%E7%BA%BF%E6%80%A7%E8%A1%A8/"
+                           href="/2021/01/10/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84%EF%BC%88%E5%AE%8C%E5%85%A8%E8%8D%89%E7%A8%BF%EF%BC%89/"
                         >
                             <span class="title flex-center">
-                                <span class="post-nav-title-item">期末习题-线性表</span>
+                                <span class="post-nav-title-item">操作系统结构</span>
                                 <span class="post-nav-item">Next posts</span>
                             </span>
                             <span class="right arrow-icon flex-center" >
@@ -362,7 +377,7 @@
         
             <div class="post-toc-wrap">
     <div class="post-toc">
-        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84"><span class="nav-number">1.</span> <span class="nav-text">操作系统结构</span></a></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%BF%B0"><span class="nav-number">1.</span> <span class="nav-text">计算机系统概述</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E6%9E%84%E6%88%90"><span class="nav-number">1.1.</span> <span class="nav-text">基本构成</span></a></li></ol></li></ol>
     </div>
 </div>
         
