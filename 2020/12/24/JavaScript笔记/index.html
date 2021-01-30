@@ -188,12 +188,14 @@
         
 
         <div class="article-content markdown-body">
-            <h1 id="笔记"><a href="#笔记" class="headerlink" title="笔记"></a>笔记</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> </span></span><br></pre></td></tr></table></figure>
+            <h1 id="JavaScript查漏补缺"><a href="#JavaScript查漏补缺" class="headerlink" title="JavaScript查漏补缺"></a>JavaScript查漏补缺</h1><h2 id="JavaScript概述"><a href="#JavaScript概述" class="headerlink" title="JavaScript概述"></a>JavaScript概述</h2><p>JavaScript是一门事件驱动型的编程语言，依靠事件去驱动，然后执行对应的程序。在JavaScript中有很多事件，其中一个事件叫做：鼠标单击，单词：click。并且任何事件都会对应一个事件句柄叫做：onclick。（注意事件与实践句柄的区别是：实践句柄是在事件单词前添加一个on。）。而事件句柄是以HTML标签的属性存在的。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;button&quot;</span> <span class="attr">value</span>=<span class="string">&quot;hello&quot;</span> <span class="attr">onclick</span>=<span class="string">&quot;js代码&quot;</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 在发生click事件时，js代码执行；页面打开时不执行 --&gt;</span></span><br></pre></td></tr></table></figure>
 
+<h2 id="JavaScript函数"><a href="#JavaScript函数" class="headerlink" title="JavaScript函数"></a>JavaScript函数</h2><p>关于全局变量与局部变量。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var_1 = <span class="string">&quot;haha&quot;</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">show</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    var_2 = <span class="string">&quot;哈哈&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line">show();</span><br><span class="line">alert(var_1 + <span class="string">&quot; &quot;</span> + var_2);</span><br></pre></td></tr></table></figure>
 
-
-
-
+<p><img src="https://gitee.com/chiuee/ihs/raw/master/img/image-20210130210922294.png" alt="image-20210130210922294"></p>
+<p>当一个变量声明的时候没用使用关键字，那么不管这个变量是在哪里声明的，都是全局变量。</p>
 
         </div>
 
@@ -368,7 +370,7 @@
         
             <div class="post-toc-wrap">
     <div class="post-toc">
-        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%94%E8%AE%B0"><span class="nav-number">1.</span> <span class="nav-text">笔记</span></a></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#JavaScript%E6%9F%A5%E6%BC%8F%E8%A1%A5%E7%BC%BA"><span class="nav-number">1.</span> <span class="nav-text">JavaScript查漏补缺</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#JavaScript%E6%A6%82%E8%BF%B0"><span class="nav-number">1.1.</span> <span class="nav-text">JavaScript概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JavaScript%E5%87%BD%E6%95%B0"><span class="nav-number">1.2.</span> <span class="nav-text">JavaScript函数</span></a></li></ol></li></ol>
     </div>
 </div>
         
