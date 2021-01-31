@@ -127,6 +127,12 @@
 
 <p><img src="https://gitee.com/chiuee/ihs/raw/master/img/image-20210130210922294.png" alt="image-20210130210922294"></p>
 <p>当一个变量声明的时候没用使用关键字，那么不管这个变量是在哪里声明的，都是全局变量。</p>
+<h2 id="Object类型"><a href="#Object类型" class="headerlink" title="Object类型"></a>Object类型</h2><p>Object类型是所有类型的超类，自定义的任何类型，默认继承Object。</p>
+<p>Object类的属性：</p>
+<ul>
+<li>prototype属性（常用）</li>
+<li>constructor属性</li>
+</ul>
 ]]></content>
       <tags>
         <tag>JavaScript笔记</tag>
