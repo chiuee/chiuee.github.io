@@ -119,7 +119,8 @@
   <entry>
     <title>JavaScript笔记</title>
     <url>/2020/12/24/JavaScript%E7%AC%94%E8%AE%B0/</url>
-    <content><![CDATA[<h1 id="JavaScript查漏补缺"><a href="#JavaScript查漏补缺" class="headerlink" title="JavaScript查漏补缺"></a>JavaScript查漏补缺</h1><h2 id="JavaScript概述"><a href="#JavaScript概述" class="headerlink" title="JavaScript概述"></a>JavaScript概述</h2><p>JavaScript是一门事件驱动型的编程语言，依靠事件去驱动，然后执行对应的程序。在JavaScript中有很多事件，其中一个事件叫做：鼠标单击，单词：click。并且任何事件都会对应一个事件句柄叫做：onclick。（注意事件与实践句柄的区别是：实践句柄是在事件单词前添加一个on。）。而事件句柄是以HTML标签的属性存在的。</p>
+    <content><![CDATA[<hr>
+<h2 id="JavaScript概述"><a href="#JavaScript概述" class="headerlink" title="JavaScript概述"></a>JavaScript概述</h2><p>JavaScript是一门事件驱动型的编程语言，依靠事件去驱动，然后执行对应的程序。在JavaScript中有很多事件，其中一个事件叫做：鼠标单击，单词：click。并且任何事件都会对应一个事件句柄叫做：onclick。（注意事件与实践句柄的区别是：实践句柄是在事件单词前添加一个on。）。而事件句柄是以HTML标签的属性存在的。</p>
 <figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;button&quot;</span> <span class="attr">value</span>=<span class="string">&quot;hello&quot;</span> <span class="attr">onclick</span>=<span class="string">&quot;js代码&quot;</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 在发生click事件时，js代码执行；页面打开时不执行 --&gt;</span></span><br></pre></td></tr></table></figure>
 
 <h2 id="JavaScript函数"><a href="#JavaScript函数" class="headerlink" title="JavaScript函数"></a>JavaScript函数</h2><p>关于全局变量与局部变量。</p>
@@ -130,10 +131,75 @@
 <h2 id="Object类型"><a href="#Object类型" class="headerlink" title="Object类型"></a>Object类型</h2><p>Object类型是所有类型的超类，自定义的任何类型，默认继承Object。</p>
 <p>Object类的属性：</p>
 <ul>
-<li>prototype属性（常用）</li>
+<li>prototype属性（常用）：给类动态地扩展属性和函数。</li>
 <li>constructor属性</li>
 </ul>
+<p>Object类的函数：</p>
+<ul>
+<li>toString()</li>
+<li>valueOf()</li>
+<li>toLocaleString()</li>
+</ul>
+<p>在JavaScript当中定义的类，默认继承Object类中所有的属性以及函数。</p>
+<h1 id="对象简介"><a href="#对象简介" class="headerlink" title="对象简介"></a>对象简介</h1><h2 id="基本数据类型"><a href="#基本数据类型" class="headerlink" title="基本数据类型"></a>基本数据类型</h2><ul>
+<li>String 字符串</li>
+<li>Number 数值</li>
+<li>Boolean 布尔值</li>
+<li>Null 空值</li>
+<li>Undefined 未定义</li>
+</ul>
+<p>以上属于基本数据类型，要不是以上五种类型，就都是对象类型。</p>
+<p>基本数据类型都是单一的值，值与值之间没有联系。</p>
+<p>对象属于一种复合的数据类型，在对象中可以保存多个不同数据类型的属性。</p>
+<h2 id="对象的分类"><a href="#对象的分类" class="headerlink" title="对象的分类"></a>对象的分类</h2><ol>
+<li><p>内建对象</p>
+<blockquote>
+<p>由ES标准中定义的对象，在任何ES的实现中都可以使用。</p>
+<p>比如：Math String Number Boolean Function Object…</p>
+</blockquote>
+</li>
+<li><p>宿主对象</p>
+<blockquote>
+<p>由JS的运行环境提供对象，目前来讲主要指由浏览器提供的对象。</p>
+<p>比如：DOM BOM</p>
+</blockquote>
+</li>
+<li><p>自定义对象</p>
+<blockquote>
+<p>由开发人员自己创建的对象。</p>
+</blockquote>
+</li>
+</ol>
+<h2 id="创建对象"><a href="#创建对象" class="headerlink" title="创建对象"></a>创建对象</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> obj = <span class="keyword">new</span> <span class="built_in">Object</span>();</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ]]></content>
+      <categories>
+        <category>JavaScript笔记</category>
+      </categories>
       <tags>
         <tag>JavaScript笔记</tag>
       </tags>
@@ -1174,5 +1240,29 @@
     <title>吉他曲目</title>
     <url>/2021/01/25/%E5%90%89%E4%BB%96%E6%9B%B2%E7%9B%AE/</url>
     <content><![CDATA[]]></content>
+  </entry>
+  <entry>
+    <title>如果你想造一艘船</title>
+    <url>/2021/02/07/%E5%A6%82%E6%9E%9C%E4%BD%A0%E6%83%B3%E9%80%A0%E4%B8%80%E8%89%98%E8%88%B9/</url>
+    <content><![CDATA[<hr>
+<p>如果你想造一艘船，</p>
+<p>不要让人去捡木头，</p>
+<p>不要给他们分配任务和工作，</p>
+<p>而是要教他们渴望无边无际的大海。</p>
+]]></content>
+      <tags>
+        <tag>杂记</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>JavaScript笔记目录</title>
+    <url>/2021/01/31/JavaScript%E7%AC%94%E8%AE%B0%E7%9B%AE%E5%BD%95/</url>
+    <content><![CDATA[<h1 id="JavaScript笔记目录索引"><a href="#JavaScript笔记目录索引" class="headerlink" title="JavaScript笔记目录索引"></a>JavaScript笔记目录索引</h1>]]></content>
+      <categories>
+        <category>JavaScript笔记</category>
+      </categories>
+      <tags>
+        <tag>JavaScript笔记</tag>
+      </tags>
   </entry>
 </search>
