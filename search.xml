@@ -1265,6 +1265,11 @@
 <td>♪ ♪ ♪</td>
 </tr>
 <tr>
+<td>押尾桑《Indigo Love》</td>
+<td>E A D C B E</td>
+<td>♪ ♪ ♪</td>
+</tr>
+<tr>
 <td>岸部真明《少年的你》</td>
 <td>D A D F<sub>#</sub> A D</td>
 <td>♪</td>
@@ -1380,6 +1385,9 @@
 
 <p>对于上述案列，如果使用<code>methods</code>的话，会调用4次，调用4次就会进行4次循环，显然性能不好，所以在这些情况下，<code>computed</code>更好。</p>
 ]]></content>
+      <categories>
+        <category>vue学习笔记</category>
+      </categories>
       <tags>
         <tag>vue</tag>
       </tags>
@@ -1418,6 +1426,9 @@
 
 <h3 id="once修饰符"><a href="#once修饰符" class="headerlink" title=".once修饰符"></a><code>.once</code>修饰符</h3><p>只回调一次。</p>
 ]]></content>
+      <categories>
+        <category>vue学习笔记</category>
+      </categories>
       <tags>
         <tag>vue</tag>
       </tags>
@@ -1447,5 +1458,55 @@
         <tag>尚医通开发日志</tag>
         <tag>开发日志</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>v-for</title>
+    <url>/2021/04/12/v-for/</url>
+    <content><![CDATA[<h1 id="v-for遍历数组和对象"><a href="#v-for遍历数组和对象" class="headerlink" title="v-for遍历数组和对象"></a><code>v-for</code>遍历数组和对象</h1><h2 id="遍历数组"><a href="#遍历数组" class="headerlink" title="遍历数组"></a>遍历数组</h2><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;app&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">li</span> <span class="attr">v-for</span>=<span class="string">&quot;item in words&quot;</span>&gt;</span>&#123;&#123;item&#125;&#125;<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://cdn.jsdelivr.net/npm/vue&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript"><span class="keyword">const</span> app = <span class="keyword">new</span> Vue(&#123;</span></span><br><span class="line"><span class="javascript">    el: <span class="string">&#x27;#app&#x27;</span>,</span></span><br><span class="line">    data: &#123;</span><br><span class="line"><span class="javascript">        words: [<span class="string">&#x27;what&#x27;</span>, <span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;wonderful&#x27;</span>, <span class="string">&#x27;world&#x27;</span>]</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">li</span> <span class="attr">v-for</span>=<span class="string">&quot;item in words&quot;</span>&gt;</span>&#123;&#123;item&#125;&#125;<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>其中<code>item</code>是一个自定义的变量名，并不是只能是<code>item</code>。</p>
+<p>如何在遍历过程中，获取索引值？</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">li</span> <span class="attr">v-for</span>=<span class="string">&quot;(item, index) in words&quot;</span>&gt;</span>&#123;&#123;index+1&#125;&#125;.&#123;&#123;item&#125;&#125;<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>括号中第一个参数是数组的元素，第二个是下标值。</p>
+<h2 id="遍历对象"><a href="#遍历对象" class="headerlink" title="遍历对象"></a>遍历对象</h2><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;app&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">li</span> <span class="attr">v-for</span>=<span class="string">&quot;value in book&quot;</span>&gt;</span>&#123;&#123;value&#125;&#125;<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://cdn.jsdelivr.net/npm/vue&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript"><span class="keyword">const</span> app = <span class="keyword">new</span> Vue(&#123;</span></span><br><span class="line"><span class="javascript">    el: <span class="string">&#x27;#app&#x27;</span>,</span></span><br><span class="line">    data: &#123;</span><br><span class="line">        book: &#123;</span><br><span class="line"><span class="javascript">            title: <span class="string">&#x27;JavaScript高级程序设计&#x27;</span>,</span></span><br><span class="line"><span class="javascript">            author: <span class="string">&#x27;Matt&#x27;</span>,</span></span><br><span class="line"><span class="javascript">            press: <span class="string">&#x27;人民邮电出版社&#x27;</span></span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>这样会遍历出对象属性的值，也就是会遍历出<code>JavaScript高级程序设计</code>，<code>Matt</code>，<code>人民邮电出版社</code>。</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">li</span> <span class="attr">v-for</span>=<span class="string">&quot;(value, key, index) in book&quot;</span>&gt;</span></span><br><span class="line">	&#123;&#123;value&#125;&#125;</span><br><span class="line">    &#123;&#123;key&#125;&#125;</span><br><span class="line">    &#123;&#123;index&#125;&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>第一个参数是属性的值，第二个参数是属性名，第三个参数是序列数。</p>
+<h1 id="绑定和非绑定key的区别"><a href="#绑定和非绑定key的区别" class="headerlink" title="绑定和非绑定key的区别"></a>绑定和非绑定key的区别</h1>]]></content>
+      <categories>
+        <category>vue学习笔记</category>
+      </categories>
+      <tags>
+        <tag>vue</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>用vue实现一个评论区功能组件</title>
+    <url>/2021/06/02/%E7%94%A8vue%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E8%AF%84%E8%AE%BA%E5%8C%BA%E5%8A%9F%E8%83%BD%E7%BB%84%E4%BB%B6/</url>
+    <content><![CDATA[<h1 id="vue-评论组件"><a href="#vue-评论组件" class="headerlink" title="vue 评论组件"></a>vue 评论组件</h1><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div&gt;</span><br><span class="line">    &lt;div v-clickoutside&#x3D;&quot;hideReplyBtn&quot;&gt;</span><br><span class="line"></span><br><span class="line">    &lt;&#x2F;div&gt;</span><br><span class="line">  &lt;&#x2F;div&gt;</span><br><span class="line">&lt;&#x2F;template&gt;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> clickoutside = &#123;</span><br><span class="line">    <span class="comment">// 初始化自定义 vue指令</span></span><br><span class="line">    <span class="function"><span class="title">bind</span>(<span class="params">el, binding, vnode</span>)</span> &#123;</span><br><span class="line">        <span class="function"><span class="keyword">function</span> <span class="title">documentHandler</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">            <span class="comment">// 判断点击的元素是否是本身，如果是本身就返回 false</span></span><br><span class="line">            <span class="keyword">if</span> (el.contains(e.target)) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            <span class="comment">/* 判断指令中时候绑定了方法，如果绑定了方法，</span></span><br><span class="line"><span class="comment">               则调用那个方法，</span></span><br><span class="line"><span class="comment">               此处 binding.value 就是 handleClose 方法 */</span></span><br><span class="line">            <span class="keyword">if</span> (binding.expression) binding.value(e);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    el.vueClickOutSide = documentHandler;</span><br><span class="line">    <span class="built_in">document</span>.addEventListener(<span class="string">&#x27;click&#x27;</span>, documentHandler);</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><code>bind()</code>方法创建一个新的方法，在<code>bind()</code>被调用时，这个新方法的<code>this</code>被指定为<code>bind()</code>的第一个参数，而其余参数将作为新方法的参数。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="built_in">module</span> = &#123;</span><br><span class="line">    x: <span class="number">42</span>,</span><br><span class="line">    getX: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">this</span>.x;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> unboundGetX = <span class="built_in">module</span>.getX;</span><br><span class="line"><span class="built_in">console</span>.log(unboundGetX());</span><br><span class="line"><span class="comment">// output: undefined</span></span><br><span class="line"><span class="comment">// unboundGetX = module.getX 之后，也 return this.x 但是 unboundGetX 没有 this，所以输出 undefined</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> boundGetX = unboundGetX.bind(<span class="built_in">module</span>);</span><br><span class="line"><span class="built_in">console</span>.log(boundGetX());</span><br><span class="line"><span class="comment">// output: 42</span></span><br><span class="line"><span class="comment">// 新方法 boundGetX 的 this 指向 bind() 的第一个参数 module ，所以新方法 boundGetX 中的 this 就有了着落，于是就可以输出42</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 例子来源于 MDN</span></span><br></pre></td></tr></table></figure>
+
+<p><code>contains()</code>方法，<code>A.contains(B)</code>如果A元素包含B元素，则返回<code>true</code></p>
+<p><code>target</code> 事件属性可返回事件的目标节点</p>
+<p><code>contenteditable</code>属性：指定元素内容是否可编辑。</p>
+<p><code>tabindex</code>属性：规定元素的 <code>tab</code> 键控制次序（当 <code>tab</code> 键用于导航时）</p>
+<p><code>spellcheck</code>属性：拼写检查，默认可能是<code>true</code>也可能是<code>false</code>，所以要专门设置值为<code>false</code></p>
+<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@input&#x3D;&quot;onDivInput($event)&quot;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">onDivInput: <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">this</span>.replyComment = e.target.innerHTML;</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+
+<p><code>$event</code>是什么参数</p>
+]]></content>
   </entry>
 </search>

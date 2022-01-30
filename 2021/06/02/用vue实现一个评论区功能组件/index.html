@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
     <title>
-        JavaScript笔记 |
+        用vue实现一个评论区功能组件 |
         
         Zhaoyifan&#39;s Blog
     </title>
@@ -140,7 +140,7 @@
     <div class="article-content-container">
 
         <div class="article-title">
-            <span class="title-hover-animation">JavaScript笔记</span>
+            <span class="title-hover-animation">用vue实现一个评论区功能组件</span>
         </div>
 
         
@@ -156,31 +156,9 @@
                     <div class="meta-info">
                         <div class="article-meta-info">
     <span class="article-date article-meta-item">
-        <i class="fas fa-calendar"></i> 2020-12-24 15:26:03
+        <i class="fas fa-calendar"></i> 2021-06-02 09:44:16
     </span>
     
-        <span class="article-categories article-meta-item">
-            <i class="fas fa-folder"></i>
-            <ul>
-                
-                    <li>
-                        <a href="/categories/JavaScript%E7%AC%94%E8%AE%B0/">JavaScript笔记</a>
-                    </li>
-                
-            </ul>
-        </span>
-    
-    
-        <span class="article-tags article-meta-item">
-            <i class="fas fa-tags"></i>
-            <ul>
-                
-                    <li>
-                        <a href="/tags/JavaScript%E7%AC%94%E8%AE%B0/">JavaScript笔记</a>
-                    </li>
-                
-            </ul>
-        </span>
     
 
     
@@ -199,83 +177,25 @@
         
 
         <div class="article-content markdown-body">
-            <hr>
-<h2 id="JavaScript概述"><a href="#JavaScript概述" class="headerlink" title="JavaScript概述"></a>JavaScript概述</h2><p>JavaScript是一门事件驱动型的编程语言，依靠事件去驱动，然后执行对应的程序。在JavaScript中有很多事件，其中一个事件叫做：鼠标单击，单词：click。并且任何事件都会对应一个事件句柄叫做：onclick。（注意事件与实践句柄的区别是：实践句柄是在事件单词前添加一个on。）。而事件句柄是以HTML标签的属性存在的。</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;button&quot;</span> <span class="attr">value</span>=<span class="string">&quot;hello&quot;</span> <span class="attr">onclick</span>=<span class="string">&quot;js代码&quot;</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 在发生click事件时，js代码执行；页面打开时不执行 --&gt;</span></span><br></pre></td></tr></table></figure>
+            <h1 id="vue-评论组件"><a href="#vue-评论组件" class="headerlink" title="vue 评论组件"></a>vue 评论组件</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div&gt;</span><br><span class="line">    &lt;div v-clickoutside&#x3D;&quot;hideReplyBtn&quot;&gt;</span><br><span class="line"></span><br><span class="line">    &lt;&#x2F;div&gt;</span><br><span class="line">  &lt;&#x2F;div&gt;</span><br><span class="line">&lt;&#x2F;template&gt;</span><br></pre></td></tr></table></figure>
 
-<h2 id="JavaScript函数"><a href="#JavaScript函数" class="headerlink" title="JavaScript函数"></a>JavaScript函数</h2><p>关于全局变量与局部变量。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var_1 = <span class="string">&quot;haha&quot;</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">show</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    var_2 = <span class="string">&quot;哈哈&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line">show();</span><br><span class="line">alert(var_1 + <span class="string">&quot; &quot;</span> + var_2);</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://gitee.com/chiuee/ihs/raw/master/img/image-20210130210922294.png" alt="image-20210130210922294"></p>
-<p>当一个变量声明的时候没用使用关键字，那么不管这个变量是在哪里声明的，都是全局变量。</p>
-<h2 id="Object类型"><a href="#Object类型" class="headerlink" title="Object类型"></a>Object类型</h2><p>Object类型是所有类型的超类，自定义的任何类型，默认继承Object。</p>
-<p>Object类的属性：</p>
-<ul>
-<li>prototype属性（常用）：给类动态地扩展属性和函数。</li>
-<li>constructor属性</li>
-</ul>
-<p>Object类的函数：</p>
-<ul>
-<li>toString()</li>
-<li>valueOf()</li>
-<li>toLocaleString()</li>
-</ul>
-<p>在JavaScript当中定义的类，默认继承Object类中所有的属性以及函数。</p>
-<h1 id="对象简介"><a href="#对象简介" class="headerlink" title="对象简介"></a>对象简介</h1><h2 id="基本数据类型"><a href="#基本数据类型" class="headerlink" title="基本数据类型"></a>基本数据类型</h2><ul>
-<li>String 字符串</li>
-<li>Number 数值</li>
-<li>Boolean 布尔值</li>
-<li>Null 空值</li>
-<li>Undefined 未定义</li>
-</ul>
-<p>以上属于基本数据类型，要不是以上五种类型，就都是对象类型。</p>
-<p>基本数据类型都是单一的值，值与值之间没有联系。</p>
-<p>对象属于一种复合的数据类型，在对象中可以保存多个不同数据类型的属性。</p>
-<h2 id="对象的分类"><a href="#对象的分类" class="headerlink" title="对象的分类"></a>对象的分类</h2><ol>
-<li><p>内建对象</p>
-<blockquote>
-<p>由ES标准中定义的对象，在任何ES的实现中都可以使用。</p>
-<p>比如：Math String Number Boolean Function Object…</p>
-</blockquote>
-</li>
-<li><p>宿主对象</p>
-<blockquote>
-<p>由JS的运行环境提供对象，目前来讲主要指由浏览器提供的对象。</p>
-<p>比如：DOM BOM</p>
-</blockquote>
-</li>
-<li><p>自定义对象</p>
-<blockquote>
-<p>由开发人员自己创建的对象。</p>
-</blockquote>
-</li>
-</ol>
-<h2 id="创建对象"><a href="#创建对象" class="headerlink" title="创建对象"></a>创建对象</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> obj = <span class="keyword">new</span> <span class="built_in">Object</span>();</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> clickoutside = &#123;</span><br><span class="line">    <span class="comment">// 初始化自定义 vue指令</span></span><br><span class="line">    <span class="function"><span class="title">bind</span>(<span class="params">el, binding, vnode</span>)</span> &#123;</span><br><span class="line">        <span class="function"><span class="keyword">function</span> <span class="title">documentHandler</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">            <span class="comment">// 判断点击的元素是否是本身，如果是本身就返回 false</span></span><br><span class="line">            <span class="keyword">if</span> (el.contains(e.target)) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            <span class="comment">/* 判断指令中时候绑定了方法，如果绑定了方法，</span></span><br><span class="line"><span class="comment">               则调用那个方法，</span></span><br><span class="line"><span class="comment">               此处 binding.value 就是 handleClose 方法 */</span></span><br><span class="line">            <span class="keyword">if</span> (binding.expression) binding.value(e);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    el.vueClickOutSide = documentHandler;</span><br><span class="line">    <span class="built_in">document</span>.addEventListener(<span class="string">&#x27;click&#x27;</span>, documentHandler);</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
 
 
 
+<p><code>bind()</code>方法创建一个新的方法，在<code>bind()</code>被调用时，这个新方法的<code>this</code>被指定为<code>bind()</code>的第一个参数，而其余参数将作为新方法的参数。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="built_in">module</span> = &#123;</span><br><span class="line">    x: <span class="number">42</span>,</span><br><span class="line">    getX: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">this</span>.x;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> unboundGetX = <span class="built_in">module</span>.getX;</span><br><span class="line"><span class="built_in">console</span>.log(unboundGetX());</span><br><span class="line"><span class="comment">// output: undefined</span></span><br><span class="line"><span class="comment">// unboundGetX = module.getX 之后，也 return this.x 但是 unboundGetX 没有 this，所以输出 undefined</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> boundGetX = unboundGetX.bind(<span class="built_in">module</span>);</span><br><span class="line"><span class="built_in">console</span>.log(boundGetX());</span><br><span class="line"><span class="comment">// output: 42</span></span><br><span class="line"><span class="comment">// 新方法 boundGetX 的 this 指向 bind() 的第一个参数 module ，所以新方法 boundGetX 中的 this 就有了着落，于是就可以输出42</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 例子来源于 MDN</span></span><br></pre></td></tr></table></figure>
 
+<p><code>contains()</code>方法，<code>A.contains(B)</code>如果A元素包含B元素，则返回<code>true</code></p>
+<p><code>target</code> 事件属性可返回事件的目标节点</p>
+<p><code>contenteditable</code>属性：指定元素内容是否可编辑。</p>
+<p><code>tabindex</code>属性：规定元素的 <code>tab</code> 键控制次序（当 <code>tab</code> 键用于导航时）</p>
+<p><code>spellcheck</code>属性：拼写检查，默认可能是<code>true</code>也可能是<code>false</code>，所以要专门设置值为<code>false</code></p>
+<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@input&#x3D;&quot;onDivInput($event)&quot;</span><br></pre></td></tr></table></figure>
 
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">onDivInput: <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">this</span>.replyComment = e.target.innerHTML;</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<p><code>$event</code>是什么参数</p>
 
         </div>
 
@@ -283,11 +203,11 @@
             <div class="post-copyright-info">
                 <div class="article-copyright-info-container">
     <ul>
-        <li>本文标题：JavaScript笔记</li>
+        <li>本文标题：用vue实现一个评论区功能组件</li>
         <li>本文作者：赵一凡</li>
-        <li>创建时间：2020-12-24 15:26:03</li>
+        <li>创建时间：2021-06-02 09:44:16</li>
         <li>
-            本文链接：https://chiuee.github.io/2020/12/24/JavaScript笔记/
+            本文链接：https://chiuee.github.io/2021/06/02/用vue实现一个评论区功能组件/
         </li>
         <li>
             版权声明：本博客所有文章除特别声明外，均采用 <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -301,29 +221,14 @@
         
             <div class="article-nav">
                 
-                    <div class="article-prev">
-                        <a class="prev"
-                           rel="prev"
-                           href="/2020/12/27/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E7%BB%AA%E8%AE%BA/"
-                        >
-                            <span class="left arrow-icon flex-center" >
-                              <i class="fas fa-chevron-left"></i>
-                            </span>
-                            <span class="title flex-center">
-                                <span class="post-nav-title-item">数据结构-绪论</span>
-                                <span class="post-nav-item">上一篇</span>
-                            </span>
-                        </a>
-                    </div>
-                
                 
                     <div class="article-next">
                         <a class="next"
                            rel="next"
-                           href="/2020/12/23/%E9%9A%8F%E4%BE%BF%E8%AE%B0%E4%B8%80%E8%AE%B0/"
+                           href="/2021/04/12/v-for/"
                         >
                             <span class="title flex-center">
-                                <span class="post-nav-title-item">随便记一记</span>
+                                <span class="post-nav-title-item">v-for</span>
                                 <span class="post-nav-item">下一篇</span>
                             </span>
                             <span class="right arrow-icon flex-center" >
@@ -450,7 +355,7 @@
         
             <div class="post-toc-wrap">
     <div class="post-toc">
-        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#JavaScript%E6%A6%82%E8%BF%B0"><span class="nav-number">1.</span> <span class="nav-text">JavaScript概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JavaScript%E5%87%BD%E6%95%B0"><span class="nav-number">2.</span> <span class="nav-text">JavaScript函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Object%E7%B1%BB%E5%9E%8B"><span class="nav-number">3.</span> <span class="nav-text">Object类型</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AF%B9%E8%B1%A1%E7%AE%80%E4%BB%8B"><span class="nav-number"></span> <span class="nav-text">对象简介</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="nav-number">1.</span> <span class="nav-text">基本数据类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%88%86%E7%B1%BB"><span class="nav-number">2.</span> <span class="nav-text">对象的分类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E5%AF%B9%E8%B1%A1"><span class="nav-number">3.</span> <span class="nav-text">创建对象</span></a></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#vue-%E8%AF%84%E8%AE%BA%E7%BB%84%E4%BB%B6"><span class="nav-number">1.</span> <span class="nav-text">vue 评论组件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%97%AE%E9%A2%98"><span class="nav-number">1.1.</span> <span class="nav-text">问题</span></a></li></ol></li></ol>
     </div>
 </div>
         
